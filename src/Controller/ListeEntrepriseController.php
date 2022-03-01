@@ -4,18 +4,17 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ListeEntrepriseController extends AbstractController
 {
     /**
-     * @Route("/liste/entreprise", name="app_liste_entreprise")
+     * @Route("/liste_entreprise", name="ListeEntreprise")
      */
-    public function ListeDesCompagnies(Request $request)
+    public function listeEntreprises(): Response
     {
         return $this->render('liste_entreprise/index.html.twig', [
-            'controller_name' => 'ListeEntrepriseController',
+            'controller_name' => 'ListeEntreprises.html.twig',
         ]);
     }
 }
