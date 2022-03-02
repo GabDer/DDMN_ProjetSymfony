@@ -33,7 +33,7 @@ class RegistrationController extends AbstractController
             // Encodage du mot de passe du nouvel utilisateur
             $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPassword()));
 
-            // Attribution du role à l'utilisateur
+            // Attribution du role USER à l'utilisateur
             $user->setRoles(['ROLE_USER']);
 
             // Sauvegarde des changements
