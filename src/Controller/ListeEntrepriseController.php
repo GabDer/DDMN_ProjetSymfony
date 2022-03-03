@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ListeEntrepriseController extends AbstractController
 {
     /**
-     * @Route("/liste_entreprise", name="ListeEntreprise")
+     * @Route("/listeEntreprise", name="listeEntreprise")
      */
     public function listeEntreprises()
     {
