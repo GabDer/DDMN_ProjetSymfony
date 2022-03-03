@@ -11,9 +11,10 @@ class ListeEntrepriseController extends AbstractController
     /**
      * @Route("/liste_entreprise", name="ListeEntreprise")
      */
-    public function listeEntreprises(): Response
+    public function listeEntreprises()
     {
-        
-        return $this->render('ListeEntreprise.html.twig');
+        $listeEntreprises = $this->getDoctrine()->getRepository(Entreprise::class)->findAll();
+        return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises]);
+
     }
 }
