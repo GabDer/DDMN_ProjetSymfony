@@ -15,5 +15,6 @@ class ListeEntrepriseController extends AbstractController
     {
         $listeEntreprises = $this->getDoctrine()->getRepository(Entreprise::class)->findAll();
         return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises]);
+
     }
 }
