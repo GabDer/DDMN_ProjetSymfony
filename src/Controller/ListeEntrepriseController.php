@@ -13,6 +13,7 @@ class ListeEntrepriseController extends AbstractController
      */
     public function listeEntreprises(): Response
     {
-        return $this->render('/templates/ListeEntreprise.html.twig');
+        
+        return $this->render('ListeEntreprise.html.twig');
     }
 }
