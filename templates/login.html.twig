@@ -4,16 +4,8 @@
 
 <div class="centerlogin">
     <a href="https://www.la-chataigneraie.org/" target="_blanck"><img src="Logo.png"></a>
-    
-    
-    <form action="" method>
-    <h1>Veuillez vous connecter :</h1>
-        {{ form_row(loginform.Email, {'attr': {'placeholder': 'Adresse e-mail'}})}}
-        <br>
-        {{ form_row(loginform.Mdp, {'attr': {'placeholder': 'Mot de passe'}})}}
-        <br>
-        {{ form_row(loginform.Valider, {'attr': {'value': 'Mot de passe'}})}}
-    </form>
+
+   {{form(loginform)}}
 </div>
 
 {% endblock %}

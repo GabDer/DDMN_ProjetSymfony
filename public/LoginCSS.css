@@ -10,7 +10,7 @@ form {
     border-radius: 12px;
     height: auto;
     box-shadow:  20px 20px 60px #2b2b2f,
-             -20px -20px 60px #3a3a3f;
+    -20px -20px 60px #3a3a3f;
   }
   div{
     display: flex;
