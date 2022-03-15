@@ -18,9 +18,13 @@ class SecurityController extends AbstractController
         $form = $this->createForm(LoginFormType :: class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
-            $annonceInfos = $form->getData();
+            $formData = $form->getData();
             // On vérifie que les infos correspondent
-            var_dump($annonceInfos);
+            $UserTemp = $this->getDoctrine()->getRepository(User::class)->findOneBy([
+                'Email' => $formData['Email'],
+                'MDP' => $formData['Mdp']
+            ]);
+            var_dump($UserTemp);
         }
         return $this->render('login.html.twig', ['loginform' => $form->createView()]);
     }
