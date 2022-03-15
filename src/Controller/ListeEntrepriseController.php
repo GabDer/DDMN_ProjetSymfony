@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\ENTREPRISE;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,9 +11,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class ListeEntrepriseController extends AbstractController
 {
     /**
-     * @Route("/listeEntreprise", name="listeEntreprise")
+     * @Route("/liste_entreprise", name="listeEntreprise")
      */
-    public function listeEntreprises(ManagerRegistery $doctrine)
+    public function listeEntreprises( ManagerRegistry $doctrine)
     {
         $entityManager = $doctrine->getManager();
         $listeEntreprises = $entityManager->getRepository(ENTREPRISE::class)->findAll();
