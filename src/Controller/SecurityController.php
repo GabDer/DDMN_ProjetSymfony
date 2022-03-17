@@ -15,19 +15,16 @@ class SecurityController extends AbstractController
      * @Route("/", name="app_login")
      */
     public function Login(Request $request){
-        $UserTemp = new Utilisateur;
-        $form = $this->createForm(LoginFormType :: class, $UserTemp);
+        $form = $this->createForm(LoginFormType :: class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
-            $formData = $form->getData();
-            // On vérifie que les infos correspondent
-            $UserTemp = $this->getDoctrine()->getRepository(Utilisateur::class)->findOneBy([
-                'UTI_Login' => $formData['Login'],
-                'UTI_MDP' => $formData['Mdp']
-            ]);
-            return $this->render('ListeEntreprise.html.twig');
+            $InfoSaisies = $form->getData();
+            $VerifLogin = $this->getDoctrine()->getRepository(Utilisateur::class)->LoginVerification($InfoSaisies['UTI_Login'],$InfoSaisies['UTI_MDP']);
+            if ($VerifLogin != False){
+                return $this->render('ListeEntreprise.html.twig', ['loginform' => $form->createView()]);
+            }
         }
-        return $this->render('login.html.twig', ['loginform' => $form->createView()]);
+        return $this->render('login.html.twig', ['loginform' => $form->createView()]);   
     }
 
     /**

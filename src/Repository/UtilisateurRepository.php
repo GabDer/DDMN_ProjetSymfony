@@ -61,7 +61,19 @@ class UtilisateurRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function LoginVerification(string $Login, string $MDP)
+    {
+        $conn = $this->getEntityManager()->getConnection();
 
+        $sql = '
+            SELECT UTI_Login, UTI_MDP FROM Utilisateur
+            WHERE UTI_Login = :login AND UTI_MDP = :mdp
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultat = $stmt->executeQuery(['login' => $Login, 'mdp' => $MDP]);
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultat->fetchAssociative();
+    }
     /*
     public function findOneBySomeField($value): ?Utilisateur
     {
