@@ -4,7 +4,7 @@ body{
   background-color: #323237;
   display: flex;
 }
-form {
+.carreblanc {
     background-color: #e8e8e8;
     width: 40%;
     border-radius: 12px;
@@ -53,6 +53,8 @@ form {
   }
   button:hover{
     background-color: #03c47d;
+    box-shadow: 6px 6px 12px #c5c5c5,
+    -6px -6px 12px #ffffff;;
   }
 
   .centerlogin{
@@ -60,13 +62,22 @@ form {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    height: 100%;
+    height: auto;
   }
   h1{
     font-family: 'Roboto', sans-serif;
-    color: white;
+    color: rgb(99, 99, 99);
     letter-spacing: 3px;
     text-align: center;
+    margin: 0;
+  }
+  h2{
+    font-family: 'Roboto', sans-serif;
+    color: rgb(0, 0, 0);
+    letter-spacing: 3px;
+    text-align: center;
+    margin: 0;
+    margin-top: 20px;
   }
   img{
     border-radius: 12px;
@@ -74,9 +85,13 @@ form {
   }
   a{
     border-radius: 12px;
-    width: 30%;
-    margin-bottom: 45px;
+    width: 70%;
+    margin-bottom: 35px;
+    margin-top: 20px;
   }
   label{
     font-family: 'Roboto', sans-serif;
+  }
+  form{
+    width: 100%;
   }
