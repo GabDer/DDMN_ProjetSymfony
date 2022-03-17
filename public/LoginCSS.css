@@ -5,7 +5,7 @@ body{
   display: flex;
 }
 form {
-    background-color: #323237;
+    background-color: #e8e8e8;
     width: 40%;
     border-radius: 12px;
     height: auto;
@@ -18,16 +18,20 @@ form {
     justify-content: center;
     align-items: center;
     width: 100%;
+    margin-top: 16px
   }
   /* Full-width inputs */
   input[type=text], input[type=password] {
+    background-color: #e8e8e8;
     width: 60%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: none;
     box-sizing: border-box;
     border-radius: 12px;
+    box-shadow: 6px 6px 12px #c5c5c5,
+    -6px -6px 12px #ffffff;
   }
   
   /* Set a style for all buttons */

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ENTREPRISERepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -61,6 +63,16 @@ class ENTREPRISE
      * @ORM\Column(type="string", length=200, nullable=true)
      */
     private $ENT_SiteWeb;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=SPECIALITE::class, mappedBy="SPE_AVOIR")
+     */
+    private $ENT_AVOIR;
+
+    public function __construct()
+    {
+        $this->ENT_AVOIR = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -171,6 +183,33 @@ class ENTREPRISE
     public function setENTSiteWeb(?string $ENT_SiteWeb): self
     {
         $this->ENT_SiteWeb = $ENT_SiteWeb;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SPECIALITE>
+     */
+    public function getENTAVOIR(): Collection
+    {
+        return $this->ENT_AVOIR;
+    }
+
+    public function addENTAVOIR(SPECIALITE $eNTAVOIR): self
+    {
+        if (!$this->ENT_AVOIR->contains($eNTAVOIR)) {
+            $this->ENT_AVOIR[] = $eNTAVOIR;
+            $eNTAVOIR->addSPEAVOIR($this);
+        }
+
+        return $this;
+    }
+
+    public function removeENTAVOIR(SPECIALITE $eNTAVOIR): self
+    {
+        if ($this->ENT_AVOIR->removeElement($eNTAVOIR)) {
+            $eNTAVOIR->removeSPEAVOIR($this);
+        }
 
         return $this;
     }
