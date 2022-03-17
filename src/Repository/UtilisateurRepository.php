@@ -74,6 +74,20 @@ class UtilisateurRepository extends ServiceEntityRepository
         // returns an array of arrays (i.e. a raw data set)
         return $resultat->fetchAssociative();
     }
+
+    public function GetRole(string $Login)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT UTI_ROLE FROM Utilisateur
+            WHERE UTI_Login = :login
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultat = $stmt->executeQuery(['login' => $Login]);
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultat->fetchAssociative();
+    }
     /*
     public function findOneBySomeField($value): ?Utilisateur
     {

@@ -17,11 +17,16 @@ class SecurityController extends AbstractController
     public function Login(Request $request){
         $form = $this->createForm(LoginFormType :: class);
         $form->handleRequest($request);
+        $session = $request->getSession();
         if ($form->isSubmitted() && $form->isValid()){
             $InfoSaisies = $form->getData();
             $VerifLogin = $this->getDoctrine()->getRepository(Utilisateur::class)->LoginVerification($InfoSaisies['UTI_Login'],$InfoSaisies['UTI_MDP']);
             if ($VerifLogin != False){
-                return $this->render('ListeEntreprise.html.twig', ['loginform' => $form->createView()]);
+                $session->set('Role', $this->getDoctrine()->getRepository(Utilisateur::class)->getRole($InfoSaisies['UTI_Login']));
+                if ($session->get('Role') == true){
+                    dd($session->get('Role')['UTI_ROLE']);
+                    //return $this->render('ListeEntreprise.html.twig');
+                }
             }
         }
         return $this->render('login.html.twig', ['loginform' => $form->createView()]);   
@@ -32,6 +37,6 @@ class SecurityController extends AbstractController
      */
     public function logout()
     {
-        
+        return $this->render('login.html.twig', ['loginform' => $form->createView()]);
     }
 }
