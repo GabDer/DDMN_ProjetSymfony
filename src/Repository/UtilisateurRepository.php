@@ -67,7 +67,7 @@ class UtilisateurRepository extends ServiceEntityRepository
 
         $sql = '
             SELECT UTI_Login, UTI_MDP FROM Utilisateur
-            WHERE UTI_Login = :login AND UTI_MDP = :mdp
+            WHERE UTI_Login = :login AND UTI_MDP = MD5(:mdp)
             ';
         $stmt = $conn->prepare($sql);
         $resultat = $stmt->executeQuery(['login' => $Login, 'mdp' => $MDP]);
