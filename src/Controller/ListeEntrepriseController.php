@@ -17,6 +17,7 @@ class ListeEntrepriseController extends AbstractController
     {
         $entityManager = $doctrine->getManager();
         $listeEntreprises = $entityManager->getRepository(ENTREPRISE::class)->findAll();
+        // dd($listeEntreprises);
         return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises]);
     }
 }

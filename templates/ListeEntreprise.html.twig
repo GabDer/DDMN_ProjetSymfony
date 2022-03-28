@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+<style>
+
+</style>
+
+
+<div class="example-wrapper" >
+    <div>
+        <div>
+
+        </div>
+    </div>
+    <div class="row ml-4" id="bloc">
+        {% for ENTREPRISE in listeEntreprises %}
+            <div class="col-sm-6 mt-2 mb-2 rounded-sm">
+            <div class="card" style="background-color: #69878a;">
+                <div class="card-header">
+                {# {% for Personne in ListePersonne %}
+                            On teste {{ Personne.id }}
+                        {% endfor %} #}
+                   <h6>Secteur d'activité</h6>
+                    <h5 class="card-title">{{ ENTREPRISE.ENT_RaisonSociale }}</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <span class="small"> Adresse</span><br/>
+                        
+                    </p>
+                    <p>
+                        <span class="small">Options : </span>
+                        <a href="#" class="btn btn-primary">SLAM</a>
+                        <a href="#" class="btn btn-primary">SISR</a>
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+        {# {% for ENTREPRISE in listeEntreprises %}
+            <div class="col-sm-6 mt-2 mb-2 rounded-sm">
+            <div class="card" style="background-color: #69878a;">
+                <div class="card-header">
+                {% for Personne in ListePersonne %}
+                            On teste {{ Personne.id }}
+                        {% endfor %}
+                   <h6>Secteur d'activité</h6>
+                    <h5 class="card-title">{{ ENTREPRISE.ENT_RaisonSociale }}</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <span class="small"> Adresse</span><br/>
+                        
+                    </p>
+                    <p>
+                        <span class="small">Options : </span>
+                        <a href="#" class="btn btn-primary">SLAM</a>
+                        <a href="#" class="btn btn-primary">SISR</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %} #}
+</div>
+
+
+{% endblock %}
