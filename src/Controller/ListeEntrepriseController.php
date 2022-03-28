@@ -13,11 +13,11 @@ class ListeEntrepriseController extends AbstractController
     /**
      * @Route("/liste_entreprise", name="listeEntreprise")
      */
-    public function listeEntreprises( ManagerRegistry $doctrine)
+    public function listeEntreprises(ManagerRegistry $doctrine)
     {
         $entityManager = $doctrine->getManager();
         $listeEntreprises = $entityManager->getRepository(ENTREPRISE::class)->findAll();
-        // dd($listeEntreprises);
+        //dd($listeEntreprises);
         return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises]);
     }
 }

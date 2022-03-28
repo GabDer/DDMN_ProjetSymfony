@@ -11,11 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
 class PERSONNE
 {
     /**
-     * @ORM\PER_ID
+     * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $PER_ID;
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=40)
@@ -39,7 +39,7 @@ class PERSONNE
 
     public function getId(): ?int
     {
-        return $this->PER_ID;
+        return $this->id;
     }
 
     public function getPERNOM(): ?string

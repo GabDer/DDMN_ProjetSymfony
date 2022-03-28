@@ -79,6 +79,21 @@ class ENTREPRISE
         return $this->id;
     }
 
+    /**
+     * @ORM\OneToMany(targetEntity=Personne::class, mappedBy="Personne")
+     */
+    public $Personne;
+
+    public function __constructPer()
+    {
+        $this->Personne = new ArrayCollection();
+    }
+
+    public function getPer_Id(): ?int
+    {
+        return $this->id;
+    }
+
     public function getENTRaisonSociale(): ?string
     {
         return $this->ENT_RaisonSociale;
