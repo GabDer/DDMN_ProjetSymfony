@@ -11,17 +11,13 @@ body{
     height: auto;
     box-shadow:  20px 20px 60px #2b2b2f,
     -20px -20px 60px #3a3a3f;
-  }
-  div{
+    justify-content: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    width: 100%;
-    margin-top: 16px
   }
-  /* Full-width inputs */
-  input[type=text], input[type=password] {
+
+  .formlogin input{
     background-color: #e8e8e8;
     width: 60%;
     padding: 12px 20px;
@@ -35,7 +31,7 @@ body{
   }
   
   /* Set a style for all buttons */
-  button {
+ .formlogin button {
     background-color: #04AA6D;
     color: white;
     padding: 14px 20px;
@@ -51,7 +47,7 @@ body{
     margin-top: 30px;
     margin-bottom: 40px;
   }
-  button:hover{
+  .formlogin button:hover{
     background-color: #03c47d;
     box-shadow: 6px 6px 12px #c5c5c5,
     -6px -6px 12px #ffffff;;
@@ -63,15 +59,16 @@ body{
     flex-direction: column;
     align-items: center;
     height: auto;
+    width: 100%;
   }
-  h1{
+  .carreblanc h1{
     font-family: 'Roboto', sans-serif;
     color: rgb(99, 99, 99);
     letter-spacing: 3px;
     text-align: center;
     margin: 0;
   }
-  h2{
+  .carreblanc h2{
     font-family: 'Roboto', sans-serif;
     color: rgb(0, 0, 0);
     letter-spacing: 3px;
@@ -79,19 +76,20 @@ body{
     margin: 0;
     margin-top: 20px;
   }
-  img{
+  .carreblanc img{
     border-radius: 12px;
     width: 100%;
   }
-  a{
+  .carreblanc a{
     border-radius: 12px;
     width: 70%;
     margin-bottom: 35px;
     margin-top: 20px;
   }
-  label{
-    font-family: 'Roboto', sans-serif;
-  }
-  form{
-    width: 100%;
-  }
+.formlogin{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
