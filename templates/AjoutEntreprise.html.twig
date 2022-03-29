@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout entreprise{% endblock %}
+
+{% block content %}
+
+    <div class="bg-danger" >
+        <form method='POST'>
+            {{form(entrepriseForm)}}
+        </form>
+    </div>
+
+{% endblock %}

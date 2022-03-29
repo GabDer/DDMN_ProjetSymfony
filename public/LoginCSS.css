@@ -1,6 +1,9 @@
+/*--------------------------------------------------
+                  CSS login
+---------------------------------------------------*/
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 /* Bordered form */
-body{
+.loginBody{
   background-color: #323237;
   display: flex;
 }
@@ -92,4 +95,8 @@ body{
   justify-content: center;
   flex-direction: column;
   text-align: center;
-}
+} 
+
+/*--------------------------------------------------
+                  Fin CSS login
+---------------------------------------------------*/

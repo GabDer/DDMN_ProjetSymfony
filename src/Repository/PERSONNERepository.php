@@ -21,6 +21,22 @@ class PERSONNERepository extends ServiceEntityRepository
         parent::__construct($registry, PERSONNE::class);
     }
 
+    public function findPersonne($entreprise)
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+    public function findlastby($id)
+    {
+        return $this->createQueryBuilder('p')
+        ->orderBy('p.id','ASC')
+        ->andWhere('p.ENTREPRISE = :val')
+        ->setParameter('val', $id)
+        ->getQuery()
+        ->getResult();
+    }
     /**
      * @throws ORMException
      * @throws OptimisticLockException
@@ -43,6 +59,19 @@ class PERSONNERepository extends ServiceEntityRepository
         if ($flush) {
             $this->_em->flush();
         }
+    }
+
+    public function findPersonneByEnt()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT DISTINCT ent_raison_sociale, PER_NOM, PER_PRENOM FROM `personne` 
+            INNER JOIN entreprise ON personne.entreprise_id=entreprise.id ';
+        $stmt = $conn->prepare($sql);
+        $resultat = $stmt->executeQuery();
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultat->fetchAllAssociative();
     }
 
     // /**

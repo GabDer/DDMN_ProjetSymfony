@@ -45,8 +45,20 @@ class ENTREPRISERepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return ENTREPRISE[] Returns an array of ENTREPRISE objects
+    public function findOneEntreprise($id)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT * FROM entreprise as e INNER JOIN personne as p 
+            on e.id = p.id
+            WHERE entreprise_id = :ent_id';
+        $stmt = $conn->prepare($sql);
+        $resultat = $stmt->executeQuery(['ent_id' => $id]);
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultat->fetchAssociative();
+    }
+    // /**//  * @return ENTREPRISE[] Returns an array of ENTREPRISE objects
     //  */
     /*
     public function findByExampleField($value)

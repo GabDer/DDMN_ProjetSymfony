@@ -36,12 +36,27 @@ class PERSONNE
      * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $PER_MAIL;
+    /**
+     * @ORM\ManyToOne(targetEntity=ENTREPRISE::class, inversedBy="Personne")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $ENTREPRISE;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    public function getEntreprise(): ?ENTREPRISE
+    {
+        return $this->ENTREPRISE;
+    }
+    public function setEntreprise(ENTREPRISE $Entreprise): self
+    {
+        $this->ENTREPRISE = $Entreprise;
+
+        return $this;
+    }
     public function getPERNOM(): ?string
     {
         return $this->PER_NOM;

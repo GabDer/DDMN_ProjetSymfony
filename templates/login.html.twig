@@ -1,15 +1,16 @@
 <link rel="stylesheet" href="LoginCSS.css">
 
-{% block body %}
+{% block content %}
+<div class="loginBody">
 
-<div class="centerlogin">
-    <div class="carreblanc">
-        <a href="https://www.la-chataigneraie.org/" target="_blanck"><img src="LogoNoBackground.png"></a>
+    <div class="centerlogin">
+        <div class="carreblanc">
+            <a href="https://www.la-chataigneraie.org/" target="_blanck"><img src="LogoNoBackground.png"></a>
 
-        <h1>Gestion des entreprises</h1>
-        <h2>Veuillez vous connecter</h2>
-        {{form(loginform, {'attr' : {'class' : 'formlogin'} }) }}
+            <h1>Gestion des entreprises</h1>
+            <h2>Veuillez vous connecter</h2>
+            {{form(loginform, {'attr' : {'class' : 'formlogin'} }) }}
+        </div>
     </div>
 </div>
-
 {% endblock %}

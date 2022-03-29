@@ -80,16 +80,16 @@ class ENTREPRISE
     }
 
     /**
-     * @ORM\OneToMany(targetEntity=Personne::class, mappedBy="Personne")
+     * @ORM\OneToMany(targetEntity=PERSONNE::class, mappedBy="PERSONNE")
      */
-    public $Personne;
+    public $PERSONNE;
 
     public function __constructPer()
     {
-        $this->Personne = new ArrayCollection();
+        $this->PERSONNE = new ArrayCollection();
     }
 
-    public function getPer_Id(): ?int
+    public function getPerId(): ?int
     {
         return $this->id;
     }
