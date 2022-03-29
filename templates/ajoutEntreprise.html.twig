@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Ajout entreprise{% endblock %}
+
 {% block content %}
-    <div>
-        <h1>Ajout d'une entreprise</h1>
-        <form methode="POST">
-            {{form(AjoutEntrepriseForm)}}
+
+    <div class="bg-danger" >
+        <form method='POST'>
+            {{form(entrepriseForm)}}
         </form>
     </div>
-    
-    
+
 {% endblock %}
