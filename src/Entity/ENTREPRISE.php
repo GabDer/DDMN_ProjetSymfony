@@ -22,47 +22,47 @@ class ENTREPRISE
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $ENT_RaisonSociale;
+    public $ENT_RaisonSociale;
 
     /**
      * @ORM\Column(type="string", length=38, nullable=true)
      */
-    private $ENT_Pays;
+    public $ENT_Pays;
 
     /**
      * @ORM\Column(type="string", length=38, nullable=true)
      */
-    private $ENT_Ville;
+    public $ENT_Ville;
 
     /**
      * @ORM\Column(type="string", length=5, nullable=true)
      */
-    private $ENT_CP;
+    public $ENT_CP;
 
     /**
      * @ORM\Column(type="string", length=200, nullable=true)
      */
-    private $ENT_RUE;
+    public $ENT_RUE;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $ENT_ComplementAdresse;
+    public $ENT_ComplementAdresse;
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
      */
-    private $ENT_NUM1;
+    public $ENT_NUM1;
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
      */
-    private $ENT_NUM2;
+    public $ENT_NUM2;
 
     /**
      * @ORM\Column(type="string", length=200, nullable=true)
      */
-    private $ENT_SiteWeb;
+    public $ENT_SiteWeb;
 
     /**
      * @ORM\ManyToMany(targetEntity=SPECIALITE::class, mappedBy="SPE_AVOIR")
@@ -75,6 +75,21 @@ class ENTREPRISE
     }
 
     public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity=Personne::class, mappedBy="Personne")
+     */
+    public $Personne;
+
+    public function __constructPer()
+    {
+        $this->Personne = new ArrayCollection();
+    }
+
+    public function getPer_Id(): ?int
     {
         return $this->id;
     }
