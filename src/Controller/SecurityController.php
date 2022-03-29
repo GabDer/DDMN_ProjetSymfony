@@ -26,11 +26,14 @@ class SecurityController extends AbstractController
             if ($VerifLogin != False){
                 $session->set('Role', $doctrine->getManager()->getRepository(Utilisateur::class)->getRole($InfoSaisies['UTI_Login']));
                 if ($session->get('Role')['UTI_ROLE'] == true){
-                    return $this->render('ListeEntreprise.html.twig');
+                    return $this->redirectToRoute("listeEntreprise");
                 }
             }
+            else{
+                return $this->render('login.html.twig', ['loginform' => $form->createView(), 'FalseLogin' => 'Identifiant ou mot de passe incorrect']);
+            }
         }
-        return $this->render('login.html.twig', ['loginform' => $form->createView()]);   
+        return $this->render('login.html.twig', ['loginform' => $form->createView(), 'FalseLogin' => '']);   
     }
 
     /**
