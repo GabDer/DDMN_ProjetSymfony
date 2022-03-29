@@ -66,7 +66,7 @@ class PERSONNERepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-            SELECT DISTINCT ent_raison_sociale, PER_NOM, PER_PRENOM FROM `personne` 
+            SELECT ent_raison_sociale, PER_NOM, PER_PRENOM FROM `personne` 
             INNER JOIN entreprise ON personne.entreprise_id=entreprise.id ';
         $stmt = $conn->prepare($sql);
         $resultat = $stmt->executeQuery();

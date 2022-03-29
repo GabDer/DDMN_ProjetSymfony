@@ -45,6 +45,33 @@ class ENTREPRISERepository extends ServiceEntityRepository
         }
     }
 
+    public function AffichageEntreprise()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+        SELECT ent_raison_sociale, PER_NOM, PER_PRENOM FROM personne 
+        INNER JOIN entreprise ON personne.entreprise_id=entreprise.id';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
+    public function RechercheParNom(string $nom)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+        SELECT ent_raison_sociale, PER_NOM, PER_PRENOM FROM personne 
+        INNER JOIN entreprise ON personne.entreprise_id=entreprise.id 
+        WHERE PER_NOM = :nom';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['nom' => $nom]);
+        return $resultSet->fetchAllAssociative();
+    }
+
     public function findOneEntreprise($id)
     {
         $conn = $this->getEntityManager()->getConnection();
@@ -59,6 +86,35 @@ class ENTREPRISERepository extends ServiceEntityRepository
         return $resultat->fetchAssociative();
     }
     // /**//  * @return ENTREPRISE[] Returns an array of ENTREPRISE objects
+    //  */
+    /*
+    public function findByExampleField($value)
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('e.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    */
+
+    /*
+    public function findOneBySomeField($value): ?ENTREPRISE
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.exampleField = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    */
+
+    // /**
+    //  * @return ENTREPRISE[] Returns an array of ENTREPRISE objects
     //  */
     /*
     public function findByExampleField($value)

@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 /* Bordered form */
 body{
-  margin: 0;
+  background-color: #323237;
 }
 .loginBody{
   background-color: #323237;
