@@ -17,11 +17,18 @@ class ListeEntrepriseController extends AbstractController
     /**
      * @Route("/liste_entreprise", name="listeEntreprise")
      */
-    public function listeEntreprises(ManagerRegistry $doctrine)
+    public function listeEntreprises(Request $request ,ManagerRegistry $doctrine)
     {
         $entityManager = $doctrine->getManager();
-        $listeEntreprises = $entityManager->getRepository(ENTREPRISE::class)->AffichageEntreprise();
-        return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises]);
+        $listeEntreprises = $entityManager->getRepository(ENTREPRISE::class)->AffichageEntreprise(); //On récupère toute les entreprises existantes
+        $listePersonnes = [];
+        foreach ($listeEntreprises as $entreprise){ //Pour chaque entreprise, on y associe un tableau de ses personnes dans le tableau 'listePersonnes'
+            $listePersonnes = array_merge($listePersonnes,$entityManager->getRepository(ENTREPRISE::class)->AffichagePersonnesEntreprise($entreprise['ent_raison_sociale'])); //array_merge permet d'ajouter des éléments à un tableau déja existant
+            
+        }
+        $session = $request->getSession();
+        //dd($session->get('Role')['UTI_ROLE']);
+        return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises, 'listePersonnes' => $listePersonnes, 'admin'=>$session->get('Role')['UTI_ROLE']]);
 
     }
 
@@ -53,8 +60,9 @@ class ListeEntrepriseController extends AbstractController
         $em = $em->getManager();
         $entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
         $entPersonne = $em->getRepository(PERSONNE::class)->findlastby($entreprise);
-        dd($entreprise, $entPersonne);
 
         return $this->render('InfosEntreprise.html.twig', array('uneEntreprise'=>$entreprise));
     }
+
+    
 }

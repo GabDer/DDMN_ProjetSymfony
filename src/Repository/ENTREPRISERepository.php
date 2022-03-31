@@ -50,10 +50,27 @@ class ENTREPRISERepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-        SELECT ent_raison_sociale, PER_NOM, PER_PRENOM FROM personne 
-        INNER JOIN entreprise ON personne.entreprise_id=entreprise.id';
+        SELECT DISTINCT ent_raison_sociale
+        FROM Entreprise
+        ORDER BY ent_raison_sociale ASC';
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
+    public function AffichagePersonnesEntreprise(string $RS)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+        SELECT ent_raison_sociale, PER_NOM, PER_PRENOM
+        FROM personne as P INNER JOIN entreprise as E ON E.id = P.entreprise_id
+        WHERE ent_raison_sociale = :RS
+        ORDER BY ent_raison_sociale';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['RS' => $RS]);
 
         // returns an array of arrays (i.e. a raw data set)
         return $resultSet->fetchAllAssociative();
@@ -64,14 +81,45 @@ class ENTREPRISERepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-        SELECT ent_raison_sociale, PER_NOM, PER_PRENOM FROM personne 
-        INNER JOIN entreprise ON personne.entreprise_id=entreprise.id 
-        WHERE PER_NOM = :nom';
+        SELECT DISTINCT ent_raison_sociale FROM entreprise
+        INNER JOIN personne ON personne.entreprise_id=entreprise.id
+        WHERE PER_NOM = :nom
+        ORDER BY ent_raison_sociale';
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery(['nom' => $nom]);
+
+        // returns an array of arrays (i.e. a raw data set)
         return $resultSet->fetchAllAssociative();
     }
 
+    public function RechercheParCP(int $CP)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "
+        SELECT DISTINCT ent_raison_sociale FROM entreprise
+        WHERE ent_cp = :CP
+        ORDER BY ent_raison_sociale";
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['CP' => $CP]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+    public function RechercheParEntreprise(string $RS)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "
+        SELECT DISTINCT ent_raison_sociale FROM entreprise
+        WHERE ent_raison_sociale LIKE :RS
+        ORDER BY ent_raison_sociale";
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['RS' => '%'.$RS.'%']);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
     public function findOneEntreprise($id)
     {
         $conn = $this->getEntityManager()->getConnection();
