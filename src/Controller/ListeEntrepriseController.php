@@ -27,7 +27,6 @@ class ListeEntrepriseController extends AbstractController
             
         }
         $session = $request->getSession();
-        //dd($session->get('Login'));
         return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises, 'listePersonnes' => $listePersonnes, 'admin'=>$session->get('Role')['UTI_ROLE'], 'Login'=>$session->get('Login')]);
 
     }
