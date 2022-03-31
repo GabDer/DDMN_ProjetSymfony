@@ -26,8 +26,7 @@ class ListeEntrepriseController extends AbstractController
             $listePersonnes = array_merge($listePersonnes,$entityManager->getRepository(ENTREPRISE::class)->AffichagePersonnesEntreprise($entreprise['ent_raison_sociale'])); //array_merge permet d'ajouter des éléments à un tableau déja existant
             
         }
-        $session = $request->getSession();
-        return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises, 'listePersonnes' => $listePersonnes, 'admin'=>$session->get('Role')['UTI_ROLE'], 'Login'=>$session->get('Login')]);
+        return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises, 'listePersonnes' => $listePersonnes]);
 
     }
 
