@@ -24,14 +24,15 @@ class SecurityController extends AbstractController
             $InfoSaisies = $form->getData();
             $VerifLogin = $doctrine->getManager()->getRepository(Utilisateur::class)->LoginVerification($InfoSaisies['UTI_Login'],$InfoSaisies['UTI_MDP']);
             if ($VerifLogin != False){
-                $session->set('Role', $doctrine->getManager()->getRepository(Utilisateur::class)->getRole($InfoSaisies['UTI_Login']));
+                $session->set('Role', $doctrine->getManager()->getRepository(Utilisateur::class)->GetRole($InfoSaisies['UTI_Login']));
+                $session->set('Login', $InfoSaisies['UTI_Login']);
                 return $this->redirectToRoute("listeEntreprise");
             }
             else{
                 return $this->render('login.html.twig', ['loginform' => $form->createView(), 'FalseLogin' => 'Identifiant ou mot de passe incorrect']);
             }
         }
-        return $this->render('login.html.twig', ['loginform' => $form->createView(), 'FalseLogin' => '']);   
+        return $this->render('login.html.twig', ['loginform' => $form->createView(), 'FalseLogin' => ' ']);   
     }
 
     /**

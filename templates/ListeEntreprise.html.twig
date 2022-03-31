@@ -6,13 +6,12 @@
 <style>
 
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
 
     <div class="row ml-4" id="bloc">
     {% if admin %}
         {% for ENTREPRISE in listeEntreprises %}
             {% set personnes = [] %}
+            
                 <div class="col-sm-6 mt-2 mb-2 rounded-sm">
                 <div class="card" style="background-color: #69878a;">
                 <div class="card-header">
@@ -21,9 +20,9 @@
                         <i class="fa-solid fa-trash-can" id="iconSupprimer"></i>
                     </div>
                     <div class="bg-danger">
-                        <h6>Secteur d'activité</h6>
+                        <h6>Secteur d'activité {{ Login }}</h6>
                     </div>
-                     <a href="{{ path('InfosEntreprise',{ 'id': ENTREPRISE.id}) }}"><h5 class="card-title">{{ENTREPRISE.ent_raison_sociale}}</h5></a>
+                    <a href="{{ path('InfosEntreprise',{ 'id': ENTREPRISE.id}) }}"><h5 class="card-title">{{ENTREPRISE.ent_raison_sociale}}</h5></a>
                 </div>
                 <div class="card-body">
                 {% for personne in listePersonnes %}

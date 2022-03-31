@@ -50,7 +50,7 @@ class ENTREPRISERepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-        SELECT id, ent_raison_sociale, ent_site_web
+        SELECT  id, ent_raison_sociale
         FROM Entreprise
         ORDER BY ent_raison_sociale ASC';
         $stmt = $conn->prepare($sql);

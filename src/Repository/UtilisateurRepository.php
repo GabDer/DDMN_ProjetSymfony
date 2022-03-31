@@ -88,6 +88,7 @@ class UtilisateurRepository extends ServiceEntityRepository
         // returns an array of arrays (i.e. a raw data set)
         return $resultat->fetchAssociative();
     }
+    
     /*
     public function findOneBySomeField($value): ?Utilisateur
     {
