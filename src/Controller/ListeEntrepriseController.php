@@ -27,8 +27,8 @@ class ListeEntrepriseController extends AbstractController
             
         }
         $session = $request->getSession();
-        //dd($session->get('Role')['UTI_ROLE']);
-        return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises, 'listePersonnes' => $listePersonnes, 'admin'=>$session->get('Role')['UTI_ROLE']]);
+        //dd($session->get('Login'));
+        return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises, 'listePersonnes' => $listePersonnes, 'admin'=>$session->get('Role')['UTI_ROLE'], 'Login'=>$session->get('Login')]);
 
     }
 
@@ -61,7 +61,6 @@ class ListeEntrepriseController extends AbstractController
         $entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
         $entPersonne = $em->getRepository(PERSONNE::class)->findLastBy($entreprise);
         dd($entreprise, $entPersonne);
-
 
         return $this->render('InfosEntreprise.html.twig', array('uneEntreprise' => $entreprise));
     }
