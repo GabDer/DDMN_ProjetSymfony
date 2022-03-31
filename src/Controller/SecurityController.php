@@ -31,7 +31,7 @@ class SecurityController extends AbstractController
                 return $this->render('login.html.twig', ['loginform' => $form->createView(), 'FalseLogin' => 'Identifiant ou mot de passe incorrect']);
             }
         }
-        return $this->render('login.html.twig', ['loginform' => $form->createView(), 'FalseLogin' => '']);   
+        return $this->render('login.html.twig', ['loginform' => $form->createView(), 'FalseLogin' => ' ']);   
     }
 
     /**
