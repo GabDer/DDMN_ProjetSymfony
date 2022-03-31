@@ -105,6 +105,52 @@ body{
 /*--------------------------------------------------
                   Fin CSS login
 ---------------------------------------------------*/
+/*--------------------------------------------------
+              Début CSS liste annonces
+---------------------------------------------------*/
+.iconeModifSupr{
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.iconeModifSupr i{
+  width: 45px;
+  border-radius: 8px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 12px;
+  padding-right: 12px;
+  margin-bottom: 10px;
+}
+#iconModifier{
+  color: #ffc400;
+  font-size: 20px;
+}
+#iconSupprimer{
+  color: red;
+  font-size: 20px;
+}
+.row{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+.card{
+  border-radius: 14px !important;
+  box-shadow:  20px 20px 60px #323232,
+             -20px -20px 60px #444444;
+}
+.card h5{
+  font-size: 1.8rem;
+}
+.bg-danger{
+  background-color: transparent !important  ;
+}
+
+
+/*--------------------------------------------------
+              Fin CSS liste annonces
+---------------------------------------------------*/
 
 /*--------------------------------------------------
                   Début CSS Ajout Form

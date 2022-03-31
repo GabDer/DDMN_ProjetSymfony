@@ -6,14 +6,8 @@
 <style>
 
 </style>
-
-
-<div class="example-wrapper" >
-    <div>
-        <div>
-
-        </div>
-    </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
 
     <div class="row ml-4" id="bloc">
     {% if admin %}
@@ -22,14 +16,14 @@
                 <div class="col-sm-6 mt-2 mb-2 rounded-sm">
                 <div class="card" style="background-color: #69878a;">
                 <div class="card-header">
-                    <div>
-                        <img src="pen.svg" class="" style="text-align: right">
-                        <img src="trash.svg" class="" style="text-align: right">
+                    <div class="iconeModifSupr">
+                        <i class="fa-solid fa-pen" id="iconModifier"></i>
+                        <i class="fa-solid fa-trash-can" id="iconSupprimer"></i>
                     </div>
                     <div class="bg-danger">
                         <h6>Secteur d'activité</h6>
                     </div>
-                     <a href=""><h5 class="card-title">{{ENTREPRISE['ent_raison_sociale']}}</h5></a>
+                     <a href="{{ path('InfosEntreprise',{ 'id': ENTREPRISE.id}) }}"><h5 class="card-title">{{ENTREPRISE.ent_raison_sociale}}</h5></a>
                 </div>
                 <div class="card-body">
                 {% for personne in listePersonnes %}
@@ -66,6 +60,12 @@
                 {% endfor %}
                 <p>
                     <span class="small"> Nom : {% for LesPersonnes in personnes %} {{LesPersonnes}} {% endfor %}</span><br/>
+                </p>
+                <p>
+                    <span class="small">
+                    {% if ENTREPRISE['ent_site_web'] is not null %}
+                        <a href= "{{ENTREPRISE['ent_site_web']}}">Lien vers le site web</a></span><br/>
+                    {% endif %}
                 </p>
                 <p>
                 <span class="small"> Options : </span>
