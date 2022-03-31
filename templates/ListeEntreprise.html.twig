@@ -16,9 +16,11 @@
     </div>
 
     <div class="row ml-4" id="bloc">
+    {% if admin %}
         {% for ENTREPRISE in listeEntreprises %}
-            <div class="col-sm-6 mt-2 mb-2 rounded-sm">
-            <div class="card" style="background-color: #69878a;">
+            {% set personnes = [] %}
+                <div class="col-sm-6 mt-2 mb-2 rounded-sm">
+                <div class="card" style="background-color: #69878a;">
                 <div class="card-header">
                     <div>
                         <img src="pen.svg" class="" style="text-align: right">
@@ -27,22 +29,56 @@
                     <div class="bg-danger">
                         <h6>Secteur d'activité</h6>
                     </div>
-                    <h5 class="card-title">{{ENTREPRISE['ent_raison_sociale']}}</h5>
+                     <a href=""><h5 class="card-title">{{ENTREPRISE['ent_raison_sociale']}}</h5></a>
                 </div>
                 <div class="card-body">
-                    <p>
-                        <span class="small"> Nom : {{ENTREPRISE['PER_NOM']}} </span><br/>
-                        <span class="small"> Prénom : {{ENTREPRISE['PER_PRENOM']}} </span><br/>
-                    </p>
-                    <p>
-                        <span class="small">Options : </span>
-                        <a href="#" class="btn btn-primary">SLAM</a>
-                        <a href="#" class="btn btn-primary">SISR</a>
-                    </p>
+                {% for personne in listePersonnes %}
+                    {% if (personne['ent_raison_sociale'] == ENTREPRISE['ent_raison_sociale']) %}
+                        {% set personnes = personnes|merge([personne['PER_NOM'], personne['PER_PRENOM'], '|']) %}
+                    {% endif %}
+                {% endfor %}
+                <p>
+                    <span class="small"> Nom : {% for LesPersonnes in personnes %} {{LesPersonnes}} {% endfor %}</span><br/>
+                </p>
+                <p>
+                <span class="small"> Options : </span>
+                    <a href="#" class="btn btn-primary">SLAM</a>
+                    <a href="#" class="btn btn-primary">SISR</a>
+                </p>
+                </div>
                 </div>
             </div>
-        </div>
         {% endfor %}
+        {% else %}
+            {% for ENTREPRISE in listeEntreprises %}
+            {% set personnes = [] %}
+                <div class="col-sm-6 mt-2 mb-2 rounded-sm">
+                <div class="card" style="background-color: #69878a;">
+                <div class="card-header">
+                    <h6>Secteur d'activitÃ©</h6>
+                    <h5 class="card-title"> {{entreprise['ent_raison_sociale']}} </h5>
+                </div>
+                <div class="card-body">
+                {% for personne in listePersonnes %}
+                    {% if (personne['ent_raison_sociale'] == entreprise['ent_raison_sociale']) %}
+                        {% set personnes = personnes|merge([personne['PER_NOM'], personne['PER_PRENOM'], '|']) %}
+                    {% endif %}
+                {% endfor %}
+                <p>
+                    <span class="small"> Nom : {% for LesPersonnes in personnes %} {{LesPersonnes}} {% endfor %}</span><br/>
+                </p>
+                <p>
+                <span class="small"> Options : </span>
+                    <a href="#" class="btn btn-primary">SLAM</a>
+                    <a href="#" class="btn btn-primary">SISR</a>
+                </p>
+                </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+        
+        
     </div>
 </div>
 {% endblock %}

@@ -25,9 +25,7 @@ class SecurityController extends AbstractController
             $VerifLogin = $doctrine->getManager()->getRepository(Utilisateur::class)->LoginVerification($InfoSaisies['UTI_Login'],$InfoSaisies['UTI_MDP']);
             if ($VerifLogin != False){
                 $session->set('Role', $doctrine->getManager()->getRepository(Utilisateur::class)->getRole($InfoSaisies['UTI_Login']));
-                if ($session->get('Role')['UTI_ROLE'] == true){
-                    return $this->redirectToRoute("listeEntreprise");
-                }
+                return $this->redirectToRoute("listeEntreprise");
             }
             else{
                 return $this->render('login.html.twig', ['loginform' => $form->createView(), 'FalseLogin' => 'Identifiant ou mot de passe incorrect']);
