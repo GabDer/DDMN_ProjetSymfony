@@ -31,6 +31,9 @@
                     {% endif %}
                 {% endfor %}
                 <p>
+                    <span class="small"> CP : {{ ENTREPRISE.ent_cp }}</span><br/>
+                </p>
+                <p>
                     <span class="small"> Nom : {% for LesPersonnes in personnes %} {{LesPersonnes}} {% endfor %}</span><br/>
                 </p>
                 <p>
@@ -42,6 +45,8 @@
                 </div>
             </div>
         {% endfor %}
+
+
         {% else %}
             {% for ENTREPRISE in listeEntreprises %}
             {% set personnes = [] %}
@@ -58,12 +63,17 @@
                     {% endif %}
                 {% endfor %}
                 <p>
+                    <span class="small"> CP : {{ ENTREPRISE.ent_cp }}</span><br/>
+                </p>
+                <p>
                     <span class="small"> Nom : {% for LesPersonnes in personnes %} {{LesPersonnes}} {% endfor %}</span><br/>
                 </p>
                 <p>
                     <span class="small">
                     {% if ENTREPRISE['ent_site_web'] is not null %}
                         <a href= "{{ENTREPRISE['ent_site_web']}}">Lien vers le site web</a></span><br/>
+                    {% else %}
+                        <p>Pas de site</p>
                     {% endif %}
                 </p>
                 <p>

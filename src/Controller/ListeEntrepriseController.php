@@ -29,6 +29,36 @@ class ListeEntrepriseController extends AbstractController
         return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises, 'listePersonnes' => $listePersonnes]);
 
     }
+    /**
+     * @Route("/liste_entreprise/RS/{RS}", name="listeEntrepriseParNom")
+     */
+    public function listeEntreprisesParNom(Request $request ,ManagerRegistry $doctrine, $RS)
+    {
+        $entityManager = $doctrine->getManager();
+        $listeEntreprises = $entityManager->getRepository(ENTREPRISE::class)->RechercheParEntreprise($RS); //On récupère toute les entreprises en fonction du nom rentré
+        $listePersonnes = [];
+        foreach ($listeEntreprises as $entreprise){ //Pour chaque entreprise, on y associe un tableau de ses personnes dans le tableau 'listePersonnes'
+            $listePersonnes = array_merge($listePersonnes,$entityManager->getRepository(ENTREPRISE::class)->AffichagePersonnesEntreprise($entreprise['ent_raison_sociale'])); //array_merge permet d'ajouter des éléments à un tableau déja existant
+            
+        }
+        return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises, 'listePersonnes' => $listePersonnes]);
+    }
+
+    /**
+     * @Route("/liste_entreprise/CP/{CP}", name="listeEntrepriseParCP")
+     */
+    public function listeEntreprisesParCP(Request $request ,ManagerRegistry $doctrine, $CP)
+    {
+        $entityManager = $doctrine->getManager();
+        $listeEntreprises = $entityManager->getRepository(ENTREPRISE::class)->RechercheParCP($CP); //On récupère toute les entreprises en fonction du nom rentré
+        $listePersonnes = [];
+        foreach ($listeEntreprises as $entreprise){ //Pour chaque entreprise, on y associe un tableau de ses personnes dans le tableau 'listePersonnes'
+            $listePersonnes = array_merge($listePersonnes,$entityManager->getRepository(ENTREPRISE::class)->AffichagePersonnesEntreprise($entreprise['ent_raison_sociale'])); //array_merge permet d'ajouter des éléments à un tableau déja existant
+            
+        }
+        return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises, 'listePersonnes' => $listePersonnes]);
+    }
+
 
     /**
      * @Route("/ajoutentreprise", name="AjoutEntreprise")
