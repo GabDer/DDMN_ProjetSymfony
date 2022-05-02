@@ -3,21 +3,9 @@
 {% block title %}Ajout entreprise{% endblock %}
 
 {% block content %}
-    <style>
-        .addFormEntBlock{
-            border-radius: 15px;
-            background: #3d4348;
-            box-shadow:  16px -16px 32px #2a2a2a,
-             -16px 16px 32px #363636;
-            padding-top: 20px;
-            padding-bottom: 20px;
-            padding-left: 20px;
-        }
-    </style>
-    
-    <div class=" addFormEntBlock" >
-        <h1>Ajout entreprise</h1>
-        <form method='POST' >
+
+    <div class="bg-danger" >
+        <form method='POST'>
             {{form(AjoutEntrepriseForm)}}
         </form>
     </div>
