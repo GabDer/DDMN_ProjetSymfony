@@ -16,8 +16,8 @@
     </div>
 </div>
     <div class="row ml-4" id="bloc">
-    {% set NomUser = app.session.get('Login') %}
-    {% if NomUser %}
+    {% set Role = app.session.get('Role') %}
+    {% if Role == 1 %}
         {% for ENTREPRISE in listeEntreprises %}
             {% set personnes = [] %}
             

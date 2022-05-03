@@ -89,6 +89,21 @@ class UtilisateurRepository extends ServiceEntityRepository
         return $resultat->fetchAssociative();
     }
     
+    public function AffichageUtilisateurs()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+        SELECT id, UTI_Login, UTI_Role
+        FROM Utilisateur
+        ORDER BY UTI_Login ASC';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
     /*
     public function findOneBySomeField($value): ?Utilisateur
     {
