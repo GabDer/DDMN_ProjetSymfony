@@ -6,10 +6,18 @@
 <style>
 
 </style>
-
+<div class="divFiltre">
+    <div class="barreRecherche">
+        <input type="text" placeholder="Nom entreprise">
+        <input type="text" placeholder="Ville">
+        <input type="text" placeholder="Pays">
+        <input type="text" placeholder="Nom du tuteur">
+        <input type="submit" value="Rechercher">
+    </div>
+</div>
     <div class="row ml-4" id="bloc">
-    {% set NomUser = app.session.get('Login') %}
-    {% if NomUser %}
+    {% set Role = app.session.get('Role') %}
+    {% if Role == 1 %}
         {% for ENTREPRISE in listeEntreprises %}
             {% set personnes = [] %}
             
@@ -32,6 +40,9 @@
                     {% endif %}
                 {% endfor %}
                 <p>
+                    <span class="small"> CP : {{ ENTREPRISE.ent_cp }}</span><br/>
+                </p>
+                <p>
                     <span class="small"> Nom : {% for LesPersonnes in personnes %} {{LesPersonnes}} {% endfor %}</span><br/>
                 </p>
                 <p>
@@ -43,13 +54,15 @@
                 </div>
             </div>
         {% endfor %}
+
+
         {% else %}
             {% for ENTREPRISE in listeEntreprises %}
             {% set personnes = [] %}
                 <div class="col-sm-6 mt-2 mb-2 rounded-sm">
                 <div class="card" style="background-color: #69878a;">
                 <div class="card-header">
-                    <h6>Secteur d'activitÃ©</h6>
+                    <h6>Secteur d'activité</h6>
                     <h5 class="card-title"> {{ENTREPRISE['ent_raison_sociale']}} </h5>
                 </div>
                 <div class="card-body">
@@ -59,12 +72,17 @@
                     {% endif %}
                 {% endfor %}
                 <p>
+                    <span class="small"> CP : {{ ENTREPRISE.ent_cp }}</span><br/>
+                </p>
+                <p>
                     <span class="small"> Nom : {% for LesPersonnes in personnes %} {{LesPersonnes}} {% endfor %}</span><br/>
                 </p>
                 <p>
                     <span class="small">
                     {% if ENTREPRISE['ent_site_web'] is not null %}
                         <a href= "{{ENTREPRISE['ent_site_web']}}">Lien vers le site web</a></span><br/>
+                    {% else %}
+                        <p>Pas de site</p>
                     {% endif %}
                 </p>
                 <p>

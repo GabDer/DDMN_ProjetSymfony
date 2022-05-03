@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+<<<<<<< HEAD
 	<div class="row">
 		<div class="col-sm-10 rounded-sm">
 			<div class="card" style="background-color: #323237;">
@@ -28,3 +29,20 @@
 		    </div>
 		</div>
 {% endblock %}
+=======
+
+{% set Role = app.session.get('Role') %}
+{% if ( Role.UTI_ROLE == 1 ) %}
+
+    <div class="bg-danger" >
+        <form method='POST'>
+            {{form(AjoutEntrepriseForm)}}
+        </form>
+    </div>
+
+{% else %}
+<h1> Vous n'avez pas les droits pour accéder à cette page.
+{% endif %}
+
+{% endblock %}
+>>>>>>> 9156a7a80364426d347e1bfb161d252a080361e6
