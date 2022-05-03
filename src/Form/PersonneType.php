@@ -18,10 +18,10 @@ class PersonneType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('PER_NOM', TextType::class)
-            ->add('PER_PRENOM', TextType::class)
-            ->add('PER_TEL', TelType::class)
-            ->add('PER_MAIL', EmailType::class)
+            ->add('PER_NOM', TextType::class, array('label'=>false, 'attr'=>['placeholder'=>'Nom']))
+            ->add('PER_PRENOM', TextType::class, array('label'=>false, 'attr'=>['placeholder'=>'Prénom']))
+            ->add('PER_TEL', TelType::class, array('label'=>false, 'attr'=>['placeholder'=>'Tel']))
+            ->add('PER_MAIL', EmailType::class, array('label'=>false, 'attr'=>['placeholder'=>'Mail']))
             ->add('ENTREPRISE', EntityType::class,
                 array(
                     'class'=>ENTREPRISE::class,

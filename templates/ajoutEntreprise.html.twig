@@ -1,8 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajout entreprise{% endblock %}
+{% block title %}Ajout entreprise
+<link rel="stylesheet" href="LoginCSS.css">
+{% endblock %}
 
 {% block content %}
+<<<<<<< HEAD
+	<div class="row">
+		<div class="col-sm-10 rounded-sm">
+			<div class="card" style="background-color: #323237;">
+				<div class="card-header">
+					<h1>Ajouter une entreprise</h1>
+				</div>
+			<div class="card-body">
+                <form method='POST' class="">
+					{# {{ form_row(AjoutEntrepriseForm.ENT_RaisonSociale) }}
+                    {{ form_row(AjoutEntrepriseForm.ENT_Pays) }}
+                    {{ form_row(AjoutEntrepriseForm.ENT_Ville) }}
+                    {{ form_row(AjoutEntrepriseForm.ENT_CP) }}
+                    {{ form_row(AjoutEntrepriseForm.ENT_RUE) }}
+                    {{ form_row(AjoutEntrepriseForm.ENT_ComplementAdresse) }}
+                    {{ form_row(AjoutEntrepriseForm.ENT_NUM1) }}
+                    {{ form_row(AjoutEntrepriseForm.ENT_NUM2) }}
+                    {{ form_row(AjoutEntrepriseForm.ENT_SiteWeb) }}
+                    {{ form_row(AjoutEntrepriseForm.Valider) }} #}
+                    {{form(AjoutEntrepriseForm, {'attr' : {'class' : 'formAjoutEnt'} }) }}
+                </form>
+		    </div>
+		</div>
+{% endblock %}
+=======
+
+{% set Role = app.session.get('Role') %}
+{% if ( Role.UTI_ROLE == 1 ) %}
 
     <div class="bg-danger" >
         <form method='POST'>
@@ -10,4 +40,9 @@
         </form>
     </div>
 
+{% else %}
+<h1> Vous n'avez pas les droits pour accéder à cette page.
+{% endif %}
+
 {% endblock %}
+>>>>>>> 9156a7a80364426d347e1bfb161d252a080361e6

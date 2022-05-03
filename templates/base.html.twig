@@ -34,24 +34,24 @@
             <div class="collapse navbar-collapse" id="mobileMenu">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                     {% set NomUser = app.session.get('Login') %}
+                    {% set Role = app.session.get('Role') %}
                         <li class="nav-item">
                             <a class="nav-link" href="#">{{NomUser}}</a>
                         </li>
+                        {% if ( Role.UTI_ROLE == 1 ) %}
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Compte</a>
+                            <a class="nav-link" href="{{ path('listeUtilisateurs') }}">Compte</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('AjoutEntreprise') }}">Ajouter une entreprise</a>
                         </li>
-
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
+                        </li>
                 </ul>
             </div>
         </nav>
-        {% if app.user %}
-            <li class="nav-item">
-                <span class="nav-link">Bienvenue !</span>
-            </li>
-        {% endif %}
         <div id="Bloc2">
             {% block content %}
             {% endblock %}

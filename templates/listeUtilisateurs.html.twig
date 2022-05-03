@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+
+{% set Role = app.session.get('Role') %}
+    {% if ( Role.UTI_ROLE == 1 ) %}
+
+    {% for UTILISATEUR in listeUtilisateurs %}
+        <div class="col-sm-6 mt-2 mb-2 rounded-sm">
+        <div class="card" style="background-color: #69878a;">
+            <div class="card-header">
+                <div>
+                    <h6>Secteur d'activité</h6>
+                </div>
+                </div>
+                    <div class="card-body">
+                    <p>
+                        <span class="medium"> Login : {{ UTILISATEUR.UTI_Login }}</span><br/>
+                    </p>
+                    <p>
+                        <span class="medium"> Role : 
+                        {% if ( UTILISATEUR.UTI_Role == 1 ) %} 
+                        Admin
+                        {% else %} 
+                        Enseignant
+                        {% endif %}
+                        </span><br/>
+                    </p>
+                    </div>
+            </div>   
+        </div>
+        </div>
+{% endfor %}
+
+    {% else %}
+    <h1> Vous n'avez pas les droits pour accéder à cette page. </h1>
+    {% endif %}
+    
+{% endblock %}
+        
