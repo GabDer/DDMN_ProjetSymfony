@@ -20,22 +20,22 @@ class PERSONNE
     /**
      * @ORM\Column(type="string", length=40)
      */
-    private $PER_NOM;
+    public $PER_NOM;
 
     /**
      * @ORM\Column(type="string", length=40, nullable=true)
      */
-    private $PER_PRENOM;
+    public $PER_PRENOM;
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
      */
-    private $PER_TEL;
+    public $PER_TEL;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $PER_MAIL;
+    public $PER_MAIL;
     /**
      * @ORM\ManyToOne(targetEntity=ENTREPRISE::class, inversedBy="Personne")
      * @ORM\JoinColumn(nullable=false)
