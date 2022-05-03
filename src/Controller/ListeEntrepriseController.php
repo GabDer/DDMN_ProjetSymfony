@@ -102,7 +102,7 @@ class ListeEntrepriseController extends AbstractController
     /**
      * @Route("/infos_entreprise/{id}", name="InfosEntreprise")
      */
-    public function InfosEntreprise(ManagerRegistry $em, $id): Response
+    public function InfosEntreprise(ManagerRegistry $em, $id, Request $request): Response
     {
         $session = $request->getSession();
         if ($session->get('Role') == null){

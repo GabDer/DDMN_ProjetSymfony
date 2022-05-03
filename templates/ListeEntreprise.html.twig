@@ -63,7 +63,7 @@
                 <div class="card" style="background-color: #69878a;">
                 <div class="card-header">
                     <h6>Secteur d'activité</h6>
-                    <h5 class="card-title"> {{ENTREPRISE['ent_raison_sociale']}} </h5>
+                    <a href="{{ path('InfosEntreprise',{ 'id': ENTREPRISE.id}) }}"><h5 class="card-title">{{ENTREPRISE.ent_raison_sociale}}</h5></a>
                 </div>
                 <div class="card-body">
                 {% for personne in listePersonnes %}
