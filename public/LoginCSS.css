@@ -203,6 +203,77 @@ body {
                   Début CSS Ajout Entreeprise
 ---------------------------------------------------*/
 
+        .addFormEntBlock{
+        background-color: #03c47d;
+    }
+
+
+
+/*--------------------------------------------------
+              Fin CSS Ajout From
+---------------------------------------------------*/
+
+/*--------------------------------------------------
+                  Début CSS InfosEntreprise
+---------------------------------------------------*/
+
+.infoEntrCardBody{
+  background-color: #69878a;
+  width: 70%;
+  height: 450px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 16px;
+  margin-top: 230px;
+  display: flex;
+  flex-direction: row;
+}
+.divGaucheInfos{
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.divGaucheInfos h1{
+  color: #e8e8e8;
+  font-size: 32px;
+  margin-top: 40px;
+  margin-left: 22px;
+}
+.divGaucheInfos h2{
+  color: #e8e8e8;
+  margin-left: 22px;
+  margin-top: 12px;
+  margin-bottom: 20px;
+}
+.divGaucheInfos h3{
+  color: #e8e8e8;
+  font-size: 20px;
+  margin-left: 22px;
+  margin-bottom: 4px;
+}
+.divGaucheInfos h4{
+  color: #e8e8e8;
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+.divDroiteMaps{
+  width: 60%;
+  height: 100%;
+}
+iframe{
+  width: 100%;
+  border-top-right-radius: 14px;
+  border-bottom-right-radius: 14px;
+}
+.contactEntr{
+  margin: 22px;
+  height: 100%;
+  overflow: auto;
+}
+.contactUnite{
+  margin-bottom: 30px;
+}
 .formAjoutEnt input {
   background-color: #e8e8e8;
   width: 60%;
