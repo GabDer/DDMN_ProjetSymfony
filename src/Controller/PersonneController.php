@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PersonneController extends AbstractController
 {
     /**
-     * @Route("/ajouterpersonne", name="AjouterPersonne")
+     * @Route("/ajouterpersonne", name="AjoutPersonne")
      */
     public function AjoutPersonne(Request $request, ManagerRegistry $em): Response
     {

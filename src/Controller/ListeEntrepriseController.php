@@ -24,7 +24,6 @@ class ListeEntrepriseController extends AbstractController
         $listePersonnes = [];
         foreach ($listeEntreprises as $entreprise){ //Pour chaque entreprise, on y associe un tableau de ses personnes dans le tableau 'listePersonnes'
             $listePersonnes = array_merge($listePersonnes,$entityManager->getRepository(ENTREPRISE::class)->AffichagePersonnesEntreprise($entreprise['ent_raison_sociale'])); //array_merge permet d'ajouter des éléments à un tableau déja existant
-            
         }
         return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises, 'listePersonnes' => $listePersonnes]);
 
@@ -36,16 +35,17 @@ class ListeEntrepriseController extends AbstractController
     public function ajoutEntreprise(ManagerRegistry $em, Request $request): Response
     {
         $entreprise = new ENTREPRISE();
-        $AjoutEntrepriseForm = $this->createForm(EntrepriseType::class, $entreprise);
+        $Personne = new PERSONNE();
 
-        if  ( $request->isMethod('POST'))
+        $AjoutEntrepriseForm = $this->createForm(EntrepriseType::class, $entreprise);
+        if( $request->isMethod('POST'))
         {
             $AjoutEntrepriseForm->handleRequest($request);
-
             $em = $em->getManager();
             $em->persist($entreprise);
             $em->flush();
-            return $this->redirectToRoute('listeEntreprise');
+            
+            return $this->redirectToRoute('AjoutPersonne');
         }
         return $this->render('AjoutEntreprise.html.twig', ['AjoutEntrepriseForm' => $AjoutEntrepriseForm->createView()]);
     }
@@ -58,7 +58,7 @@ class ListeEntrepriseController extends AbstractController
         $em = $em->getManager();
         $entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
         $entPersonne = $em->getRepository(PERSONNE::class)->findLastBy($entreprise);
-        dd($entreprise, $entPersonne);
+        //dd($entreprise, $entPersonne);
 
         return $this->render('InfosEntreprise.html.twig', array('uneEntreprise' => $entreprise));
     }
