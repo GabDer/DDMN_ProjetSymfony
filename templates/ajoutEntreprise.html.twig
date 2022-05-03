@@ -4,10 +4,17 @@
 
 {% block content %}
 
+{% set Role = app.session.get('Role') %}
+{% if ( Role.UTI_ROLE == 1 ) %}
+
     <div class="bg-danger" >
         <form method='POST'>
             {{form(AjoutEntrepriseForm)}}
         </form>
     </div>
+
+{% else %}
+<h1> Vous n'avez pas les droits pour accéder à cette page.
+{% endif %}
 
 {% endblock %}
