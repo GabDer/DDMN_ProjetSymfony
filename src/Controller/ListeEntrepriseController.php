@@ -19,6 +19,11 @@ class ListeEntrepriseController extends AbstractController
      */
     public function listeEntreprises(Request $request ,ManagerRegistry $doctrine)
     {
+        $session = $request->getSession();
+        if ($session->get('Role') == null){
+            return $this->redirectToRoute("app_login");
+        }
+        
         $entityManager = $doctrine->getManager();
         $listeEntreprises = $entityManager->getRepository(ENTREPRISE::class)->AffichageEntreprise(); //On récupère toute les entreprises existantes
         $listePersonnes = [];
@@ -34,6 +39,11 @@ class ListeEntrepriseController extends AbstractController
      */
     public function listeEntreprisesParNom(Request $request ,ManagerRegistry $doctrine, $RS)
     {
+        $session = $request->getSession();
+        if ($session->get('Role') == null){
+            return $this->redirectToRoute("app_login");
+        }
+
         $entityManager = $doctrine->getManager();
         $listeEntreprises = $entityManager->getRepository(ENTREPRISE::class)->RechercheParEntreprise($RS); //On récupère toute les entreprises en fonction du nom rentré
         $listePersonnes = [];
@@ -49,6 +59,11 @@ class ListeEntrepriseController extends AbstractController
      */
     public function listeEntreprisesParCP(Request $request ,ManagerRegistry $doctrine, $CP)
     {
+        $session = $request->getSession();
+        if ($session->get('Role') == null){
+            return $this->redirectToRoute("app_login");
+        }
+
         $entityManager = $doctrine->getManager();
         $listeEntreprises = $entityManager->getRepository(ENTREPRISE::class)->RechercheParCP($CP); //On récupère toute les entreprises en fonction du nom rentré
         $listePersonnes = [];
@@ -65,6 +80,11 @@ class ListeEntrepriseController extends AbstractController
      */
     public function ajoutEntreprise(ManagerRegistry $em, Request $request): Response
     {
+        $session = $request->getSession();
+        if ($session->get('Role') == null){
+            return $this->redirectToRoute("app_login");
+        }
+
         $entreprise = new ENTREPRISE();
         $AjoutEntrepriseForm = $this->createForm(EntrepriseType::class, $entreprise);
 
@@ -85,6 +105,11 @@ class ListeEntrepriseController extends AbstractController
      */
     public function InfosEntreprise(ManagerRegistry $em, $id): Response
     {
+        $session = $request->getSession();
+        if ($session->get('Role') == null){
+            return $this->redirectToRoute("app_login");
+        }
+
         $em = $em->getManager();
         $entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
         $entPersonne = $em->getRepository(PERSONNE::class)->findLastBy($entreprise);

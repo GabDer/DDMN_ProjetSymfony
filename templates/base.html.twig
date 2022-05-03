@@ -46,14 +46,12 @@
                             <a class="nav-link" href="{{ path('AjoutEntreprise') }}">Ajouter une entreprise</a>
                         </li>
                         {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
+                        </li>
                 </ul>
             </div>
         </nav>
-        {% if app.user %}
-            <li class="nav-item">
-                <span class="nav-link">Bienvenue !</span>
-            </li>
-        {% endif %}
         <div id="Bloc2">
             {% block content %}
             {% endblock %}
