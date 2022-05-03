@@ -2,10 +2,11 @@
 
 {% block content %}
 
-    {% for key in uneEntreprise %}
+ 
+        {% for ENTREPRISE in listeEntreprises %}
 
-        <h1> {{ key.ENT_RaisonSociale }} </h1>
+            <h1> {{ENTREPRISE.ent_raison_sociale}} </h1>
 
-    {% endfor %}
+        {% endfor %}
 
 {% endblock %}

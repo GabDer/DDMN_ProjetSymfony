@@ -88,7 +88,6 @@ class ListeEntrepriseController extends AbstractController
         $em = $em->getManager();
         $entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
         $entPersonne = $em->getRepository(PERSONNE::class)->findLastBy($entreprise);
-        dd($entreprise, $entPersonne);
 
         return $this->render('InfosEntreprise.html.twig', array('uneEntreprise' => $entreprise));
     }
