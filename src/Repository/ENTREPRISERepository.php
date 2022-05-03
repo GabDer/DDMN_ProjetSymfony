@@ -50,7 +50,7 @@ class ENTREPRISERepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-        SELECT  id, ent_raison_sociale, ent_site_web
+        SELECT id, ent_raison_sociale, ent_site_web, ent_cp
         FROM Entreprise
         ORDER BY ent_raison_sociale ASC';
         $stmt = $conn->prepare($sql);
@@ -81,7 +81,7 @@ class ENTREPRISERepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-        SELECT DISTINCT ent_raison_sociale FROM entreprise
+        SELECT id, ent_raison_sociale, ent_site_web, ent_cp FROM entreprise
         INNER JOIN personne ON personne.entreprise_id=entreprise.id
         WHERE PER_NOM = :nom
         ORDER BY ent_raison_sociale';
@@ -97,7 +97,7 @@ class ENTREPRISERepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = "
-        SELECT DISTINCT ent_raison_sociale FROM entreprise
+        SELECT id, ent_raison_sociale, ent_site_web, ent_cp FROM entreprise
         WHERE ent_cp = :CP
         ORDER BY ent_raison_sociale";
         $stmt = $conn->prepare($sql);
@@ -111,7 +111,7 @@ class ENTREPRISERepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = "
-        SELECT DISTINCT ent_raison_sociale FROM entreprise
+        SELECT id, ent_raison_sociale, ent_site_web, ent_cp FROM entreprise
         WHERE ent_raison_sociale LIKE :RS
         ORDER BY ent_raison_sociale";
         $stmt = $conn->prepare($sql);
