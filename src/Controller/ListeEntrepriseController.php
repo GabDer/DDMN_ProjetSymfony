@@ -68,7 +68,7 @@ class ListeEntrepriseController extends AbstractController
         $entreprise = new ENTREPRISE();
         $AjoutEntrepriseForm = $this->createForm(EntrepriseType::class, $entreprise);
 
-        if  ( $request->isMethod('POST'))
+        if ($request->isMethod('POST'))
         {
             $AjoutEntrepriseForm->handleRequest($request);
 

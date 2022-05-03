@@ -36,6 +36,17 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * @Route("/liste_utilisateurs", name="listeUtilisateurs")
+     */
+    public function listeUtilisateurs(Request $request ,ManagerRegistry $doctrine)
+    {
+        $entityManager = $doctrine->getManager();
+        $listeEntreprises = $entityManager->getRepository(UTILISATEUR::class)->AffichageUtilisateurs(); //On récupère toute les utilisateurs existants
+        return $this->render('/ListeUtilisateurs.html.twig', ['listeEntreprises' => $listeEntreprises]);
+
+    }
+
+    /**
      * @Route("/logout", name="app_logout")
      */
     public function logout()
