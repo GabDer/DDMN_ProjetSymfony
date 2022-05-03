@@ -40,6 +40,10 @@ class SecurityController extends AbstractController
      */
     public function listeUtilisateurs(Request $request ,ManagerRegistry $doctrine)
     {
+        $session = $request->getSession();
+        if ($session->get('Role') == null){
+            return $this->redirectToRoute("app_login");
+        }
         $entityManager = $doctrine->getManager();
         $listeUtilisateurs = $entityManager->getRepository(UTILISATEUR::class)->AffichageUtilisateurs(); //On récupère toute les utilisateurs existants
         return $this->render('/ListeUtilisateurs.html.twig', ['listeUtilisateurs' => $listeUtilisateurs]);
@@ -48,8 +52,10 @@ class SecurityController extends AbstractController
     /**
      * @Route("/logout", name="app_logout")
      */
-    public function logout()
+    public function logout(Request $request)
     {
-        return $this->render('login.html.twig', ['loginform' => $form->createView()]);
+        $session = $request->getSession();
+        $session->clear();
+        return $this->redirectToRoute("app_login");
     }
 }
