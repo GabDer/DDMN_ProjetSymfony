@@ -6,7 +6,15 @@
 <style>
 
 </style>
-
+<div class="divFiltre">
+    <div class="barreRecherche">
+        <input type="text" placeholder="Nom entreprise">
+        <input type="text" placeholder="Ville">
+        <input type="text" placeholder="Pays">
+        <input type="text" placeholder="Nom du tuteur">
+        <input type="submit" value="Rechercher">
+    </div>
+</div>
     <div class="row ml-4" id="bloc">
     {% if app.session.get('admin') %}
         {% for ENTREPRISE in listeEntreprises %}

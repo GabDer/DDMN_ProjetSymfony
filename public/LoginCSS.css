@@ -151,7 +151,33 @@ body{
 .bg-danger{
   background-color: transparent !important  ;
 }
-
+#Bloc2{
+  margin-top: 90px !important;
+}
+.divFiltre{
+  width: 100%;
+  height: 100px;
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.barreRecherche{
+  width: 80%;
+  height: 80%;
+  background-color: #4e4e4e;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+}
+.barreRecherche input[type='text']{
+  border-radius: 12px;
+  height: 45px;
+  margin-left: 20px;
+  border: none;
+  padding-left: 12px;
+  padding-top: 0px;
+}
 
 /*--------------------------------------------------
               Fin CSS liste annonces
