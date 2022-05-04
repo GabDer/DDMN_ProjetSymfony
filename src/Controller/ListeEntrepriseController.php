@@ -94,7 +94,7 @@ class ListeEntrepriseController extends AbstractController
             $em->persist($entreprise);
             $em->flush();
             
-            return $this->redirectToRoute('AjoutPersonne');
+            return $this->redirectToRoute('InfosEntreprise', ['id'=>$entreprise->getId()]);
         }
         return $this->render('AjoutEntreprise.html.twig', ['AjoutEntrepriseForm' => $AjoutEntrepriseForm->createView()]);
     }
