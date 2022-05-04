@@ -20,7 +20,6 @@
     {% if Role.UTI_ROLE == 1 %}
         {% for ENTREPRISE in listeEntreprises %}
             {% set personnes = [] %}
-            
                 <div class="col-sm-6 mt-2 mb-2 rounded-sm">
                 <div class="card" style="background-color: #69878a;">
                 <div class="card-header">
@@ -54,7 +53,6 @@
                 </div>
             </div>
         {% endfor %}
-
 
         {% else %}
             {% for ENTREPRISE in listeEntreprises %}
@@ -94,9 +92,7 @@
                 </div>
             </div>
         {% endfor %}
-    {% endif %}
-        
-        
+    {% endif %} 
     </div>
 </div>
 {% endblock %}
