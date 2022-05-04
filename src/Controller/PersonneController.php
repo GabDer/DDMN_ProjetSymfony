@@ -14,12 +14,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class PersonneController extends AbstractController
 {
     /**
-     * @Route("/ajouterpersonne", name="AjoutPersonne")
+     * @Route("/ajouterpersonne", name="AjouterPersonne")
      */
     public function AjoutPersonne(Request $request, ManagerRegistry $em): Response
     {
-        $Personne = new PERSONNE();
+        $session = $request->getSession();
+        if ($session->get('Role') == null){
+            return $this->redirectToRoute("app_login");
+        }
 
+        $Personne = new PERSONNE();
         $PersonneForm = $this->createForm(PersonneType::class, $Personne);
         if ($request->isMethod('POST'))
         {

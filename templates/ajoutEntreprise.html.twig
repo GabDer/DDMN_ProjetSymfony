@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block content %}
+{% set Role = app.session.get('Role') %}
+{% if ( Role.UTI_ROLE == 1 ) %}
+
 	<div class="row">
 		<div class="col-sm-10 rounded-sm">
 			<div class="card" style="background-color: #323237;">
@@ -23,7 +26,7 @@
                     {{ form_row(AjoutEntrepriseForm.ENT_NUM2) }}
                     {{ form_row(AjoutEntrepriseForm.ENT_SiteWeb) }}
                     {{ form_row(AjoutEntrepriseForm.Valider) }} #}
-                    {{form(AjoutEntrepriseForm, {'attr' : {'class' : 'formAjoutEnt'} }) }}
+                    {{ form(AjoutEntrepriseForm, {'attr' : {'class' : 'formAjoutEnt'} }) }}
                 </form>
 		    </div>
 		</div>
