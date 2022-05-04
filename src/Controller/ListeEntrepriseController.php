@@ -23,7 +23,7 @@ class ListeEntrepriseController extends AbstractController
         if ($session->get('Role') == null){
             return $this->redirectToRoute("app_login");
         }
-        
+
         $entityManager = $doctrine->getManager();
         $listeEntreprises = $entityManager->getRepository(ENTREPRISE::class)->AffichageEntreprise(); //On récupère toute les entreprises existantes
         $listePersonnes = [];
@@ -94,7 +94,7 @@ class ListeEntrepriseController extends AbstractController
             $em->persist($entreprise);
             $em->flush();
             
-            return $this->redirectToRoute('AjoutPersonne');
+            return $this->redirectToRoute('InfosEntreprise', ['id'=>$entreprise->getId()]);
         }
         return $this->render('AjoutEntreprise.html.twig', ['AjoutEntrepriseForm' => $AjoutEntrepriseForm->createView()]);
     }
