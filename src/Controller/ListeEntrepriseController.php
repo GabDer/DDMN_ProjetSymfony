@@ -7,6 +7,7 @@ use App\Entity\PERSONNE;
 use App\Form\EntrepriseType;
 use App\Form\PersonneType;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -116,5 +117,43 @@ class ListeEntrepriseController extends AbstractController
         return $this->render('InfosEntreprise.html.twig', ['uneEntreprise' => $entreprise, 'unePersonne' => $entPersonne]);
     }
 
-    
+    /**
+    *  @Route("/supprimer_entreprise/{id}", name="SupprimerEntreprise")
+    */
+    public function SupprimerEntreprise(ManagerRegistry $em, $id, Request $request): Response
+    {
+        $session = $request->getSession();
+        if ($session->get('Role') == null){
+            return $this->redirectToRoute("app_login");
+        }
+        $em = $em->getManager();
+        $entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
+        $entPersonne = $em->getRepository(PERSONNE::class)->findLastBy($entreprise);
+
+        $entForm = $this->get('form.factory')->create();
+        if( $request->isMethod('POST'))
+        {
+            $entForm->handleRequest($request);
+            if($entForm->isSubmitted())
+            {
+                try
+                {
+                    foreach($entPersonne as $value)
+                    {
+                        $em->remove($value);
+                        $em->flush();
+                    }
+                    $em->remove($entreprise);
+                    $em->flush();
+                    $this->addFlash('success', 'L\'entreprise a bien été supprimée');
+                    return $this->redirectToRoute('listeEntreprise');
+                }
+                catch(Exception $e)
+                {
+                    $this->addFlash('Error', 'une erreur s\'est produite l\'entreprise n\'a pas pu etre supprimer');
+                }
+            }
+        }
+        return $this->render('SupprimerEntreprise.html.twig', ['Entreprise'=>$entreprise, 'entFormSupp'=>$entForm->createView()]);
+    }
 }
