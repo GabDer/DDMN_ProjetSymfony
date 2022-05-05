@@ -320,8 +320,20 @@ border: 1.5px solid transparent;
                   Début CSS Ajout Entreeprise
 ---------------------------------------------------*/
 
-        .addFormEntBlock{
+    .addFormEntBlock{
         background-color: #03c47d;
+    }
+    .card-body{
+      display: flex;
+    }
+    .card-body form{
+      width: 100%;
+    }
+    .col-sm-10{
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      justify-content: center;
     }
 
 
@@ -393,7 +405,7 @@ iframe{
 }
 .formAjoutEnt input {
   background-color: #e8e8e8;
-  width: 60%;
+  width: 50%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -412,7 +424,7 @@ iframe{
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 60%;
+  width: 50%;
   display: flex;
   justify-content: center;
   margin-left: auto;
@@ -441,7 +453,11 @@ iframe{
 .formAjoutEnt {
   width: 100%;
   display: flex;
-  justify-content: left;
+  justify-content: center;
   flex-direction: column;
-  text-align: left;
+  text-align: center;
+}
+.card-header:first-child{
+  color: white;
+  text-align: center;
 }
