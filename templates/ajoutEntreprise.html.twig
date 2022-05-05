@@ -29,12 +29,11 @@
                     {{ form(AjoutEntrepriseForm, {'attr' : {'class' : 'formAjoutEnt'} }) }}
                 </form>
                 
+                
 		    </div>
 		</div>
 
 {% set Role = app.session.get('Role') %}
-{% else %}
-<h1> Vous n'avez pas les droits pour accéder à cette page.
-{% endif %}
+
 
 {% endblock %}

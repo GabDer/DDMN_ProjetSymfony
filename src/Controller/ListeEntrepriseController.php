@@ -175,7 +175,7 @@ class ListeEntrepriseController extends AbstractController
         }
 
         $entreprise = new ENTREPRISE();
-
+        
         $AjoutEntrepriseForm = $this->createForm(EntrepriseType::class, $entreprise);
         if( $request->isMethod('POST'))
         {
@@ -183,7 +183,7 @@ class ListeEntrepriseController extends AbstractController
             $em = $em->getManager();
             $em->persist($entreprise);
             $em->flush();
-            
+            $this->addFlash('success', 'L\entreprise à bien était ajouter. ');
             return $this->redirectToRoute('InfosEntreprise', ['id'=>$entreprise->getId()]);
         }
         return $this->render('AjoutEntreprise.html.twig', ['AjoutEntrepriseForm' => $AjoutEntrepriseForm->createView()]);
@@ -219,11 +219,11 @@ class ListeEntrepriseController extends AbstractController
         $entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
         $entPersonne = $em->getRepository(PERSONNE::class)->findLastBy($entreprise);
 
-        $entForm = $this->get('form.factory')->create();
+        $entFormSupp = $this->get('form.factory')->create();
         if( $request->isMethod('POST'))
         {
-            $entForm->handleRequest($request);
-            if($entForm->isSubmitted())
+            $entFormSupp->handleRequest($request);
+            if($entFormSupp->isSubmitted())
             {
                 try
                 {
@@ -243,6 +243,36 @@ class ListeEntrepriseController extends AbstractController
                 }
             }
         }
-        return $this->render('SupprimerEntreprise.html.twig', ['Entreprise'=>$entreprise, 'entFormSupp'=>$entForm->createView()]);
+        return $this->render('SupprimerEntreprise.html.twig', ['Entreprise'=>$entreprise, 'entFormSupp'=>$entFormSupp->createView()]);
+    }
+
+    /**
+    *  @Route("/modifier_entreprise/{id}", name="ModifierEntreprise")
+    */
+    public function ModifierEntreprise(ManagerRegistry $em,Request $request, $id):Response
+    {
+        $em = $em->getManager();
+        $entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
+
+        $entFormModif = $this->createForm(EntrepriseType::class, $entreprise);
+        if( $request->isMethod('POST'))
+        {
+            $entFormModif->handleRequest($request);
+
+            if($entFormModif->isValid())
+            {
+                try
+                {
+                    $em->persist($entreprise);
+                    $em->flush();
+                    return $this->redirectToRoute('infos_entreprise', ['id'=> $entreprise->getId()]);
+                }
+                catch(Exception $e)
+                {
+                    $this->addFlash('error', 'Une erreur s\'est produite l\'entreprise n\'a pas pu être modifier.');
+                }
+            }
+        }
+        return $this->render('ModifierEntreprise.html.twig', ['Entreprise'=>$entreprise, 'entFormModif'=>$entFormModif ]);
     }
 }

@@ -25,9 +25,17 @@
                 <div class="card" style="background-color: #69878a;">
                 <div class="card-header">
                     <div class="iconeModifSupr">
-                        <i class="fa-solid fa-pen" id="iconModifier"></i>
-                        <i class="fa-solid fa-trash-can" id="iconSupprimer"></i>
+                                    <div class="modifcompterow">
+                    <div class="modifcomptecolumn">
+                        <label class="labelinscr" for="datenaiss">
+                        </label>
                     </div>
+                </div>
+                        <a href="#"><i class="fa-solid fa-pen" id="iconModifier"></i></a>
+                        <a href="#Mod"><i class="fa-solid fa-trash-can" id="iconSupprimer"></i></a>
+                        
+                    </div>
+                    
                     <div>
                         <h6>Secteur d'activité</h6>
                         <a href="{{ path('InfosEntreprise',{ 'id': ENTREPRISE.id}) }}"><h5 class="card-title">{{ENTREPRISE.ent_raison_sociale}}</h5></a>
