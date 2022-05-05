@@ -59,7 +59,6 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute("app_login");
         }
 
-        $em = $em->getManager();
         $utilisateur = new Utilisateur();
         $ajoutUserForm = $this->createForm(LoginFormType::class, $utilisateur);
         if ($request->isMethod('POST'))
@@ -69,7 +68,7 @@ class SecurityController extends AbstractController
             $em->persist($utilisateur);
             $em->flush();
             $this->addFlash('success', 'L\'utilisateur a bien été ajouté');
-            return $this->redirectToRoute('InfosEntreprise');
+            return $this->redirectToRoute('listeUtilisateurs');
         }
         return $this->render('AjoutUtilisateur.html.twig', ['ajoutUserForm'=>$ajoutUserForm->createView()]);
     }
