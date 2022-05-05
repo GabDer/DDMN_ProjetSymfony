@@ -26,6 +26,7 @@ class PersonneType extends AbstractType
                 array(
                     'class'=>ENTREPRISE::class,
                     'choice_label'=>'ent_raison_sociale',
+                    'label'=>false,
                 )
             )
             // ->add('ENTREPRISE', EntityType::class, 

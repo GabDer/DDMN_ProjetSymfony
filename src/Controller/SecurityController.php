@@ -50,6 +50,31 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * @Route("/ajout_utilisateur", name="AjoutUtilisateurs")
+     */
+    public function ajoutUtilisateur(Request $request, ManagerRegistry $em)
+    {
+        $session = $request->getSession();
+        if ($session->get('Role') == null){
+            return $this->redirectToRoute("app_login");
+        }
+
+        $em = $em->getManager();
+        $utilisateur = new Utilisateur();
+        $ajoutUserForm = $this->createForm(LoginFormType::class, $utilisateur);
+        if ($request->isMethod('POST'))
+        {
+            $ajoutUserForm->handleRequest($request);
+            $em = $em->getManager();
+            $em->persist($utilisateur);
+            $em->flush();
+            $this->addFlash('success', 'L\'utilisateur a bien été ajouté');
+            return $this->redirectToRoute('InfosEntreprise');
+        }
+        return $this->render('AjoutUtilisateur.html.twig', ['ajoutUserForm'=>$ajoutUserForm->createView()]);
+    }
+
+    /**
      * @Route("/logout", name="app_logout")
      */
     public function logout(Request $request)
