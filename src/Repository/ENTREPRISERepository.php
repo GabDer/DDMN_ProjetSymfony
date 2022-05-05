@@ -50,7 +50,7 @@ class ENTREPRISERepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-        SELECT id, ent_raison_sociale, ent_site_web, ent_cp
+        SELECT id, ent_raison_sociale, ent_site_web, ent_cp, ent_ville, ent_pays
         FROM Entreprise
         ORDER BY ent_raison_sociale ASC';
         $stmt = $conn->prepare($sql);
@@ -81,13 +81,13 @@ class ENTREPRISERepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-        SELECT id, ent_raison_sociale, ent_site_web, ent_cp FROM entreprise
+        SELECT id, ent_raison_sociale, ent_site_web, ent_cp, ent_ville, ent_pays
+        FROM entreprise
         INNER JOIN personne ON personne.entreprise_id=entreprise.id
-        WHERE PER_NOM = :nom
+        WHERE PER_NOM LIKE :nom
         ORDER BY ent_raison_sociale';
         $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->executeQuery(['nom' => $nom]);
-
+        $resultSet = $stmt->executeQuery(['nom' => '%'.$nom.'%']);
         // returns an array of arrays (i.e. a raw data set)
         return $resultSet->fetchAllAssociative();
     }
@@ -97,21 +97,24 @@ class ENTREPRISERepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = "
-        SELECT id, ent_raison_sociale, ent_site_web, ent_cp FROM entreprise
-        WHERE ent_cp = :CP
+        SELECT id, ent_raison_sociale, ent_site_web, ent_cp, ent_ville, ent_pays
+        FROM entreprise
+        WHERE ent_cp LIKE :CP
         ORDER BY ent_raison_sociale";
         $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->executeQuery(['CP' => $CP]);
+        $resultSet = $stmt->executeQuery(['CP' => '%'.$CP.'%']);
 
         // returns an array of arrays (i.e. a raw data set)
         return $resultSet->fetchAllAssociative();
     }
+
     public function RechercheParEntreprise(string $RS)
     {
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = "
-        SELECT id, ent_raison_sociale, ent_site_web, ent_cp FROM entreprise
+        SELECT id, ent_raison_sociale, ent_site_web, ent_cp, ent_ville, ent_pays
+        FROM entreprise
         WHERE ent_raison_sociale LIKE :RS
         ORDER BY ent_raison_sociale";
         $stmt = $conn->prepare($sql);
@@ -120,6 +123,39 @@ class ENTREPRISERepository extends ServiceEntityRepository
         // returns an array of arrays (i.e. a raw data set)
         return $resultSet->fetchAllAssociative();
     }
+
+    public function RechercheParVille(string $ville)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "
+        SELECT id, ent_raison_sociale, ent_site_web, ent_cp, ent_ville, ent_pays
+        FROM entreprise
+        WHERE ent_ville LIKE :ville
+        ORDER BY ent_raison_sociale";
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['ville' => '%'.$ville.'%']);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
+    public function RechercheParPays(string $pays)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "
+        SELECT id, ent_raison_sociale, ent_site_web, ent_cp, ent_ville, ent_pays
+        FROM entreprise
+        WHERE ent_pays LIKE :pays
+        ORDER BY ent_raison_sociale";
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['pays' => '%'.$pays.'%']);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
     public function findOneEntreprise($id)
     {
         $conn = $this->getEntityManager()->getConnection();
