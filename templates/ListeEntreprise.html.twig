@@ -6,6 +6,22 @@
 <style>
 
 </style>
+<form action="mesinformationsPage2.php" method="post">
+<div id="Mod" class="modal">
+  <div class="modal_content">
+    <h1>Suprimer</h1>
+    <div class="mesinfosmodif" >
+        <div class="inputField" id="linkSuprEntr">
+            <a href="#" >Supprimer</a>
+        </div>
+        <div class="inputField" id="linkAnnulSuprEntr">
+            <a href="#" >Annuler</a>
+        </div>
+    </div>
+    <a href="#" class="modal_close">&times;</a>
+  </div>
+</div>
+</form>
 <div class="divFiltre">
     <div class="barreRecherche">
         <input type="text" placeholder="Nom entreprise">
@@ -24,9 +40,17 @@
                 <div class="card" style="background-color: #69878a;">
                 <div class="card-header">
                     <div class="iconeModifSupr">
-                        <i class="fa-solid fa-pen" id="iconModifier"></i>
-                        <i class="fa-solid fa-trash-can" id="iconSupprimer"></i>
+                                    <div class="modifcompterow">
+                    <div class="modifcomptecolumn">
+                        <label class="labelinscr" for="datenaiss">
+                        </label>
                     </div>
+                </div>
+                        <a href="#"><i class="fa-solid fa-pen" id="iconModifier"></i></a>
+                        <a href="#Mod"><i class="fa-solid fa-trash-can" id="iconSupprimer"></i></a>
+                        
+                    </div>
+                    
                     <div>
                         <h6>Secteur d'activité</h6>
                     </div>
