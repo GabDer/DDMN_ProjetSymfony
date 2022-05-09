@@ -59,7 +59,6 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute("app_login");
         }
 
-        $em = $em->getManager();
         $utilisateur = new Utilisateur();
         $ajoutUserForm = $this->createForm(LoginFormType::class, $utilisateur);
         if ($request->isMethod('POST'))
@@ -69,9 +68,73 @@ class SecurityController extends AbstractController
             $em->persist($utilisateur);
             $em->flush();
             $this->addFlash('success', 'L\'utilisateur a bien été ajouté');
-            return $this->redirectToRoute('InfosEntreprise');
+            return $this->redirectToRoute('listeUtilisateurs');
         }
         return $this->render('AjoutUtilisateur.html.twig', ['ajoutUserForm'=>$ajoutUserForm->createView()]);
+    }
+
+    /**
+    *  @Route("/modifier_utilisateur/{id}", name="ModifierUtilisateur")
+    */
+    public function ModifierUtilisatuer(ManagerRegistry $em,Request $request, $id):Response
+    {
+        $em = $em->getManager();
+        $utilisateur = $em->getRepository(Utilisateur::class)->find($id);
+
+        $utilisateurFormModif = $this->createForm(LoginFormType::class, $utilisateur);
+        if( $request->isMethod('POST'))
+        {
+            $utilisateurFormModif->handleRequest($request);
+
+            if($utilisateurFormModif->isValid())
+            {
+                try
+                {
+                    $em->persist($utilisateur);
+                    $em->flush();
+                    return $this->redirectToRoute('listeUtilisateurs', ['id'=> $utilisateur->getId()]);
+                }
+                catch(Exeption $e)
+                {
+                    $this->addFlash('error', 'Une erreur s\'est produite l\'utilisateur n\'a pas pu être modifier.');
+                }
+            }
+        }
+        return $this->render('ModifierUtilisateur.html.twig', ['Utilisateur'=>$utilisateur, 'utilisateurFormModif'=>$utilisateurFormModif->createView()]);
+    }
+
+    /**
+    *  @Route("/supprimer_utilisateur/{id}", name="SupprimerUtilisateur")
+    */
+    public function SupprimerEntreprise(ManagerRegistry $em, $id, Request $request): Response
+    {
+        $session = $request->getSession();
+        if ($session->get('Role') == null){
+            return $this->redirectToRoute("app_login");
+        }
+        $em = $em->getManager();
+        $utilisateur = $em->getRepository(Utilisateur::class)->find($id);
+        
+        $userFormSupp = $this->get('form.factory')->create();
+        if( $request->isMethod('POST'))
+        {
+            $userFormSupp->handleRequest($request);
+            if($userFormSupp->isSubmitted())
+            {
+                try
+                {
+                    $em->remove($utilisateur);
+                    $em->flush();
+                    $this->addFlash('success', 'L\'utilisateur a bien été supprimée');
+                    return $this->redirectToRoute('listeEntreprise');
+                }
+                catch(Exception $e)
+                {
+                    $this->addFlash('Error', 'une erreur s\'est produite l\'utilisateur n\'a pas pu etre supprimer');
+                }
+            }
+        }
+        return $this->render('SupprimerUtilisateur.html.twig', ['Utilisateur'=>$utilisateur, 'userFormSupp'=>$userFormSupp->createView()]);
     }
 
     /**

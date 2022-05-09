@@ -1,123 +1,167 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Accueil
+{% endblock %}
 
 {% block content %}
-<style>
+	<style></style>
 
-</style>
-<form action="mesinformationsPage2.php" method="post">
-<div id="Mod" class="modal">
-  <div class="modal_content">
-    <h1>Suprimer</h1>
-    <div class="mesinfosmodif" >
-        <div class="inputField" id="linkSuprEntr">
-            <a href="#" >Supprimer</a>
-        </div>
-        <div class="inputField" id="linkAnnulSuprEntr">
-            <a href="#" >Annuler</a>
-        </div>
+	<div class="divFiltre">
+		<div class="barreRecherche">
+			<input type="text" placeholder="Nom entreprise">
+			<input type="text" placeholder="Ville">
+			<input type="text" placeholder="Pays">
+			<input type="text" placeholder="Nom du tuteur">
+			<input type="submit" value="Rechercher">
+		</div>
+	</div>
+	{% set Role = app.session.get('Role') %}
+	{% if Role.UTI_ROLE == 1 %}
+		<div class="row ml-4" id="bloc">
+			{% for ENTREPRISE in listeEntreprises %}
+				<form action="{{ path('SupprimerEntreprise',{ 'id': ENTREPRISE.id}) }}" method="post">
+					<div id="Mod" class="modal">
+						<div class="modal_content">
+							<h1>Suprimer
+								{{ENTREPRISE.ent_raison_sociale}}</h1>
+							<div class="mesinfosmodif">
+								<div class="inputField" id="linkSuprEntr">
+									<a href="{{ path('SupprimerEntreprise',{ 'id': ENTREPRISE.id}) }}">Supprimer</a>
+								</div>
+								<div class="inputField" id="linkAnnulSuprEntr">
+									<a href="#">Annuler</a>
+								</div>
+							</div>
+							<a href="#" class="modal_close">&times;</a>
+						</div>
+					</div>
+				</form>
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
     </div>
-    <a href="#" class="modal_close">&times;</a>
   </div>
 </div>
-</form>
-<div class="divFiltre">
-    <div class="barreRecherche">
-        <input type="text" placeholder="Nom entreprise">
-        <input type="text" placeholder="Ville">
-        <input type="text" placeholder="Pays">
-        <input type="text" placeholder="Nom du tuteur">
-        <input type="submit" value="Rechercher">
-    </div>
-</div>
-{% set Role = app.session.get('Role') %}
-    {% if Role.UTI_ROLE == 1 %}
-    <div class="row ml-4" id="bloc">
-        {% for ENTREPRISE in listeEntreprises %}
-            {% set personnes = [] %}
-                <div class="col-sm-6 mt-2 mb-2 rounded-sm">
-                <div class="card" style="background-color: #69878a;">
-                <div class="card-header">
-                    <div class="iconeModifSupr">
-                                    <div class="modifcompterow">
-                    <div class="modifcomptecolumn">
-                        <label class="labelinscr" for="datenaiss">
-                        </label>
-                    </div>
-                </div>
-                        <a href="#"><i class="fa-solid fa-pen" id="iconModifier"></i></a>
-                        <a href="#Mod"><i class="fa-solid fa-trash-can" id="iconSupprimer"></i></a>
-                        
-                    </div>
-                    
-                    <div>
-                        <h6>Secteur d'activité</h6>
-                    </div>
-                    <a href="{{ path('InfosEntreprise',{ 'id': ENTREPRISE.id}) }}"><h5 class="card-title">{{ENTREPRISE.ent_raison_sociale}}</h5></a>
-                </div>
-                <div class="card-body">
-                {% for personne in listePersonnes %}
-                    {% if (personne['ent_raison_sociale'] == ENTREPRISE['ent_raison_sociale']) %}
-                        {% set personnes = personnes|merge([personne['PER_NOM'], personne['PER_PRENOM'], '|']) %}
-                    {% endif %}
-                {% endfor %}
-                <p>
-                    <span class="small"> CP : {{ ENTREPRISE.ent_cp }}</span><br/>
-                </p>
-                <p>
-                    <span class="small"> Nom : {% for LesPersonnes in personnes %} {{LesPersonnes}} {% endfor %}</span><br/>
-                </p>
-                <p>
-                <span class="small"> Options : </span>
-                    <a href="#" class="btn btn-primary">SLAM</a>
-                    <a href="#" class="btn btn-primary">SISR</a>
-                </p>
-                </div>
-                </div>
-                </div>
-                
-        {% endfor %}
+				{% set personnes = [] %}
+				<div class="col-sm-6 mt-2 mb-2 rounded-sm">
+					<div class="card" style="background-color: #69878a;">
+						<div class="card-header">
+							<div class="iconeModifSupr">
+								<div class="modifcompterow">
+									<div class="modifcomptecolumn">
+										<label class="labelinscr" for="datenaiss"></label>
+									</div>
+								</div>
+								<a href="#">
+									<i class="fa-solid fa-pen" id="iconModifier"></i>
+								</a>
+								<a href="" data-toggle="modal" data-target="#exampleModalCenter">
+									<i class="fa-solid fa-trash-can" id="iconSupprimer" ></i>
+								</a>
 
-        {% else %}
-            {% for ENTREPRISE in listeEntreprises %}
-            {% set personnes = [] %}
-                <div class="col-sm-6 mt-2 mb-2 rounded-sm">
-                <div class="card" style="background-color: #69878a;">
-                <div class="card-header">
-                    <h6>Secteur d'activité</h6>
-                    <a href="{{ path('InfosEntreprise',{ 'id': ENTREPRISE.id}) }}"><h5 class="card-title">{{ENTREPRISE.ent_raison_sociale}}</h5></a>
-                </div>
-                <div class="card-body">
-                {% for personne in listePersonnes %}
-                    {% if (personne['ent_raison_sociale'] == ENTREPRISE['ent_raison_sociale']) %}
-                        {% set personnes = personnes|merge([personne['PER_NOM'], personne['PER_PRENOM'], '|']) %}
-                    {% endif %}
-                {% endfor %}
-                <p>
-                    <span class="small"> CP : {{ ENTREPRISE.ent_cp }}</span><br/>
-                </p>
-                <p>
-                    <span class="small"> Nom : {% for LesPersonnes in personnes %} {{LesPersonnes}} {% endfor %}</span><br/>
-                </p>
-                <p>
-                    <span class="small">
-                    {% if ENTREPRISE['ent_site_web'] is not null %}
-                        <a href= "{{ENTREPRISE['ent_site_web']}}">Lien vers le site web</a></span><br/>
-                    {% else %}
-                        <p>Pas de site</p>
-                    {% endif %}
-                </p>
-                <p>
-                <span class="small"> Options : </span>
-                    <a href="#" class="btn btn-primary">SLAM</a>
-                    <a href="#" class="btn btn-primary">SISR</a>
-                </p>
-                </div>
-                </div>
-            </div>
-        {% endfor %}
-    {% endif %} 
-    </div>
-</div>
-{% endblock %}
+							</div>
+							<div>
+								<h6>Secteur d'activité</h6>
+							</div>
+							<a href="{{ path('InfosEntreprise',{ 'id': ENTREPRISE.id}) }}">
+								<h5 class="card-title">{{ENTREPRISE.ent_raison_sociale}}</h5>
+							</a>
+						</div>
+						<div class="card-body">
+							{% for personne in listePersonnes %}
+								{% if (personne['ent_raison_sociale'] == ENTREPRISE['ent_raison_sociale']) %}
+									{% set personnes = personnes|merge([personne['PER_NOM'], personne['PER_PRENOM'], '|']) %}
+								{% endif %}
+							{% endfor %}
+							<p>
+								<span class="small">
+									CP :
+									{{ ENTREPRISE.ent_cp }}</span><br/>
+							</p>
+							<p>
+								<span class="small">
+									Nom :
+									{% for LesPersonnes in personnes %}
+										{{LesPersonnes}}
+									{% endfor %}
+								</span><br/>
+							</p>
+							<p>
+								<span class="small">
+									Options :
+								</span>
+								<a href="#" class="btn btn-primary">SLAM</a>
+								<a href="#" class="btn btn-primary">SISR</a>
+							</p>
+						</div>
+					</div>
+				</div>
+
+			{% endfor %}
+
+		{% else %}
+			{% for ENTREPRISE in listeEntreprises %}
+				{% set personnes = [] %}
+				<div class="col-sm-6 mt-2 mb-2 rounded-sm">
+					<div class="card" style="background-color: #69878a;">
+						<div class="card-header">
+							<h6>Secteur d'activité</h6>
+							<a href="{{ path('InfosEntreprise',{ 'id': ENTREPRISE.id}) }}">
+								<h5 class="card-title">{{ENTREPRISE.ent_raison_sociale}}</h5>
+							</a>
+						</div>
+						<div class="card-body">
+							{% for personne in listePersonnes %}
+								{% if (personne['ent_raison_sociale'] == ENTREPRISE['ent_raison_sociale']) %}
+									{% set personnes = personnes|merge([personne['PER_NOM'], personne['PER_PRENOM'], '|']) %}
+								{% endif %}
+							{% endfor %}
+							<p>
+								<span class="small">
+									CP :
+									{{ ENTREPRISE.ent_cp }}</span><br/>
+							</p>
+							<p>
+								<span class="small">
+									Nom :
+									{% for LesPersonnes in personnes %}
+										{{LesPersonnes}}
+									{% endfor %}
+								</span><br/>
+							</p>
+							<p>
+								<span class="small">
+									{% if ENTREPRISE['ent_site_web'] is not null %}
+										<a href="{{ENTREPRISE['ent_site_web']}}">Lien vers le site web</a>
+									</span><br/>
+								{% else %}
+									<p>Pas de site</p>
+								{% endif %}
+							</p>
+							<p>
+								<span class="small">
+									Options :
+								</span>
+								<a href="#" class="btn btn-primary">SLAM</a>
+								<a href="#" class="btn btn-primary">SISR</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		{% endif %}
+	</div>
+</div>{% endblock %}

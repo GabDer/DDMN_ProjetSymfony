@@ -20,7 +20,7 @@ class Utilisateur
     /**
      * @ORM\Column(type="string", length=38)
      */
-    private $UTI_Login;
+    public $UTI_Login;
 
     /**
      * @ORM\Column(type="string", length=38)
@@ -30,7 +30,7 @@ class Utilisateur
     /**
      * @ORM\Column(type="boolean")
      */
-    private $UTI_Role;
+    public $UTI_Role;
 
     public function getId(): ?int
     {
