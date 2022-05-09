@@ -328,6 +328,7 @@ border: 1.5px solid transparent;
     }
     .card-body{
       display: flex;
+      flex-direction: column;
     }
     .card-body form{
       width: 100%;
