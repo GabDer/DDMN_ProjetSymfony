@@ -4,20 +4,22 @@
 {% endblock %}
 
 {% block content %}
-	<style></style>
-<form action="/GestionFiltre" method="post">
+
 	<div class="divFiltre">
 		<div class="barreRecherche">
+		<form action="/GestionFiltre" method="post">
 			<div class="champRecherche">
-				<input type="text" placeholder="Nom entreprise">
-				<input type="text" placeholder="Ville">
-				<input type="text" placeholder="Pays">
-				<input type="text" placeholder="Nom du tuteur">
+				<input type="text" name="RS" placeholder="Nom entreprise">
+				<input type="text" name="ville" placeholder="Ville">
+				<input type="text" name="CP" placeholder="Code postal">
+				<input type="text" name="pays" placeholder="Pays">
+				<input type="text" name="nom" placeholder="Nom du tuteur">
 				<input type="submit" value="Rechercher">
 			</div>
+		</form>
 		</div>
 	</div>
-</form>
+
 	{% set Role = app.session.get('Role') %}
 	{% if Role.UTI_ROLE == 1 %}
 		<div class="row ml-4" id="bloc">
