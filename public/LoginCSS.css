@@ -201,6 +201,15 @@ body {
   border: none;
   padding-left: 12px;
   padding-top: 0px;
+  width: inherit;
+}
+.barreRecherche input[type='submit']{
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 14px;
+  border: none;
+  background-color: #007bff;
+  color: white;
 }
 .modale_content a {
   text-decoration: none;
@@ -348,7 +357,11 @@ border: 1.5px solid transparent;
     p{
       white-space: nowrap;
     }
-
+    .champRecherche{
+      display: flex;
+      width: 100%;
+      justify-content: center;
+    }
 /*--------------------------------------------------
               Fin CSS Ajout From
 ---------------------------------------------------*/
