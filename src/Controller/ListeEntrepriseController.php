@@ -252,6 +252,11 @@ class ListeEntrepriseController extends AbstractController
     */
     public function ModifierEntreprise(ManagerRegistry $em,Request $request, $id):Response
     {
+        $session = $request->getSession();
+        if ($session->get('Role') == null){
+            return $this->redirectToRoute("app_login");
+        }
+
         $em = $em->getManager();
         $entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
 
