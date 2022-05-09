@@ -211,6 +211,10 @@ body {
   background-color: #007bff;
   color: white;
 }
+.barreRecherche input[type='submit']:hover{
+  background-color: #1b88fc;
+  cursor: pointer;
+}
 .modale_content a {
   text-decoration: none;
   padding: 15px;

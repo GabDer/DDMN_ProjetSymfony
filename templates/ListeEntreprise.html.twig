@@ -5,7 +5,7 @@
 
 {% block content %}
 	<style></style>
-
+<form action="/GestionFiltre" method="post">
 	<div class="divFiltre">
 		<div class="barreRecherche">
 			<div class="champRecherche">
@@ -17,6 +17,7 @@
 			</div>
 		</div>
 	</div>
+</form>
 	{% set Role = app.session.get('Role') %}
 	{% if Role.UTI_ROLE == 1 %}
 		<div class="row ml-4" id="bloc">
