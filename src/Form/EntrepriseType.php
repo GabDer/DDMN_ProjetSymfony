@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\ENTREPRISE;
-
+use Doctrine\Common\Annotations\Annotation\Required;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -21,10 +21,10 @@ class EntrepriseType extends AbstractType
             ->add('ENT_Ville', TextType::class, array('label'=>false, 'attr'=>['placeholder'=>'Ville']))
             ->add('ENT_CP', TextType::class, array('label'=>false, 'attr'=>['placeholder'=>'Code postale']))
             ->add('ENT_RUE', TextType::class, array('label'=>false, 'attr'=>['placeholder'=>'Rue']))
-            ->add('ENT_ComplementAdresse', TextType::class, array('label'=>false, 'attr'=>['placeholder'=>'Complément d\'adresse']))
-            ->add('ENT_NUM1', TextType::class, array('label'=>false, 'attr'=>['placeholder'=>'Numero 1']))
-            ->add('ENT_NUM2', TextType::class, array('label'=>false, 'attr'=>['placeholder'=>'Numero 2']))
-            ->add('ENT_SiteWeb', UrlType::class, array('label'=>false, 'attr'=>['placeholder'=>'URL site web']))
+            ->add('ENT_ComplementAdresse', TextType::class, array('required' => false, 'label'=>false, 'attr'=>['placeholder'=>'Complément d\'adresse']))
+            ->add('ENT_NUM1', TextType::class, array('required' => false, 'label'=>false, 'attr'=>['placeholder'=>'Numero 1']))
+            ->add('ENT_NUM2', TextType::class, array('required' => false, 'label'=>false, 'attr'=>['placeholder'=>'Numero 2']))
+            ->add('ENT_SiteWeb', UrlType::class, array('required' => false, 'label'=>false, 'attr'=>['placeholder'=>'URL site web']))
             //->add('ENT_AVOIR', TextType::class)
             ->add('Valider', SubmitType :: class, ['label' => 'Sauvegarder'])
         ;
@@ -33,7 +33,7 @@ class EntrepriseType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => ENTREPRISE::class,
+            'data_class' => ENTREPRISE::class
         ]);
     }
 }

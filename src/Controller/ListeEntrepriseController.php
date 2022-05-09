@@ -35,10 +35,40 @@ class ListeEntrepriseController extends AbstractController
         return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises, 'listePersonnes' => $listePersonnes]);
 
     }
+
     /**
-     * @Route("/liste_entreprise/RS/{RS}", name="listeEntrepriseParNom")
+     * @Route("/GestionFiltre", name="GestionFiltre")
      */
-    public function listeEntreprisesParNom(Request $request ,ManagerRegistry $doctrine, $RS)
+    public function GestionFiltre(Request $request)
+    {
+        $session = $request->getSession();
+        if ($session->get('Role') == null){
+            return $this->redirectToRoute("app_login");
+        }
+        if(isset($_POST['RS']) && $_POST['RS']!=null ){
+            return $this->redirectToRoute('listeEntrepriseParRS',['RS'=>$_POST['RS']]);
+        }
+        elseif(isset($_POST['ville']) && $_POST['ville']!=null){
+            return $this->redirectToRoute('listeEntrepriseParVille',['ville'=>$_POST['ville']]);
+        }
+        elseif(isset($_POST['CP']) && $_POST['CP']!=null){
+            return $this->redirectToRoute('listeEntrepriseParCP',['CP'=>$_POST['CP']]);
+        }
+        elseif(isset($_POST['pays']) && $_POST['pays']!=null){
+            return $this->redirectToRoute('listeEntrepriseParPays',['pays'=>$_POST['pays']]);
+        }
+        elseif(isset($_POST['nom']) && $_POST['nom']!=null){
+            return $this->redirectToRoute('listeEntrepriseParNom',['nom'=>$_POST['nom']]);
+        }
+        else{
+            return $this->redirectToRoute('listeEntreprise');
+        }
+    }
+
+    /**
+     * @Route("/liste_entreprise/RS/{RS}", name="listeEntrepriseParRS")
+     */
+    public function listeEntreprisesParRS(Request $request ,ManagerRegistry $doctrine, $RS)
     {
         $session = $request->getSession();
         if ($session->get('Role') == null){
@@ -66,7 +96,7 @@ class ListeEntrepriseController extends AbstractController
         }
 
         $entityManager = $doctrine->getManager();
-        $listeEntreprises = $entityManager->getRepository(ENTREPRISE::class)->RechercheParCP($CP); //On récupère toute les entreprises en fonction du nom rentré
+        $listeEntreprises = $entityManager->getRepository(ENTREPRISE::class)->RechercheParCP($CP); //On récupère toute les entreprises en fonction du CP rentré
         $listePersonnes = [];
         foreach ($listeEntreprises as $entreprise){ //Pour chaque entreprise, on y associe un tableau de ses personnes dans le tableau 'listePersonnes'
             $listePersonnes = array_merge($listePersonnes,$entityManager->getRepository(ENTREPRISE::class)->AffichagePersonnesEntreprise($entreprise['ent_raison_sociale'])); //array_merge permet d'ajouter des éléments à un tableau déja existant
@@ -75,6 +105,65 @@ class ListeEntrepriseController extends AbstractController
         return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises, 'listePersonnes' => $listePersonnes]);
     }
 
+    /**
+     * @Route("/liste_entreprise/ville/{ville}", name="listeEntrepriseParVille")
+     */
+    public function listeEntreprisesParVille(Request $request ,ManagerRegistry $doctrine, $ville)
+    {
+        $session = $request->getSession();
+        if ($session->get('Role') == null){
+            return $this->redirectToRoute("app_login");
+        }
+
+        $entityManager = $doctrine->getManager();
+        $listeEntreprises = $entityManager->getRepository(ENTREPRISE::class)->RechercheParVille($ville); //On récupère toute les entreprises en fonction de la ville rentré
+        $listePersonnes = [];
+        foreach ($listeEntreprises as $entreprise){ //Pour chaque entreprise, on y associe un tableau de ses personnes dans le tableau 'listePersonnes'
+            $listePersonnes = array_merge($listePersonnes,$entityManager->getRepository(ENTREPRISE::class)->AffichagePersonnesEntreprise($entreprise['ent_raison_sociale'])); //array_merge permet d'ajouter des éléments à un tableau déja existant
+            
+        }
+        return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises, 'listePersonnes' => $listePersonnes]);
+    }
+
+    /**
+     * @Route("/liste_entreprise/pays/{pays}", name="listeEntrepriseParPays")
+     */
+    public function listeEntreprisesParPays(Request $request ,ManagerRegistry $doctrine, $pays)
+    {
+        $session = $request->getSession();
+        if ($session->get('Role') == null){
+            return $this->redirectToRoute("app_login");
+        }
+
+        $entityManager = $doctrine->getManager();
+        $listeEntreprises = $entityManager->getRepository(ENTREPRISE::class)->RechercheParPays($pays); //On récupère toute les entreprises en fonction du pays rentré
+        $listePersonnes = [];
+        foreach ($listeEntreprises as $entreprise){ //Pour chaque entreprise, on y associe un tableau de ses personnes dans le tableau 'listePersonnes'
+            $listePersonnes = array_merge($listePersonnes,$entityManager->getRepository(ENTREPRISE::class)->AffichagePersonnesEntreprise($entreprise['ent_raison_sociale'])); //array_merge permet d'ajouter des éléments à un tableau déja existant
+            
+        }
+        return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises, 'listePersonnes' => $listePersonnes]);
+    }
+
+    /**
+     * @Route("/liste_entreprise/nom/{nom}", name="listeEntrepriseParNom")
+     */
+    public function listeEntreprisesParNom(Request $request ,ManagerRegistry $doctrine, $nom)
+    {
+        $session = $request->getSession();
+        if ($session->get('Role') == null){
+            return $this->redirectToRoute("app_login");
+        }
+
+        $entityManager = $doctrine->getManager();
+        $listeEntreprises = $entityManager->getRepository(ENTREPRISE::class)->RechercheParNom($nom); //On récupère toute les entreprises en fonction du nom rentré
+        $listePersonnes = [];
+        foreach ($listeEntreprises as $entreprise){ //Pour chaque entreprise, on y associe un tableau de ses personnes dans le tableau 'listePersonnes'
+            $listePersonnes = array_merge($listePersonnes,$entityManager->getRepository(ENTREPRISE::class)->AffichagePersonnesEntreprise($entreprise['ent_raison_sociale'])); //array_merge permet d'ajouter des éléments à un tableau déja existant
+            
+        }
+        return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises, 'listePersonnes' => $listePersonnes]);
+    }
 
     /**
      * @Route("/ajoutentreprise", name="AjoutEntreprise")

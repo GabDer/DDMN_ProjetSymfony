@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PERSONNERepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,22 @@ class PERSONNE
      * @ORM\JoinColumn(nullable=false)
      */
     private $ENTREPRISE;
+
+    /**
+     * @ORM\OneToMany(targetEntity=PERSONNEPROFIL::class, mappedBy="PER_ID")
+     */
+    private $PersonneProfil;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=FONCTION::class, mappedBy="FonctionPersonne")
+     */
+    private $Fonction;
+
+    public function __construct()
+    {
+        $this->PersonneProfil = new ArrayCollection();
+        $this->Fonction = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -101,6 +119,63 @@ class PERSONNE
     public function setPERMAIL(?string $PER_MAIL): self
     {
         $this->PER_MAIL = $PER_MAIL;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PERSONNEPROFIL>
+     */
+    public function getPersonneProfil(): Collection
+    {
+        return $this->PersonneProfil;
+    }
+
+    public function addPersonneProfil(PERSONNEPROFIL $personneProfil): self
+    {
+        if (!$this->PersonneProfil->contains($personneProfil)) {
+            $this->PersonneProfil[] = $personneProfil;
+            $personneProfil->setPERID($this);
+        }
+
+        return $this;
+    }
+
+    public function removePersonneProfil(PERSONNEPROFIL $personneProfil): self
+    {
+        if ($this->PersonneProfil->removeElement($personneProfil)) {
+            // set the owning side to null (unless already changed)
+            if ($personneProfil->getPERID() === $this) {
+                $personneProfil->setPERID(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FONCTION>
+     */
+    public function getFonction(): Collection
+    {
+        return $this->Fonction;
+    }
+
+    public function addFonction(FONCTION $fonction): self
+    {
+        if (!$this->Fonction->contains($fonction)) {
+            $this->Fonction[] = $fonction;
+            $fonction->addFonctionPersonne($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFonction(FONCTION $fonction): self
+    {
+        if ($this->Fonction->removeElement($fonction)) {
+            $fonction->removeFonctionPersonne($this);
+        }
 
         return $this;
     }
