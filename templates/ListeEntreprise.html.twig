@@ -104,6 +104,15 @@
 									{% endfor %}
 								</span><br/>
 							</p>
+                            <p>
+								<span class="small">
+									{% if ENTREPRISE['ent_site_web'] is not null %}
+										<a href="{{ENTREPRISE['ent_site_web']}}">Lien vers le site web</a>
+									</span><br/>
+								{% else %}
+									<p>Pas de site</p>
+								{% endif %}
+							</p>
 							<p>
 								<span class="small">
 									Options :
