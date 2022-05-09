@@ -9,3 +9,4 @@
 /vendor/
 ###< symfony/framework-bundle ###
 templates/ajoutEntreprise.html.twig
+templates/AjoutEntreprise.html.twig
