@@ -20,6 +20,9 @@
                     <h4>{{ PERSONNE.PER_NOM}} {{ PERSONNE.PER_PRENOM}}</h4>
                     <h4>{{ PERSONNE.PER_MAIL}}</h4>
                     <h4>{{ PERSONNE.PER_TEL}}</h4>
+                    {% for FONCTION in persFonctions %}
+                        <h4>{{ FONCTION.fon_libelle}}</h4>
+                    {% endfor %}
                 </div>
             {% endfor %}
             </div>
