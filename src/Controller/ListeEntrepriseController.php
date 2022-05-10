@@ -223,9 +223,6 @@ class ListeEntrepriseController extends AbstractController
             return $this->redirectToRoute("listeEntreprise");
         }
         $em = $em->getManager();
-        //$entPersonne = $em->getRepository(PERSONNE::class)->findLastBy($entreprise);
-        //$entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
-
         try
         {
             foreach($entPersonneProfil as $value)

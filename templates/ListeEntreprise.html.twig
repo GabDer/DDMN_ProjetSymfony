@@ -37,9 +37,6 @@
 								<a href="#"> <i class="fa-solid fa-pen" id="iconModifier"></i> </a>
 								<a href="{{ path('SupprimerEntreprise',{ 'id': ENTREPRISE.id}) }}" onclick="return confirm('Voulez vous vraiment supprimer cette entreprise ?');"><i class="fa-solid fa-trash-can" id="iconSupprimer"></i></a>
 							</div>
-							<div>
-								<h6>Secteur d'activité</h6>
-							</div>
 							<a href="{{ path('InfosEntreprise',{ 'id': ENTREPRISE.id}) }}">
 								<h5 class="card-title">{{ENTREPRISE.ent_raison_sociale}}</h5>
 							</a>
@@ -69,7 +66,7 @@
 										<a href="{{ENTREPRISE['ent_site_web']}}">Lien vers le site web</a>
 									</span><br/>
 								{% else %}
-									<p>Pas de site</p>
+									Pas de site
 								{% endif %}
 							</p>
 							<p>
@@ -129,9 +126,9 @@
 								<span class="large">
 									{% if ENTREPRISE['ent_site_web'] is not null %}
 										<a href="{{ENTREPRISE['ent_site_web']}}">Lien vers le site web</a>
-									</span><br/>
+								</span><br/>
 								{% else %}
-									<p>Pas de site</p>
+									Pas de site
 								{% endif %}
 							</p>
 							<p>
