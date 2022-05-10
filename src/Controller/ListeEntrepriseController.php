@@ -66,6 +66,9 @@ class ListeEntrepriseController extends AbstractController
         elseif(isset($_POST['nom']) && $_POST['nom']!=null){
             return $this->redirectToRoute('listeEntrepriseParNom',['nom'=>$_POST['nom']]);
         }
+        elseif(isset($_POST['specialite']) && $_POST['specialite']!=null){
+            return $this->redirectToRoute('listeEntrepriseParSpecialite',['specialite'=>$_POST['specialite']]);
+        }
         else{
             return $this->redirectToRoute('listeEntreprise');
         }
@@ -167,6 +170,27 @@ class ListeEntrepriseController extends AbstractController
 
         $entityManager = $doctrine->getManager();
         $listeEntreprises = $entityManager->getRepository(ENTREPRISE::class)->RechercheParNom($nom); //On récupère toute les entreprises en fonction du nom rentré
+        $listePersonnes = [];
+        $listeSpecialite = $entityManager->getRepository(ENTREPRISE::class)->AffichageSpecialiteEntreprise();  //On récupère toute les spécialités existantes en fonction des entreprises
+        foreach ($listeEntreprises as $entreprise){ //Pour chaque entreprise, on y associe un tableau de ses personnes dans le tableau 'listePersonnes'
+            $listePersonnes = array_merge($listePersonnes,$entityManager->getRepository(ENTREPRISE::class)->AffichagePersonnesEntreprise($entreprise['ent_raison_sociale'])); //array_merge permet d'ajouter des éléments à un tableau déja existant
+            
+        }
+        return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises, 'listePersonnes' => $listePersonnes, 'listeSpecialite' => $listeSpecialite]);
+    }
+
+    /**
+     * @Route("/liste_entreprise/specialite/{specialite}", name="listeEntrepriseParSpecialite")
+     */
+    public function listeEntreprisesParSpecialite(Request $request ,ManagerRegistry $doctrine, $specialite)
+    {
+        $session = $request->getSession();
+        if ($session->get('Role') == null){
+            return $this->redirectToRoute("app_login");
+        }
+
+        $entityManager = $doctrine->getManager();
+        $listeEntreprises = $entityManager->getRepository(ENTREPRISE::class)->RechercheParSpecialite($specialite); //On récupère toute les entreprises en fonction du pays rentré
         $listePersonnes = [];
         $listeSpecialite = $entityManager->getRepository(ENTREPRISE::class)->AffichageSpecialiteEntreprise();  //On récupère toute les spécialités existantes en fonction des entreprises
         foreach ($listeEntreprises as $entreprise){ //Pour chaque entreprise, on y associe un tableau de ses personnes dans le tableau 'listePersonnes'
