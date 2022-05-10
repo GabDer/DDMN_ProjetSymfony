@@ -77,13 +77,13 @@
 									Pas de site
 								{% endif %}
 							</p>
-							<p>
-								<span class="large">
-									Options :
-								</span>
+							<p class="large">
+							Options :
 								{% for specialite in listeSpecialite %}
 									{% if specialite['entreprise_id'] == ENTREPRISE.id %}
+									<span class="badge badge-info">
 									{{specialite['spe_libelle']}}
+									</span>
 									{% endif %}
 								{% endfor %}
 							</p>
