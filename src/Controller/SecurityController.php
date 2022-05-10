@@ -48,7 +48,9 @@ class SecurityController extends AbstractController
         $listeUtilisateurs = $entityManager->getRepository(UTILISATEUR::class)->AffichageUtilisateurs(); //On récupère toute les utilisateurs existants
         sort($listeUtilisateurs);
         //dd($listeUtilisateurs) 
-        return $this->render('/ListeUtilisateurs.html.twig', ['listeUtilisateurs' => $listeUtilisateurs]);
+        if (isset($_GET['ParamRecue']))
+            return $this->render('/ListeUtilisateurs.html.twig', ['listeUtilisateurs'=>$listeUtilisateurs, 'ParamRecue'=>$_GET['ParamRecue']]);
+        return $this->render('/ListeUtilisateurs.html.twig', ['listeUtilisateurs' => $listeUtilisateurs, 'ParamRecue']);
     }
 
     /**
@@ -116,27 +118,16 @@ class SecurityController extends AbstractController
         }
         $em = $em->getManager();
         $utilisateur = $em->getRepository(Utilisateur::class)->find($id);
-        
-        $userFormSupp = $this->get('form.factory')->create();
-        if( $request->isMethod('POST'))
+        try
         {
-            $userFormSupp->handleRequest($request);
-            if($userFormSupp->isSubmitted())
-            {
-                try
-                {
-                    $em->remove($utilisateur);
-                    $em->flush();
-                    $this->addFlash('success', 'L\'utilisateur a bien été supprimée');
-                    return $this->redirectToRoute('listeEntreprise');
-                }
-                catch(Exception $e)
-                {
-                    $this->addFlash('Error', 'une erreur s\'est produite l\'utilisateur n\'a pas pu etre supprimer');
-                }
-            }
+            $em->remove($utilisateur);
+            $em->flush();
+            return $this->redirectToRoute('listeUtilisateurs',['ParamRecue'=>'success']);
         }
-        return $this->render('SupprimerUtilisateur.html.twig', ['Utilisateur'=>$utilisateur, 'userFormSupp'=>$userFormSupp->createView()]);
+        catch(Exception $e)
+        {
+            return $this->redirectToRoute('listeUtilisateurs',['ParamRecue'=>'error']);
+        }
     }
 
     /**

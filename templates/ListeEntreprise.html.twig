@@ -34,8 +34,10 @@
 									<label class="labelinscr" for="datenaiss"></label>
 								</div>
 								</div>
-								<a href="#"> <i class="fa-solid fa-pen" id="iconModifier"></i> </a>
-								<a href="{{ path('SupprimerEntreprise',{ 'id': ENTREPRISE.id}) }}" onclick="return confirm('Voulez vous vraiment supprimer cette entreprise ?');"><i class="fa-solid fa-trash-can" id="iconSupprimer"></i></a>
+								<a href="{{ path('ModifierEntreprise',{ 'id': ENTREPRISE.id}) }}"> <i class="fa-solid fa-pen" id="iconModifier"></i> </a>
+								<a href="{{ path('SupprimerEntreprise',{ 'id': ENTREPRISE.id}) }}" onclick="return confirm('Voulez vous vraiment supprimer cette entreprise ?');">
+									<i class="fa-solid fa-trash-can" id="iconSupprimer"></i>
+								</a>
 							</div>
 							<a href="{{ path('InfosEntreprise',{ 'id': ENTREPRISE.id}) }}">
 								<h5 class="card-title">{{ENTREPRISE.ent_raison_sociale}}</h5>
@@ -73,8 +75,11 @@
 								<span class="large">
 									Options :
 								</span>
-								<a href="#" class="btn btn-primary">SLAM</a>
-								<a href="#" class="btn btn-primary">SISR</a>
+								{% for specialite in listeSpecialite %}
+									{% if specialite['entreprise_id'] == ENTREPRISE.id %}
+									{{specialite['spe_libelle']}}
+									{% endif %}
+								{% endfor %}
 							</p>
 						</div>
 					</div>
@@ -135,8 +140,11 @@
 								<span class="large">
 									Options :
 								</span>
-								<a href="#" class="btn btn-primary">SLAM</a>
-								<a href="#" class="btn btn-primary">SISR</a>
+								{% for specialite in listeSpecialite %}
+									{% if specialite['entreprise_id'] == ENTREPRISE.id %}
+									{{specialite['spe_libelle']}}
+									{% endif %}
+								{% endfor %}
 							</p>
 						</div>
 					</div>
