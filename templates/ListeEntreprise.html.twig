@@ -24,59 +24,18 @@
 	{% if Role.UTI_ROLE == 1 %}
 		<div class="row ml-4" id="bloc">
 			{% for ENTREPRISE in listeEntreprises %}
-				<form action="{{ path('SupprimerEntreprise',{ 'id': ENTREPRISE.id}) }}" method="post">
-					<div id="Mod" class="modal">
-						<div class="modal_content">
-							<h1>Suprimer
-								{{ENTREPRISE.ent_raison_sociale}}</h1>
-							<div class="mesinfosmodif">
-								<div class="inputField" id="linkSuprEntr">
-									<a href="{{ path('SupprimerEntreprise',{ 'id': ENTREPRISE.id}) }}">Supprimer</a>
-								</div>
-								<div class="inputField" id="linkAnnulSuprEntr">
-									<a href="#">Annuler</a>
-								</div>
-							</div>
-							<a href="#" class="modal_close">&times;</a>
-						</div>
-					</div>
-				</form>
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 				{% set personnes = [] %}
 				<div class="col-sm-6 mt-2 mb-2 rounded-sm">
 					<div class="card" style="background-color: #69878a;">
 						<div class="card-header">
 							<div class="iconeModifSupr">
 								<div class="modifcompterow">
-									<div class="modifcomptecolumn">
-										<label class="labelinscr" for="datenaiss"></label>
-									</div>
+								<div class="modifcomptecolumn">
+									<label class="labelinscr" for="datenaiss"></label>
 								</div>
-								<a href="#">
-									<i class="fa-solid fa-pen" id="iconModifier"></i>
-								</a>
-								<a href="" data-toggle="modal" data-target="#exampleModalCenter">
-									<i class="fa-solid fa-trash-can" id="iconSupprimer" ></i>
-								</a>
-
+								</div>
+								<a href="#"> <i class="fa-solid fa-pen" id="iconModifier"></i> </a>
+								<a href="{{ path('SupprimerEntreprise',{ 'id': ENTREPRISE.id}) }}" onclick="return confirm('Voulez vous vraiment supprimer cette entreprise ?');"><i class="fa-solid fa-trash-can" id="iconSupprimer"></i></a>
 							</div>
 							<div>
 								<h6>Secteur d'activité</h6>
@@ -92,12 +51,12 @@
 								{% endif %}
 							{% endfor %}
 							<p>
-								<span class="small">
+								<span class="large">
 									CP :
 									{{ ENTREPRISE.ent_cp }}</span><br/>
 							</p>
 							<p>
-								<span class="small">
+								<span class="large">
 									Nom :
 									{% for LesPersonnes in personnes %}
 										{{LesPersonnes}}
@@ -105,7 +64,7 @@
 								</span><br/>
 							</p>
                             <p>
-								<span class="small">
+								<span class="large">
 									{% if ENTREPRISE['ent_site_web'] is not null %}
 										<a href="{{ENTREPRISE['ent_site_web']}}">Lien vers le site web</a>
 									</span><br/>
@@ -114,7 +73,7 @@
 								{% endif %}
 							</p>
 							<p>
-								<span class="small">
+								<span class="large">
 									Options :
 								</span>
 								<a href="#" class="btn btn-primary">SLAM</a>
@@ -123,9 +82,12 @@
 						</div>
 					</div>
 				</div>
-
 			{% endfor %}
-
+			{% if ParamRecue == 'success' %}
+       			<script> alert("Entreprise bien supprimée"); </script>
+    			{% elseif ParamRecue == 'error' %}
+        		<script> alert("Suppression échouée"); </script>
+    		{% endif %}
 		{% else %}
 			{% for ENTREPRISE in listeEntreprises %}
 				{% set personnes = [] %}

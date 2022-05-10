@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\ENTREPRISE;
 use App\Entity\PERSONNE;
+use App\Entity\PERSONNEPROFIL;
 use App\Form\EntrepriseType;
 use App\Form\PersonneType;
 use Doctrine\Persistence\ManagerRegistry;
@@ -18,12 +19,12 @@ class ListeEntrepriseController extends AbstractController
     /**
      * @Route("/liste_entreprise", name="listeEntreprise")
      */
-    public function listeEntreprises(Request $request ,ManagerRegistry $doctrine)
+    public function listeEntreprises(Request $request, ManagerRegistry $doctrine)
     {
         $session = $request->getSession();
         if ($session->get('Role') == null){
             return $this->redirectToRoute("app_login");
-        }
+        }   
 
         $entityManager = $doctrine->getManager();
         $listeEntreprises = $entityManager->getRepository(ENTREPRISE::class)->AffichageEntreprise(); //On récupère toute les entreprises existantes
@@ -32,8 +33,10 @@ class ListeEntrepriseController extends AbstractController
             $listePersonnes = array_merge($listePersonnes,$entityManager->getRepository(ENTREPRISE::class)->AffichagePersonnesEntreprise($entreprise['ent_raison_sociale'])); //array_merge permet d'ajouter des éléments à un tableau déja existant
         }
         //dd($listeEntreprises);
-        return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises, 'listePersonnes' => $listePersonnes]);
-
+        if (isset($_GET['ParamRecue']))
+            return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises, 'listePersonnes' => $listePersonnes, 'ParamRecue' => $_GET['ParamRecue']]);
+        else
+        return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises, 'listePersonnes' => $listePersonnes, 'ParamRecue' => '']);
     }
 
     /**
@@ -210,41 +213,37 @@ class ListeEntrepriseController extends AbstractController
     /**
     *  @Route("/supprimer_entreprise/{id}", name="SupprimerEntreprise")
     */
-    public function SupprimerEntreprise(ManagerRegistry $em, $id, Request $request): Response
+    public function SupprimerEntreprise(ManagerRegistry $em, $id, Request $request)
     {
         $session = $request->getSession();
         if ($session->get('Role') == null){
             return $this->redirectToRoute("app_login");
         }
         $em = $em->getManager();
-        $entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
+        $entPersonneProfil = $em->getRepository(PERSONNEPROFIL::class)->findBy($entPersonne);
         $entPersonne = $em->getRepository(PERSONNE::class)->findLastBy($entreprise);
+        $entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
 
-        $entFormSupp = $this->get('form.factory')->create();
-        if( $request->isMethod('POST'))
+        try
         {
-            $entFormSupp->handleRequest($request);
-            if($entFormSupp->isSubmitted())
+            foreach($entPersonneProfil as $value)
             {
-                try
-                {
-                    foreach($entPersonne as $value)
-                    {
-                        $em->remove($value);
-                        $em->flush();
-                    }
-                    $em->remove($entreprise);
-                    $em->flush();
-                    $this->addFlash('success', 'L\'entreprise a bien été supprimée');
-                    return $this->redirectToRoute('listeEntreprise');
-                }
-                catch(Exception $e)
-                {
-                    $this->addFlash('Error', 'une erreur s\'est produite l\'entreprise n\'a pas pu etre supprimer');
-                }
+                $em->remove($value);
+                $em->flush();
             }
+            foreach($entPersonne as $value)
+            {
+                $em->remove($value);
+                $em->flush();
+            }
+            $em->remove($entreprise);
+            $em->flush();
+            return $this->redirectToRoute('listeEntreprise',['ParamRecue'=>'success']);
         }
-        return $this->render('SupprimerEntreprise.html.twig', ['Entreprise'=>$entreprise, 'entFormSupp'=>$entFormSupp->createView()]);
+        catch(Exception $e)
+        {
+            return $this->redirectToRoute('listeEntreprise',['ParamRecue'=>'error']);
+        }
     }
 
     /**
@@ -271,11 +270,11 @@ class ListeEntrepriseController extends AbstractController
                 {
                     $em->persist($entreprise);
                     $em->flush();
-                    return $this->redirectToRoute('infos_entreprise', ['id'=> $entreprise->getId()]);
+                    return $this->redirectToRoute('listeEntreprise',['addFlashType'=>'success']);
                 }
                 catch(Exception $e)
                 {
-                    $this->addFlash('error', 'Une erreur s\'est produite l\'entreprise n\'a pas pu être modifier.');
+                    return $this->redirectToRoute('listeEntreprise',['addFlashType'=>'Error']);
                 }
             }
         }
