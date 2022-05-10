@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\ENTREPRISE;
+use App\Entity\FONCTION;
 use App\Entity\PERSONNE;
 use App\Entity\PERSONNEPROFIL;
 use App\Form\EntrepriseType;
@@ -211,7 +212,8 @@ class ListeEntrepriseController extends AbstractController
         }
 
         $em = $em->getManager();
-        $entPersonneFonction = $em->getRepository(PERSONNEPROFIL::class)->findFonctionPersonne();
+        $entPersonneFonction = $em->getRepository(FONCTION::class)->affichageFonctionPersonne();
+        dd($entPersonneFonction);
         $entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
         $entPersonne = $em->getRepository(PERSONNE::class)->findLastBy($entreprise);
         /*dd($entreprise, $entPersonne);*/
