@@ -46,6 +46,8 @@ class SecurityController extends AbstractController
         }
         $entityManager = $doctrine->getManager();
         $listeUtilisateurs = $entityManager->getRepository(UTILISATEUR::class)->AffichageUtilisateurs(); //On récupère toute les utilisateurs existants
+        sort($listeUtilisateurs);
+        //dd($listeUtilisateurs) 
         return $this->render('/ListeUtilisateurs.html.twig', ['listeUtilisateurs' => $listeUtilisateurs]);
     }
 

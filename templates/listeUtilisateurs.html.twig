@@ -1,42 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Accueil
+{% endblock %}
 
 {% block content %}
 
-{% set Role = app.session.get('Role') %}
-    {% if ( Role.UTI_ROLE == 1 ) %}
-
-    {% for UTILISATEUR in listeUtilisateurs %}
-        <div class="col-sm-6 mt-2 mb-2 rounded-sm">
-        <div class="card" style="background-color: #69878a;">
-            <div class="card-header">
-                <div>
-                    <h6>Secteur d'activité</h6>
-                </div>
-                </div>
-                    <div class="card-body">
-                    <p>
-                        <span class="medium"> Login : {{ UTILISATEUR.UTI_Login }}</span><br/>
-                    </p>
-                    <p>
-                        <span class="medium"> Role : 
-                        {% if ( UTILISATEUR.UTI_Role == 1 ) %} 
-                        Admin
-                        {% else %} 
-                        Enseignant
-                        {% endif %}
-                        </span><br/>
-                    </p>
-                    </div>
-            </div>   
+	{% set Role = app.session.get('Role') %}
+	{% if ( Role.UTI_ROLE == 1 ) %}
+        <div id="userBloc">
+            <div>
+            
+            </div> 
+            <div>
+                <h3>Ajouter un utilisateur</h3>
+            </div>
         </div>
-        </div>
-{% endfor %}
-
+        <table class="table table-striped table-dark" id="userTable">
+            {% for UTILISATEUR in listeUtilisateurs %}
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>{{ UTILISATEUR.id }}</th>
+                        <td>{{ UTILISATEUR.UTI_Login }}</td>
+                        <td>
+                            {% if ( UTILISATEUR.UTI_Role == 1 ) %}
+                                Admin
+                            {% else %}
+                                Enseignant
+                            {% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+            {% endfor %}   
+        </table>    
     {% else %}
-    <h1> Vous n'avez pas les droits pour accéder à cette page. </h1>
-    {% endif %}
-    
-{% endblock %}
-        
+<h1>
+	Vous n'avez pas les droits pour accéder à cette page.
+</h1>{% endif %}{% endblock %}
