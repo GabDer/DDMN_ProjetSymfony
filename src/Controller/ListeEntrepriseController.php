@@ -34,7 +34,6 @@ class ListeEntrepriseController extends AbstractController
         foreach ($listeEntreprises as $entreprise){ //Pour chaque entreprise, on y associe un tableau de ses personnes dans le tableau 'listePersonnes'
             $listePersonnes = array_merge($listePersonnes,$entityManager->getRepository(ENTREPRISE::class)->AffichagePersonnesEntreprise($entreprise['ent_raison_sociale'])); //array_merge permet d'ajouter des éléments à un tableau déja existant
         }
-        dd($listeSpecialite);
         //dd($listeEntreprises);
         if (isset($_GET['ParamRecue']))
             return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises, 'listePersonnes' => $listePersonnes, 'listeSpecialite' => $listeSpecialite, 'ParamRecue' => $_GET['ParamRecue']]);
