@@ -34,8 +34,10 @@
 									<label class="labelinscr" for="datenaiss"></label>
 								</div>
 								</div>
-								<a href="#"> <i class="fa-solid fa-pen" id="iconModifier"></i> </a>
-								<a href="{{ path('SupprimerEntreprise',{ 'id': ENTREPRISE.id}) }}" onclick="return confirm('Voulez vous vraiment supprimer cette entreprise ?');"><i class="fa-solid fa-trash-can" id="iconSupprimer"></i></a>
+								<a href="{{ path('ModifierEntreprise',{ 'id': ENTREPRISE.id}) }}"> <i class="fa-solid fa-pen" id="iconModifier"></i> </a>
+								<a href="{{ path('SupprimerEntreprise',{ 'id': ENTREPRISE.id}) }}" onclick="return confirm('Voulez vous vraiment supprimer cette entreprise ?');">
+									<i class="fa-solid fa-trash-can" id="iconSupprimer"></i>
+								</a>
 							</div>
 							<div>
 								<h6>Secteur d'activité</h6>
