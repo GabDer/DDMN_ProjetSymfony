@@ -247,6 +247,7 @@ class ListeEntrepriseController extends AbstractController
         return $this->render('SupprimerEntreprise.html.twig', ['Entreprise'=>$entreprise, 'entFormSupp'=>$entFormSupp->createView()]);
     }
 
+
     /**
     *  @Route("/modifier_entreprise/{id}", name="ModifierEntreprise")
     */
