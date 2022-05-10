@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 10 mai 2022 à 07:51
+-- Généré le : mar. 10 mai 2022 à 12:14
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `entreprise` (
   `ent_num2` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ent_site_web` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `entreprise`
@@ -171,18 +171,6 @@ CREATE TABLE IF NOT EXISTS `personneprofil` (
   KEY `IDX_780F4F62C19FAEF2` (`pro_id_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Déchargement des données de la table `personneprofil`
---
-
-INSERT INTO `personneprofil` (`id`, `per_id_id`, `pro_id_id`, `date`) VALUES
-(1, 1, 3, '2021-08-30'),
-(2, 2, 4, '2021-05-07'),
-(3, 3, 2, '2021-09-27'),
-(4, 3, 4, '2021-06-02'),
-(5, 4, 1, '2022-01-13'),
-(6, 4, 3, '2021-04-18');
-
 -- --------------------------------------------------------
 
 --
@@ -276,8 +264,8 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`id`, `uti_login`, `uti_mdp`, `uti_role`) VALUES
-(1, 'ADMIN', '7cf2db5ec261a0fa27a502d3196a6f60', 1),
-(2, 'Enseignant', '7cf2db5ec261a0fa27a502d3196a6f60', 0);
+(1, 'ADMIN', 'ecf482a600e363689703fe9f1bb1e80c', 1),
+(2, 'Enseignant', 'ffa30b58137ef56ec4415a64f7d5d919', 0);
 
 --
 -- Contraintes pour les tables déchargées
