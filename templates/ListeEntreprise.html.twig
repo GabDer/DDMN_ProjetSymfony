@@ -73,8 +73,11 @@
 								<span class="large">
 									Options :
 								</span>
-								<a href="#" class="btn btn-primary">SLAM</a>
-								<a href="#" class="btn btn-primary">SISR</a>
+								{% for specialite in listeSpecialite %}
+									{% if specialite['entreprise_id'] == ENTREPRISE.id %}
+									{{specialite['spe_libelle']}}
+									{% endif %}
+								{% endfor %}
 							</p>
 						</div>
 					</div>
@@ -135,8 +138,11 @@
 								<span class="large">
 									Options :
 								</span>
-								<a href="#" class="btn btn-primary">SLAM</a>
-								<a href="#" class="btn btn-primary">SISR</a>
+								{% for specialite in listeSpecialite %}
+									{% if specialite['entreprise_id'] == ENTREPRISE.id %}
+									{{specialite['spe_libelle']}}
+									{% endif %}
+								{% endfor %}
 							</p>
 						</div>
 					</div>
