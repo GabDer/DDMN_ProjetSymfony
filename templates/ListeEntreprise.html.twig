@@ -83,18 +83,25 @@
 					</div>
 				</div>
 			{% endfor %}
-			{% if ParamRecue == 'success' %}
+			{% if ParamRecue is defined and ParamRecue == 'success' %}
        			<script> alert("Entreprise bien supprimée"); </script>
-    			{% elseif ParamRecue == 'error' %}
+    			{% elseif ParamRecue is defined and ParamRecue == 'error' %}
         		<script> alert("Suppression échouée"); </script>
     		{% endif %}
 		{% else %}
+			<div class="row ml-4" id="bloc">
 			{% for ENTREPRISE in listeEntreprises %}
 				{% set personnes = [] %}
 				<div class="col-sm-6 mt-2 mb-2 rounded-sm">
 					<div class="card" style="background-color: #69878a;">
 						<div class="card-header">
-							<h6>Secteur d'activité</h6>
+							<div class="iconeModifSupr">
+								<div class="modifcompterow">
+									<div class="modifcomptecolumn">
+										<label class="labelinscr" for="datenaiss"></label>
+									</div>
+								</div>
+							</div>
 							<a href="{{ path('InfosEntreprise',{ 'id': ENTREPRISE.id}) }}">
 								<h5 class="card-title">{{ENTREPRISE.ent_raison_sociale}}</h5>
 							</a>
@@ -106,20 +113,20 @@
 								{% endif %}
 							{% endfor %}
 							<p>
-								<span class="small">
+								<span class="large">
 									CP :
 									{{ ENTREPRISE.ent_cp }}</span><br/>
 							</p>
 							<p>
-								<span class="small">
+								<span class="large">
 									Nom :
 									{% for LesPersonnes in personnes %}
 										{{LesPersonnes}}
 									{% endfor %}
 								</span><br/>
 							</p>
-							<p>
-								<span class="small">
+                            <p>
+								<span class="large">
 									{% if ENTREPRISE['ent_site_web'] is not null %}
 										<a href="{{ENTREPRISE['ent_site_web']}}">Lien vers le site web</a>
 									</span><br/>
@@ -128,7 +135,7 @@
 								{% endif %}
 							</p>
 							<p>
-								<span class="small">
+								<span class="large">
 									Options :
 								</span>
 								<a href="#" class="btn btn-primary">SLAM</a>

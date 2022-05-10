@@ -219,10 +219,12 @@ class ListeEntrepriseController extends AbstractController
         if ($session->get('Role') == null){
             return $this->redirectToRoute("app_login");
         }
+        if ($session->get('Role') == "0"){
+            return $this->redirectToRoute("listeEntreprise");
+        }
         $em = $em->getManager();
-        $entPersonneProfil = $em->getRepository(PERSONNEPROFIL::class)->findBy($entPersonne);
-        $entPersonne = $em->getRepository(PERSONNE::class)->findLastBy($entreprise);
-        $entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
+        //$entPersonne = $em->getRepository(PERSONNE::class)->findLastBy($entreprise);
+        //$entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
 
         try
         {
