@@ -177,11 +177,11 @@ class ENTREPRISERepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-        SELECT E.id, ent_raison_sociale, ent_site_web, ent_cp, ent_ville, ent_pays
+        SELECT E.id, ent_raison_sociale, ent_site_web, ent_cp, ent_ville, ent_pays, spe_libelle
         FROM entreprise as E
         INNER JOIN specialite_entreprise as SE ON E.id=entreprise_id
         INNER JOIN specialite as S on S.id = SE.specialite_id
-        WHERE PER_NOM LIKE :specialite
+        WHERE spe_libelle = :specialite
         ORDER BY ent_raison_sociale';
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery(['specialite' => $specialite]);
