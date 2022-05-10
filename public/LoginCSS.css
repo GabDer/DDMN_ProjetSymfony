@@ -334,6 +334,15 @@ border: 1.5px solid transparent;
 #linkAnnulSuprEntr:hover{
   background-color: #27272b;
 }
+.selectRech{
+  border-radius: 12px;
+  height: 45px;
+  margin-left: 20px;
+  border: none;
+  padding-left: 12px;
+  padding-top: 0px;
+  width: inherit;
+}
 /*--------------------------------------------------
               Fin CSS liste entreprises
 ---------------------------------------------------*/
