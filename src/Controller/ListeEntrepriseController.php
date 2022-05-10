@@ -216,7 +216,6 @@ class ListeEntrepriseController extends AbstractController
 
         $em = $em->getManager();
         $entPersonneFonction = $em->getRepository(FONCTION::class)->affichageFonctionPersonne();
-        dd($entPersonneFonction);
         $entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
         $entPersonne = $em->getRepository(PERSONNE::class)->findLastBy($entreprise);
         /*dd($entreprise, $entPersonne);*/

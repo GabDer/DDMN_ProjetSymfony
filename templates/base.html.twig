@@ -26,7 +26,11 @@
                     {% set NomUser = app.session.get('Login') %}
                     {% set Role = app.session.get('Role') %}
                         <li class="nav-item">
-                            <a class="nav-link" href="#">{{NomUser}}</a>
+                            {% if ( Role.UTI_ROLE == 1 ) %}
+                                <a class="nav-link" href="#">{{NomUser}} / Administrateur</a>
+                            {% else %}
+                                <a class="nav-link" href="#">{{NomUser}} / Enseignant</a>
+                            {% endif %}
                         </li>
                         {% if ( Role.UTI_ROLE == 1 ) %}
                         <li class="nav-item">
