@@ -39,9 +39,6 @@
 									<i class="fa-solid fa-trash-can" id="iconSupprimer"></i>
 								</a>
 							</div>
-							<div>
-								<h6>Secteur d'activité</h6>
-							</div>
 							<a href="{{ path('InfosEntreprise',{ 'id': ENTREPRISE.id}) }}">
 								<h5 class="card-title">{{ENTREPRISE.ent_raison_sociale}}</h5>
 							</a>
@@ -71,15 +68,18 @@
 										<a href="{{ENTREPRISE['ent_site_web']}}">Lien vers le site web</a>
 									</span><br/>
 								{% else %}
-									<p>Pas de site</p>
+									Pas de site
 								{% endif %}
 							</p>
 							<p>
 								<span class="large">
 									Options :
 								</span>
-								<a href="#" class="btn btn-primary">SLAM</a>
-								<a href="#" class="btn btn-primary">SISR</a>
+								{% for specialite in listeSpecialite %}
+									{% if specialite['entreprise_id'] == ENTREPRISE.id %}
+									{{specialite['spe_libelle']}}
+									{% endif %}
+								{% endfor %}
 							</p>
 						</div>
 					</div>
@@ -131,17 +131,20 @@
 								<span class="large">
 									{% if ENTREPRISE['ent_site_web'] is not null %}
 										<a href="{{ENTREPRISE['ent_site_web']}}">Lien vers le site web</a>
-									</span><br/>
+								</span><br/>
 								{% else %}
-									<p>Pas de site</p>
+									Pas de site
 								{% endif %}
 							</p>
 							<p>
 								<span class="large">
 									Options :
 								</span>
-								<a href="#" class="btn btn-primary">SLAM</a>
-								<a href="#" class="btn btn-primary">SISR</a>
+								{% for specialite in listeSpecialite %}
+									{% if specialite['entreprise_id'] == ENTREPRISE.id %}
+									{{specialite['spe_libelle']}}
+									{% endif %}
+								{% endfor %}
 							</p>
 						</div>
 					</div>
