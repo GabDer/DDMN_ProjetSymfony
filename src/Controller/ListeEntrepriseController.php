@@ -218,7 +218,8 @@ class ListeEntrepriseController extends AbstractController
         $entPersonneFonction = $em->getRepository(FONCTION::class)->affichageFonctionPersonne();
         $entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
         $entPersonne = $em->getRepository(PERSONNE::class)->findLastBy($entreprise);
-        /*dd($entreprise, $entPersonne);*/
+        
+        //dd($entreprise, $entPersonne, $entPersonneFonction);
         return $this->render('InfosEntreprise.html.twig', ['uneEntreprise' => $entreprise, 'unePersonne' => $entPersonne, 'persFonctions'=>$entPersonneFonction]);
     }
 
