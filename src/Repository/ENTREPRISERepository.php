@@ -76,6 +76,22 @@ class ENTREPRISERepository extends ServiceEntityRepository
         return $resultSet->fetchAllAssociative();
     }
 
+    public function AffichageSpecialiteEntreprise()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+        SELECT entreprise_id, spe_libelle
+        FROM Specialite as S 
+        INNER JOIN specialite_entreprise as SE ON S.id = SE.specialite_id 
+        ORDER BY entreprise_id';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
     public function RechercheParNom(string $nom)
     {
         $conn = $this->getEntityManager()->getConnection();

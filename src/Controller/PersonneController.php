@@ -36,7 +36,7 @@ class PersonneController extends AbstractController
                 $em = $em->getManager();
                 $em->persist($Personne);
                 $em->flush(); 
-                return $this->redirectToRoute('listeentreprise');
+                return $this->redirectToRoute('listeEntreprise');
             }
         }
         return $this->render('AjoutPersonne.html.twig', ["AjoutPersonneForm" => $PersonneForm->createView()]);

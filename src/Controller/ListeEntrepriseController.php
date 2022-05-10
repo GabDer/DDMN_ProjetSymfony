@@ -29,11 +29,11 @@ class ListeEntrepriseController extends AbstractController
         $entityManager = $doctrine->getManager();
         $listeEntreprises = $entityManager->getRepository(ENTREPRISE::class)->AffichageEntreprise(); //On récupère toute les entreprises existantes
         $listePersonnes = [];
-        
+        $listeSpecialite = $entityManager->getRepository(ENTREPRISE::class)->AffichageSpecialiteEntreprise();  //On récupère toute les spécialités existantes
         foreach ($listeEntreprises as $entreprise){ //Pour chaque entreprise, on y associe un tableau de ses personnes dans le tableau 'listePersonnes'
             $listePersonnes = array_merge($listePersonnes,$entityManager->getRepository(ENTREPRISE::class)->AffichagePersonnesEntreprise($entreprise['ent_raison_sociale'])); //array_merge permet d'ajouter des éléments à un tableau déja existant
         }
-        
+        // dd($listeSpecialite);
         //dd($listeEntreprises);
         if (isset($_GET['ParamRecue']))
             return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises, 'listePersonnes' => $listePersonnes, 'ParamRecue' => $_GET['ParamRecue']]);
@@ -225,12 +225,9 @@ class ListeEntrepriseController extends AbstractController
             return $this->redirectToRoute("listeEntreprise");
         }
         $em = $em->getManager();
-        
         $entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
         $entPersonne = $em->getRepository(PERSONNE::class)->findLastBy($entreprise);
         $entPersonneProfil = $em->getRepository(PERSONNEPROFIL::class)->findBy($entPersonne);
-        
-        //dd($entPersonne,$entreprise,$entPersonneProfil);
         try
         {
             foreach($entPersonneProfil as $value)
@@ -252,7 +249,6 @@ class ListeEntrepriseController extends AbstractController
             return $this->redirectToRoute('listeEntreprise',['ParamRecue'=>'error']);
         }
     }
-
 
     /**
     *  @Route("/modifier_entreprise/{id}", name="ModifierEntreprise")
