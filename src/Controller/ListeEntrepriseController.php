@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\ENTREPRISE;
+use App\Entity\FONCTION;
 use App\Entity\PERSONNE;
 use App\Entity\PERSONNEPROFIL;
 use App\Form\EntrepriseType;
@@ -184,6 +185,9 @@ class ListeEntrepriseController extends AbstractController
         if ($session->get('Role') == null){
             return $this->redirectToRoute("app_login");
         }
+        if ($session->get('Role') == "0"){
+            return $this->redirectToRoute("listeEntreprise");
+        }
 
         $entreprise = new ENTREPRISE();
         
@@ -211,7 +215,8 @@ class ListeEntrepriseController extends AbstractController
         }
 
         $em = $em->getManager();
-        $entPersonneFonction = $em->getRepository(PERSONNEPROFIL::class)->findFonctionPersonne();
+        $entPersonneFonction = $em->getRepository(FONCTION::class)->affichageFonctionPersonne();
+        dd($entPersonneFonction);
         $entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
         $entPersonne = $em->getRepository(PERSONNE::class)->findLastBy($entreprise);
         /*dd($entreprise, $entPersonne);*/
@@ -264,6 +269,9 @@ class ListeEntrepriseController extends AbstractController
         $session = $request->getSession();
         if ($session->get('Role') == null){
             return $this->redirectToRoute("app_login");
+        }
+        if ($session->get('Role') == "0"){
+            return $this->redirectToRoute("listeEntreprise");
         }
 
         $em = $em->getManager();

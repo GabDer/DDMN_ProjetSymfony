@@ -1,7 +1,0 @@
-Voulez vous vraiment supprimer l'utilisateur: {{Utilisateur.UTI_Login}} ?
-<form action="{{ path('SupprimerUtilisateur', {'id': Utilisateur.id})}}" method="post">
-
-  <input class="ajout" type="submit" id"submit" name="submit" value="Supprimer">
-  <input type = "button" value = "Annuler"  onclick = "history.back()" class="annule">
-            {{ form_rest(userFormSupp)}}
-  </form> 
