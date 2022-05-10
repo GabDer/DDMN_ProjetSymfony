@@ -377,7 +377,7 @@ border: 1.5px solid transparent;
       margin-top: 8px;
       background-color: #e8e8e8;
       padding-left: 14px;
-      color: grey;
+      color: black;
       box-shadow: 4px 4px 8px #0c0c0c;
     }
 
@@ -488,9 +488,6 @@ iframe{
 
 .formAjoutEnt button:hover {
   background-color: #03c47d;
-  box-shadow: 6px 6px 12px #c5c5c5,
-    -6px -6px 12px #999999;
-  ;
 }
 
 .formAjoutEnt {
