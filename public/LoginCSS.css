@@ -369,6 +369,28 @@ border: 1.5px solid transparent;
       width: 100%;
       justify-content: center;
     }
+
+    #personne_ENTREPRISE{
+      width: 50%;
+      height: 48px;
+      border-radius: 12px;
+      margin-top: 8px;
+      background-color: #e8e8e8;
+      padding-left: 14px;
+      color: grey;
+      box-shadow: 4px 4px 8px #0c0c0c;
+    }
+
+    .BtnAjouterPers{
+      background-color: #2083d9;
+      border-radius: 10px;
+      margin-left: 20px;
+      color: white;
+      font-size: 16px;
+      padding-left: 6px;
+      padding-right: 6px;
+    }
+
 /*--------------------------------------------------
               Fin CSS Ajout From
 ---------------------------------------------------*/
