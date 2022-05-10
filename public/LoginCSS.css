@@ -215,6 +215,9 @@ body {
   background-color: #1b88fc;
   cursor: pointer;
 }
+.barreRecherche form{
+  width: 100%;
+}
 .modale_content a {
   text-decoration: none;
   padding: 15px;
