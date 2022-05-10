@@ -173,6 +173,11 @@ a{
 
 .card h5 {
   font-size: 1.8rem;
+  color: #323237;
+}
+.card h5:hover{
+  text-decoration: underline;
+  text-decoration-color: #323237;
 }
 
 .bg-danger {
@@ -372,6 +377,8 @@ border: 1.5px solid transparent;
 
     p{
       white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
     .champRecherche{
       display: flex;
@@ -520,6 +527,9 @@ iframe{
 .card-header:first-child{
   color: white;
   text-align: center;
+}
+.large a{
+  color: #e8e8e8;
 }
 
 /*--------------------------------------------------
