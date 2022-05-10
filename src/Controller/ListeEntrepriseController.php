@@ -220,10 +220,12 @@ class ListeEntrepriseController extends AbstractController
             return $this->redirectToRoute("app_login");
         }
         $em = $em->getManager();
-        $entPersonneProfil = $em->getRepository(PERSONNEPROFIL::class)->findBy($entPersonne);
-        $entPersonne = $em->getRepository(PERSONNE::class)->findLastBy($entreprise);
+        
         $entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
-
+        $entPersonne = $em->getRepository(PERSONNE::class)->findLastBy($entreprise);
+        $entPersonneProfil = $em->getRepository(PERSONNEPROFIL::class)->findBy($entPersonne);
+        
+        //dd($entPersonne,$entreprise,$entPersonneProfil);
         try
         {
             foreach($entPersonneProfil as $value)
