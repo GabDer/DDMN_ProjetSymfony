@@ -7,6 +7,9 @@
 body {
   background-color: #323237;
 }
+a{
+  text-decoration: none;
+}
 
 .loginBody {
   background-color: #323237;
@@ -515,8 +518,5 @@ iframe{
                   Début CSS Listes utilisateurs
 ---------------------------------------------------*/
 #userTable{
-  margin-top: 30%;
-}
-#userBloc{
-  
+  margin-top: 10%;
 }
