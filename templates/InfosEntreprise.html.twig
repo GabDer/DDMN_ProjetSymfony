@@ -7,21 +7,23 @@
      <a href="{{ path('listeEntreprise') }}"><img src="../LogoNoBackground.png" style="width: 200px;"/></a>
 {% endblock %}
 {% block content %}
+    {% set fonctions =[] %}
     <div class="infoEntrCardBody">
         <div class="divGaucheInfos">
-            <h2>{{ uneEntreprise.ENT_RaisonSociale}}</h2>
-            <h3>{{ uneEntreprise.ENT_RUE}}</h3>
-            <h3>{{ uneEntreprise.ENT_ComplementAdresse}}</h3>
-            <h3>{{ uneEntreprise.ENT_CP}} {{ uneEntreprise.ENT_Ville}}</h3>
+            <h2>{{ Entreprise.ENT_RaisonSociale}}</h2>
+            <h3>{{ Entreprise.ENT_RUE}}</h3>
+            <h3>{{ Entreprise.ENT_ComplementAdresse}}</h3>
+            <h3>{{ Entreprise.ENT_CP}} {{ Entreprise.ENT_Ville}}</h3>
             <h1>Contact</h1>
             <div class="contactEntr">
-            {% for PERSONNE in unePersonne  %}
+            {% for PERSONNE in Personnes %}
+            {% set fonctions = PERSONNE.getFonction() %}
                 <div class="contactUnite">
                     <h4>{{ PERSONNE.PER_NOM}} {{ PERSONNE.PER_PRENOM}}</h4>
                     <h4>{{ PERSONNE.PER_MAIL}}</h4>
                     <h4>{{ PERSONNE.PER_TEL}}</h4>
-                    {% for FONCTION in persFonctions %}
-                        <h4>{{ FONCTION.fon_libelle}}</h4>
+                    {% for fonction in fonctions %}
+                        <h4>{{fonction.getfonlibelle}}</h4>
                     {% endfor %}
                 </div>
             {% endfor %}
@@ -32,7 +34,7 @@
             {% endif %}
         </div>
         <div class="divDroiteMaps">
-            <iframe src="https://maps.google.com/maps?width=100%25&amp;height=auto&amp;hl=fr&amp;q={{uneEntreprise.ENT_RUE}}+{{uneEntreprise.ENT_Ville}}&amp;t=p&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" width="100%" height="100%"></iframe>
+            <iframe src="https://maps.google.com/maps?width=100%25&amp;height=auto&amp;hl=fr&amp;q={{Entreprise.ENT_RUE}}+{{Entreprise.ENT_Ville}}&amp;t=p&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" width="100%" height="100%"></iframe>
         </div>
     </div>
 {% endblock %}

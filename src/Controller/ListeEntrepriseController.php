@@ -34,7 +34,7 @@ class ListeEntrepriseController extends AbstractController
         foreach ($listeEntreprises as $entreprise){ //Pour chaque entreprise, on y associe un tableau de ses personnes dans le tableau 'listePersonnes'
             $listePersonnes = array_merge($listePersonnes,$entityManager->getRepository(ENTREPRISE::class)->AffichagePersonnesEntreprise($entreprise['ent_raison_sociale'])); //array_merge permet d'ajouter des éléments à un tableau déja existant
         }
-        //dd($listeSpecialite);
+        dd($listeSpecialite);
         //dd($listeEntreprises);
         if (isset($_GET['ParamRecue']))
             return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises, 'listePersonnes' => $listePersonnes, 'listeSpecialite' => $listeSpecialite, 'ParamRecue' => $_GET['ParamRecue']]);
@@ -65,6 +65,9 @@ class ListeEntrepriseController extends AbstractController
         }
         elseif(isset($_POST['nom']) && $_POST['nom']!=null){
             return $this->redirectToRoute('listeEntrepriseParNom',['nom'=>$_POST['nom']]);
+        }
+        elseif(isset($_POST['specialite']) && $_POST['specialite']!=null){
+            return $this->redirectToRoute('listeEntrepriseParSpecialite',['specialite'=>$_POST['specialite']]);
         }
         else{
             return $this->redirectToRoute('listeEntreprise');
@@ -177,6 +180,27 @@ class ListeEntrepriseController extends AbstractController
     }
 
     /**
+     * @Route("/liste_entreprise/specialite/{specialite}", name="listeEntrepriseParSpecialite")
+     */
+    public function listeEntreprisesParSpecialite(Request $request ,ManagerRegistry $doctrine, $specialite)
+    {
+        $session = $request->getSession();
+        if ($session->get('Role') == null){
+            return $this->redirectToRoute("app_login");
+        }
+
+        $entityManager = $doctrine->getManager();
+        $listeEntreprises = $entityManager->getRepository(ENTREPRISE::class)->RechercheParSpecialite($specialite); //On récupère toute les entreprises en fonction du pays rentré
+        $listePersonnes = [];
+        $listeSpecialite = $entityManager->getRepository(ENTREPRISE::class)->AffichageSpecialiteEntreprise();  //On récupère toute les spécialités existantes en fonction des entreprises
+        foreach ($listeEntreprises as $entreprise){ //Pour chaque entreprise, on y associe un tableau de ses personnes dans le tableau 'listePersonnes'
+            $listePersonnes = array_merge($listePersonnes,$entityManager->getRepository(ENTREPRISE::class)->AffichagePersonnesEntreprise($entreprise['ent_raison_sociale'])); //array_merge permet d'ajouter des éléments à un tableau déja existant
+            
+        }
+        return $this->render('/ListeEntreprise.html.twig', ['listeEntreprises' => $listeEntreprises, 'listePersonnes' => $listePersonnes, 'listeSpecialite' => $listeSpecialite]);
+    }
+
+    /**
      * @Route("/ajoutentreprise", name="AjoutEntreprise")
      */
     public function ajoutEntreprise(ManagerRegistry $em, Request $request): Response
@@ -215,12 +239,10 @@ class ListeEntrepriseController extends AbstractController
         }
 
         $em = $em->getManager();
-        $entPersonneFonction = $em->getRepository(FONCTION::class)->affichageFonctionPersonne();
-        $entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
-        $entPersonne = $em->getRepository(PERSONNE::class)->findLastBy($entreprise);
-        
-        //dd($entreprise, $entPersonne, $entPersonneFonction);
-        return $this->render('InfosEntreprise.html.twig', ['uneEntreprise' => $entreprise, 'unePersonne' => $entPersonne, 'persFonctions'=>$entPersonneFonction]);
+        $Entreprise = $em->getRepository(ENTREPRISE::class)->find($id); // Récupère l'entreprise dont l'id est passé en paramètre
+        $Personnes = $em->getRepository(PERSONNE::class)->findLastBy($Entreprise); // Récupère les personnes pour chaque entreprises
+        //dd($PersonnesFonctions, $Entreprise, $Personnes);
+        return $this->render('InfosEntreprise.html.twig', ['Entreprise' => $Entreprise, 'Personnes' => $Personnes]);
     }
 
     /**

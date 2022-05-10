@@ -46,20 +46,7 @@ class FONCTIONRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
-    public function affichageFonctionPersonne()
-    {
-        $conn = $this->getEntityManager()->getConnection();
-
-        $sql = '
-        SELECT per_nom, per_prenom, fon_libelle 
-        FROM fonction_personne AS FB INNER JOIN fonction AS F ON FB.fonction_id = F.id 
-        INNER JOIN personne AS P ON P.id = FB.personne_id 
-        ORDER BY per_nom ASC';
-        $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->executeQuery();
-
-        return $resultSet->fetchAllAssociative();
-    }
+    
     // /**
     //  * @return FONCTION[] Returns an array of FONCTION objects
     //  */
