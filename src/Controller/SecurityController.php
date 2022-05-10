@@ -69,6 +69,12 @@ class SecurityController extends AbstractController
         {
             $ajoutUserForm->handleRequest($request);
             $em = $em->getManager();
+            //On récupère le mpasse saisie
+            $data = $utilisateur->getUTIMDP('UTI_MDP');
+            //On hashe le mot de passe saisie
+            $mdp = hash('MD5', $data);
+            
+            $utilisateur->setUTIMDP($mdp);
             $em->persist($utilisateur);
             $em->flush();
             $this->addFlash('success', 'L\'utilisateur a bien été ajouté');
