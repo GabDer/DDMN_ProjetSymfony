@@ -94,6 +94,7 @@ class SecurityController extends AbstractController
             {
                 try
                 {
+
                     $em->persist($utilisateur);
                     $em->flush();
                     return $this->redirectToRoute('listeUtilisateurs', ['id'=> $utilisateur->getId()]);
