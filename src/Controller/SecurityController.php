@@ -106,7 +106,7 @@ class SecurityController extends AbstractController
     /**
     *  @Route("/supprimer_utilisateur/{id}", name="SupprimerUtilisateur")
     */
-    public function SupprimerEntreprise(ManagerRegistry $em, $id, Request $request): Response
+    public function SupprimerUtilisateur(ManagerRegistry $em, $id, Request $request): Response
     {
         $session = $request->getSession();
         if ($session->get('Role') == null){

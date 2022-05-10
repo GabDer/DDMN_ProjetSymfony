@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 10 mai 2022 à 07:26
+-- Généré le : mar. 10 mai 2022 à 07:51
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `ddmn_bdgestionentreprise`
 --
+CREATE DATABASE IF NOT EXISTS `ddmn_bdgestionentreprise` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `ddmn_bdgestionentreprise`;
 
 -- --------------------------------------------------------
 
@@ -40,8 +42,8 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
 --
 
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-('DoctrineMigrations\\Version20220505094546', '2022-05-09 08:19:19', 312),
-('DoctrineMigrations\\Version20220505094820', '2022-05-09 08:19:19', 74);
+('DoctrineMigrations\\Version20220505094546', '2022-05-10 07:48:58', 198),
+('DoctrineMigrations\\Version20220505094820', '2022-05-10 07:48:58', 51);
 
 -- --------------------------------------------------------
 
@@ -62,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `entreprise` (
   `ent_num2` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ent_site_web` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `entreprise`
@@ -72,8 +74,7 @@ INSERT INTO `entreprise` (`id`, `ent_raison_sociale`, `ent_pays`, `ent_ville`, `
 (1, 'ABC INFORMATIQUE', 'France', 'Friville', '80130', 'Allée des marettes', 'Zac Le Parc', NULL, NULL, 'https://www.abcinformatique.fr/nos-magasins/materiel-informatique-depannage-friville/'),
 (2, 'Agence Digiworks', 'France', 'Mont-Saint-Aignan', '76130', '85 Chemin de Clères', NULL, NULL, NULL, 'https://www.digiworks.fr/'),
 (3, 'AGEVOL Développement', 'France', 'Bihorel', '76420', '10 rue Maréchal de Lattre de Tassigny', NULL, NULL, NULL, NULL),
-(4, 'Centre Henri-Becquerel', 'France', 'Rouen Cedex 1', '76038', 'Rue d\'Amiens', 'CS11516', NULL, NULL, 'www.centre-henri-becquerel.fr'),
-(5, 'Mairie de Schöneberg', 'Allemagne', 'Berlin', '10825', 'Am Rathaus', 'Test', '2', 'Test', 'https://www.berlin.de/ba-tempelhof-schoeneberg/');
+(4, 'Centre Henri-Becquerel', 'France', 'Rouen Cedex 1', '76038', 'Rue d\'Amiens', 'CS11516', NULL, NULL, 'www.centre-henri-becquerel.fr');
 
 -- --------------------------------------------------------
 
@@ -275,8 +276,8 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`id`, `uti_login`, `uti_mdp`, `uti_role`) VALUES
-(1, 'ADMIN', 'c855bee1a1a898a85b2c442d1e68d2bf', 1),
-(2, 'Enseignant', 'e496044409cd040eab0c9f677ed7ed89', 0);
+(1, 'ADMIN', '7cf2db5ec261a0fa27a502d3196a6f60', 1),
+(2, 'Enseignant', '7cf2db5ec261a0fa27a502d3196a6f60', 0);
 
 --
 -- Contraintes pour les tables déchargées

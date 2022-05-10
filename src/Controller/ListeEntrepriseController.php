@@ -223,6 +223,12 @@ class ListeEntrepriseController extends AbstractController
             return $this->redirectToRoute("listeEntreprise");
         }
         $em = $em->getManager();
+        
+        $entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
+        $entPersonne = $em->getRepository(PERSONNE::class)->findLastBy($entreprise);
+        $entPersonneProfil = $em->getRepository(PERSONNEPROFIL::class)->findBy($entPersonne);
+        
+        //dd($entPersonne,$entreprise,$entPersonneProfil);
         try
         {
             foreach($entPersonneProfil as $value)
@@ -244,6 +250,7 @@ class ListeEntrepriseController extends AbstractController
             return $this->redirectToRoute('listeEntreprise',['ParamRecue'=>'error']);
         }
     }
+
 
     /**
     *  @Route("/modifier_entreprise/{id}", name="ModifierEntreprise")
