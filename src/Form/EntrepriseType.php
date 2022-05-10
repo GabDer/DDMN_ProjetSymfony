@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\ENTREPRISE;
-use Doctrine\Common\Annotations\Annotation\Required;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -33,7 +33,7 @@ class EntrepriseType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => ENTREPRISE::class
+            'data_class' => ENTREPRISE::class,
         ]);
     }
 }

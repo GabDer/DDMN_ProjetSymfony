@@ -201,6 +201,19 @@ body {
   border: none;
   padding-left: 12px;
   padding-top: 0px;
+  width: inherit;
+}
+.barreRecherche input[type='submit']{
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 14px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+}
+.barreRecherche input[type='submit']:hover{
+  background-color: #1b88fc;
+  cursor: pointer;
 }
 .modale_content a {
   text-decoration: none;
@@ -345,8 +358,14 @@ border: 1.5px solid transparent;
       margin-right: auto;
     }
 
-
-
+    p{
+      white-space: nowrap;
+    }
+    .champRecherche{
+      display: flex;
+      width: 100%;
+      justify-content: center;
+    }
 /*--------------------------------------------------
               Fin CSS Ajout From
 ---------------------------------------------------*/

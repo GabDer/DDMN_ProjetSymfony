@@ -4,38 +4,38 @@
 {% endblock %}
 
 {% block content %}
-	<style></style>
 
 	<div class="divFiltre">
 		<div class="barreRecherche">
-			<input type="text" placeholder="Nom entreprise">
-			<input type="text" placeholder="Ville">
-			<input type="text" placeholder="Pays">
-			<input type="text" placeholder="Nom du tuteur">
-			<input type="submit" value="Rechercher">
+		<form action="/GestionFiltre" method="post">
+			<div class="champRecherche">
+				<input type="text" name="RS" placeholder="Nom entreprise">
+				<input type="text" name="ville" placeholder="Ville">
+				<input type="text" name="CP" placeholder="Code postal">
+				<input type="text" name="pays" placeholder="Pays">
+				<input type="text" name="nom" placeholder="Nom du tuteur">
+				<input type="submit" value="Rechercher">
+			</div>
+		</form>
 		</div>
 	</div>
+
 	{% set Role = app.session.get('Role') %}
 	{% if Role.UTI_ROLE == 1 %}
 		<div class="row ml-4" id="bloc">
 			{% for ENTREPRISE in listeEntreprises %}
-
 				{% set personnes = [] %}
 				<div class="col-sm-6 mt-2 mb-2 rounded-sm">
 					<div class="card" style="background-color: #69878a;">
 						<div class="card-header">
 							<div class="iconeModifSupr">
 								<div class="modifcompterow">
-									<div class="modifcomptecolumn">
-										<label class="labelinscr" for="datenaiss"></label>
-									</div>
+								<div class="modifcomptecolumn">
+									<label class="labelinscr" for="datenaiss"></label>
 								</div>
-								<a href="#">
-									<i class="fa-solid fa-pen" id="iconModifier"></i>
-								</a>
-								<a href="">
-									<i class="fa-solid fa-trash-can" id="iconSupprimer" onclick=" return confirm('Voulez vous vraiment supprimer ' + '{{ENTREPRISE.ent_raison_sociale}}')"></i>
-								</a>
+								</div>
+								<a href="#"> <i class="fa-solid fa-pen" id="iconModifier"></i> </a>
+								<a href="{{ path('SupprimerEntreprise',{ 'id': ENTREPRISE.id}) }}" onclick="return confirm('Voulez vous vraiment supprimer cette entreprise ?');"><i class="fa-solid fa-trash-can" id="iconSupprimer"></i></a>
 							</div>
 							<div>
 								<h6>Secteur d'activité</h6>
@@ -51,20 +51,29 @@
 								{% endif %}
 							{% endfor %}
 							<p>
-								<span class="small">
+								<span class="large">
 									CP :
 									{{ ENTREPRISE.ent_cp }}</span><br/>
 							</p>
 							<p>
-								<span class="small">
+								<span class="large">
 									Nom :
 									{% for LesPersonnes in personnes %}
 										{{LesPersonnes}}
 									{% endfor %}
 								</span><br/>
 							</p>
+                            <p>
+								<span class="large">
+									{% if ENTREPRISE['ent_site_web'] is not null %}
+										<a href="{{ENTREPRISE['ent_site_web']}}">Lien vers le site web</a>
+									</span><br/>
+								{% else %}
+									<p>Pas de site</p>
+								{% endif %}
+							</p>
 							<p>
-								<span class="small">
+								<span class="large">
 									Options :
 								</span>
 								<a href="#" class="btn btn-primary">SLAM</a>
@@ -73,9 +82,12 @@
 						</div>
 					</div>
 				</div>
-
 			{% endfor %}
-
+			{% if ParamRecue == 'success' %}
+       			<script> alert("Entreprise bien supprimée"); </script>
+    			{% elseif ParamRecue == 'error' %}
+        		<script> alert("Suppression échouée"); </script>
+    		{% endif %}
 		{% else %}
 			{% for ENTREPRISE in listeEntreprises %}
 				{% set personnes = [] %}
