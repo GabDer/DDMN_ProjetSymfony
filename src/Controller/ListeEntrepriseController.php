@@ -184,6 +184,9 @@ class ListeEntrepriseController extends AbstractController
         if ($session->get('Role') == null){
             return $this->redirectToRoute("app_login");
         }
+        if ($session->get('Role') == "0"){
+            return $this->redirectToRoute("listeEntreprise");
+        }
 
         $entreprise = new ENTREPRISE();
         
@@ -264,6 +267,9 @@ class ListeEntrepriseController extends AbstractController
         $session = $request->getSession();
         if ($session->get('Role') == null){
             return $this->redirectToRoute("app_login");
+        }
+        if ($session->get('Role') == "0"){
+            return $this->redirectToRoute("listeEntreprise");
         }
 
         $em = $em->getManager();
