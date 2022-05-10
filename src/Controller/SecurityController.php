@@ -108,7 +108,6 @@ class SecurityController extends AbstractController
                     $utilisateur->setUTIMDP($mdp);
                     $em->persist($utilisateur);
                     $em->flush();
-                    return $this->redirectToRoute('listeUtilisateurs', ['id'=> $utilisateur->getId()]);
                 }
                 catch(Exeption $e)
                 {

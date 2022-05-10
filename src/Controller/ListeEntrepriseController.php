@@ -258,7 +258,11 @@ class ListeEntrepriseController extends AbstractController
         $em = $em->getManager();
         $entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
         $entPersonne = $em->getRepository(PERSONNE::class)->findLastBy($entreprise);
-        $entPersonneProfil = $em->getRepository(PERSONNEPROFIL::class)->findBy($entPersonne);
+        //$perFOnction = $em->getRepository(FONCTION::class)->findAll();
+        //$a = array($entPersonne['1']->getFonction());
+        
+        $entPersonneProfil = $em->getRepository(PERSONNEPROFIL::class)->getFonctionPersonne($entPersonne);
+        dd($entPersonneProfil);
         try
         {
             foreach($entPersonneProfil as $value)
