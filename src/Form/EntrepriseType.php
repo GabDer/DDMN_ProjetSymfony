@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\ENTREPRISE;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -25,6 +26,7 @@ class EntrepriseType extends AbstractType
             ->add('ENT_NUM1', TextType::class, array('required' => false, 'label'=>false, 'attr'=>['placeholder'=>'Numero 1']))
             ->add('ENT_NUM2', TextType::class, array('required' => false, 'label'=>false, 'attr'=>['placeholder'=>'Numero 2']))
             ->add('ENT_SiteWeb', UrlType::class, array('required' => false, 'label'=>false, 'attr'=>['placeholder'=>'URL site web']))
+            // ->add('ENT_AVOIR', CheckboxType::class, array('label'=>false, 'attr'=>['placeholder'=>'Specialite']))
             //->add('ENT_AVOIR', TextType::class)
             ->add('Valider', SubmitType :: class, ['label' => 'Sauvegarder'])
         ;

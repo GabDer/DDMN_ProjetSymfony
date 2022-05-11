@@ -67,7 +67,7 @@ class ENTREPRISE
     /**
      * @ORM\ManyToMany(targetEntity=SPECIALITE::class, mappedBy="SPE_AVOIR")
      */
-    private $ENT_AVOIR;
+    public $ENT_AVOIR;
 
     public function __construct()
     {
