@@ -42,6 +42,14 @@ class PersonneController extends AbstractController
                 $em = $em->getManager();
                 $em->persist($Personne);
                 $em->flush(); 
+                
+                //$Fonction->addFonctionPersonne($Personne->getFonction()->);
+                $a = $Personne->getFonction();
+                
+                dd($a);
+                $em->persist($Fonction);
+                $em->flush();
+                dd($Personne, $Fonction);
                 return $this->redirectToRoute('listeEntreprise');
             }
         }

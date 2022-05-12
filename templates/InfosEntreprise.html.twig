@@ -11,14 +11,6 @@
     <div class="infoEntrCardBody">
         <div class="divGaucheInfos">
             <h2>{{ Entreprise.ENT_RaisonSociale}}</h2>
-            <div class="cbxSpecialite">
-                <input type="checkbox" value="SLAM" name="SLAM" id="SLAM">
-                <label for="SLAM">SLAM</label>
-                <input type="checkbox" value="SISR" name="SISR" id="SISR">
-                <label for="SISR">SISR</label>
-                <input type="checkbox" value="Licence" name="Licence" id="Licence">
-                <label for="Licence">Licence</label>
-            </div>
             <h3>{{ Entreprise.ENT_RUE}}</h3>
             <h3>{{ Entreprise.ENT_ComplementAdresse}}</h3>
             <h3>{{ Entreprise.ENT_CP}} {{ Entreprise.ENT_Ville}}</h3>
@@ -28,8 +20,7 @@
             {% set fonctions = PERSONNE.getFonction() %}
             {% set PersonnesP = PERSONNE.getFonction() %}
                 <div class="contactUnite">
-                    <a href="{{ path('AjoutFonction', { 'id': PERSONNE.id}) }}">
-                    <h4>{{ PERSONNE.PER_NOM }} {{ PERSONNE.PER_PRENOM}}</h4></a>
+                    <h4>{{ PERSONNE.PER_NOM }} {{ PERSONNE.PER_PRENOM}}</h4>
                     <h4>{{ PERSONNE.PER_MAIL}}</h4>
                     <h4>{{ PERSONNE.PER_TEL}}</h4>
                     {% for Lafonction in fonctions %}
