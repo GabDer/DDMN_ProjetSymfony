@@ -427,12 +427,12 @@ border: 1.5px solid transparent;
 
 .infoEntrCardBody{
   background-color: #69878a;
-  width: 70%;
-  height: 450px;
+  width: 85%;
+  height: 600px;
   margin-left: auto;
   margin-right: auto;
   border-radius: 16px;
-  margin-top: 230px;
+  margin-top: 195px;
   display: flex;
   flex-direction: row;
 }
@@ -538,6 +538,17 @@ iframe{
 }
 .large a{
   color: #e8e8e8;
+}
+.cbxSpecialite label{
+  margin-right: 13px;
+  margin-left: 4px;
+}
+.cbxSpecialite{
+  display: flex;
+  margin-left: 21px;
+  align-items: baseline;
+  gap: 0px;
+  color: white;
 }
 
 /*--------------------------------------------------
