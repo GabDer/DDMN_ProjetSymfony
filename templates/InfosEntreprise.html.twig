@@ -18,12 +18,18 @@
             <div class="contactEntr">
             {% for PERSONNE in Personnes %}
             {% set fonctions = PERSONNE.getFonction() %}
+            {% set PersonnesP = PERSONNE.getFonction() %}
                 <div class="contactUnite">
                     <h4>{{ PERSONNE.PER_NOM}} {{ PERSONNE.PER_PRENOM}}</h4>
                     <h4>{{ PERSONNE.PER_MAIL}}</h4>
                     <h4>{{ PERSONNE.PER_TEL}}</h4>
-                    {% for fonction in fonctions %}
-                        <h4>{{fonction.getfonlibelle()}}</h4>
+                    {% for Lafonction in fonctions %}
+                        <h4>{{ Lafonction.getfonlibelle()}}</h4>
+                    {% endfor %}
+                    {% for profil in Profils %}
+                        {% if profil.id == PERSONNE.id %}
+                        <h4>{{ profil.pro_libelle }}</h4>
+                        {% endif %}
                     {% endfor %}
                 </div>
             {% endfor %}

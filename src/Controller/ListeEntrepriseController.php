@@ -239,8 +239,13 @@ class ListeEntrepriseController extends AbstractController
         $em = $em->getManager();
         $Entreprise = $em->getRepository(ENTREPRISE::class)->find($id); // Récupère l'entreprise dont l'id est passé en paramètre
         $Personnes = $em->getRepository(PERSONNE::class)->findLastBy($Entreprise); // Récupère les personnes pour chaque entreprises
+        $listeProfils = [];
+        //dd($Personnes);
+        foreach ($Personnes as $personne){
+            $listeProfils = array_merge($listeProfils,$em->getRepository(PERSONNE::class)->AffichagePersonneProfil($personne->getId())); //On récupère toute les entreprises en fonction du pays rentré
+        }
         //dd($PersonnesFonctions, $Entreprise, $Personnes);
-        return $this->render('InfosEntreprise.html.twig', ['Entreprise' => $Entreprise, 'Personnes' => $Personnes]);
+        return $this->render('InfosEntreprise.html.twig', ['Entreprise' => $Entreprise, 'Personnes' => $Personnes, 'Profils' => $listeProfils]);
     }
 
     /**

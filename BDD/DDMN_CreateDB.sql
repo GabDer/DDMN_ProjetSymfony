@@ -119,12 +119,10 @@ CREATE TABLE IF NOT EXISTS `fonction_personne` (
 --
 
 INSERT INTO `fonction_personne` (`fonction_id`, `personne_id`) VALUES
-(1, 3),
-(1, 4),
-(2, 3),
-(3, 4),
-(4, 1),
-(4, 3);
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4);
 
 -- --------------------------------------------------------
 
