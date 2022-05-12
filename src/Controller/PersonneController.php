@@ -47,21 +47,4 @@ class PersonneController extends AbstractController
         }
         return $this->render('AjoutPersonne.html.twig', ["AjoutPersonneForm" => $PersonneForm->createView()]);
     }
-    /**
-     * @Route("/ajoutfonction/{id}", name="AjoutFonction")
-     */
-    public function ajoutfonction(Request $request, ManagerRegistry $em, $id): Response
-    {
-        $session = $request->getSession();
-        if ($session->get('Role') == null){
-            return $this->redirectToRoute("app_login");
-        }
-        if ($session->get('Role')["UTI_ROLE"] == "0"){
-            return $this->redirectToRoute("listeEntreprise");
-        }
-        $em = $em->getManager();
-        $Personne = $em->getRepository(PERSONNE::class)->find($id);
-            
-
-    }
 }

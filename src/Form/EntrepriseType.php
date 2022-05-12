@@ -23,13 +23,11 @@ class EntrepriseType extends AbstractType
             ->add('ENT_CP', TextType::class, array('label'=>false, 'attr'=>['placeholder'=>'Code postale']))
             ->add('ENT_RUE', TextType::class, array('label'=>false, 'attr'=>['placeholder'=>'Rue']))
             ->add('ENT_ComplementAdresse', TextType::class, array('required' => false, 'label'=>false, 'attr'=>['placeholder'=>'Complément d\'adresse']))
-            ->add('ENT_NUM1', TextType::class, array('required' => false, 'label'=>false, 'attr'=>['placeholder'=>'Numero 1']))
-            ->add('ENT_NUM2', TextType::class, array('required' => false, 'label'=>false, 'attr'=>['placeholder'=>'Numero 2']))
             ->add('ENT_SiteWeb', UrlType::class, array('required' => false, 'label'=>false, 'attr'=>['placeholder'=>'URL site web']))
             // ->add('ENT_AVOIR', CheckboxType::class, ['label'=> '])
             //->add('ENT_AVOIR', TextType::class)
-            ->add('Valider', SubmitType :: class, ['label' => 'Sauvegarder'])
-        ;
+            ->add('Valider', SubmitType :: class, ['label' => 'Sauvegarder']);
+        
     }
 
     public function configureOptions(OptionsResolver $resolver): void

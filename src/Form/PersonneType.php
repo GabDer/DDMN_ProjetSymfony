@@ -24,6 +24,13 @@ class PersonneType extends AbstractType
             ->add('PER_PRENOM', TextType::class, array('label'=>false, 'attr'=>['placeholder'=>'Prénom']))
             ->add('PER_TEL', TelType::class, array('label'=>false, 'attr'=>['placeholder'=>'Tel']))
             ->add('PER_MAIL', EmailType::class, array('label'=>false, 'attr'=>['placeholder'=>'Mail']))
+            ->add('Fonction', EntityType::class,[
+                    'class'=>FONCTION::class,
+                    'choice_label'=> 'FON_LIBELLE',
+                    'label'=>false,
+                    'multiple'=>true,
+                    'required' => false
+                ])
             ->add('ENTREPRISE', EntityType::class,
                 array(
                     'class'=>ENTREPRISE::class,
