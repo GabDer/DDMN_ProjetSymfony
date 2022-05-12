@@ -74,6 +74,22 @@ class PERSONNERepository extends ServiceEntityRepository
         return $resultat->fetchAllAssociative();
     }
 
+    public function AffichagePersonneProfil(int $per_id)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT PER.id, pro_libelle
+            FROM Profil as Pro
+            INNER JOIN PersonneProfil as PERPRO ON Pro.id=pro_id_id
+            INNER JOIN Personne as Per ON per_id_id=per.id 
+            WHERE PERPRO.PER_id_id = :per_id ';
+        $stmt = $conn->prepare($sql);
+        $resultat = $stmt->executeQuery(['per_id' => $per_id]);
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultat->fetchAllAssociative();
+    }
+
     // /**
     //  * @return PERSONNE[] Returns an array of PERSONNE objects
     //  */

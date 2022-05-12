@@ -207,7 +207,7 @@ class ListeEntrepriseController extends AbstractController
         if ($session->get('Role') == null){
             return $this->redirectToRoute("app_login");
         }
-        if ($session->get('Role') == "0"){
+        if ($session->get('Role')["UTI_ROLE"] == "0"){
             return $this->redirectToRoute("listeEntreprise");
         }
 
@@ -220,7 +220,6 @@ class ListeEntrepriseController extends AbstractController
             $em = $em->getManager();
             $em->persist($entreprise);
             $em->flush();
-            $this->addFlash('success', 'L\entreprise à bien était ajouter. ');
             return $this->redirectToRoute('InfosEntreprise', ['id'=>$entreprise->getId()]);
         }
         return $this->render('AjoutEntreprise.html.twig', ['AjoutEntrepriseForm' => $AjoutEntrepriseForm->createView()]);
@@ -239,8 +238,13 @@ class ListeEntrepriseController extends AbstractController
         $em = $em->getManager();
         $Entreprise = $em->getRepository(ENTREPRISE::class)->find($id); // Récupère l'entreprise dont l'id est passé en paramètre
         $Personnes = $em->getRepository(PERSONNE::class)->findLastBy($Entreprise); // Récupère les personnes pour chaque entreprises
+        $listeProfils = [];
+        //dd($Personnes);
+        foreach ($Personnes as $personne){
+            $listeProfils = array_merge($listeProfils,$em->getRepository(PERSONNE::class)->AffichagePersonneProfil($personne->getId())); //On récupère toute les entreprises en fonction du pays rentré
+        }
         //dd($PersonnesFonctions, $Entreprise, $Personnes);
-        return $this->render('InfosEntreprise.html.twig', ['Entreprise' => $Entreprise, 'Personnes' => $Personnes]);
+        return $this->render('InfosEntreprise.html.twig', ['Entreprise' => $Entreprise, 'Personnes' => $Personnes, 'Profils' => $listeProfils]);
     }
 
     /**
@@ -252,7 +256,7 @@ class ListeEntrepriseController extends AbstractController
         if ($session->get('Role') == null){
             return $this->redirectToRoute("app_login");
         }
-        if ($session->get('Role') == "0"){
+        if ($session->get('Role')["UTI_ROLE"] == "0"){
             return $this->redirectToRoute("listeEntreprise");
         }
         $em = $em->getManager();
@@ -284,7 +288,7 @@ class ListeEntrepriseController extends AbstractController
         if ($session->get('Role') == null){
             return $this->redirectToRoute("app_login");
         }
-        if ($session->get('Role') == "0"){
+        if ($session->get('Role')["UTI_ROLE"] == "0"){
             return $this->redirectToRoute("listeEntreprise");
         }
 

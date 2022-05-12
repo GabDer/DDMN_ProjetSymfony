@@ -5,8 +5,6 @@
 {% endblock %}
 
 {% block content %}
-{% set Role = app.session.get('Role') %}
-{% if ( Role.UTI_ROLE == 1 ) %}
 	<div class="row">
 		<div class="col-sm-10 mt-4 rounded-sm">
 			<div class="card" style="background-color: #323237;">
@@ -21,7 +19,4 @@
 		    </div>
         </div>
 	</div>
-{% else %}
-    <h1> Vous n'avez pas les droits pour accéder à cette page. </h1>
-{% endif %}
 {% endblock %}

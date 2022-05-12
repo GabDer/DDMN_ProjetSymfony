@@ -370,9 +370,17 @@ border: 1.5px solid transparent;
       justify-content: center;
     }
     .ajoutUtil .unRole{
-      display: block;
+      width: 50%;
+      height: 48px;
+      border-radius: 12px;
+      margin-top: 8px;
+      background-color: #e8e8e8;
+      padding-left: 14px;
+      color: black;
+      box-shadow: 4px 4px 8px #0c0c0c;
       margin-left: auto;
       margin-right: auto;
+      display: block;
     }
 
     p{
