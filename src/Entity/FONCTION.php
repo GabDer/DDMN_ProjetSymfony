@@ -31,7 +31,7 @@ class FONCTION
 
     public function __construct()
     {
-        $this->FonctionPersonne = new ArrayCollection();
+        //$this->FonctionPersonne = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -54,7 +54,7 @@ class FONCTION
     /**
      * @return Collection<int, PERSONNE>
      */
-    public function getFonctionPersonne(): Collection
+    public function getFonctionPersonne(): ?Collection
     {
         return $this->FonctionPersonne;
     }
