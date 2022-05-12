@@ -550,6 +550,12 @@ iframe{
   gap: 0px;
   color: white;
 }
+.cbxSpecialite input{
+  border-radius: 14px;
+  border: none;
+  background-color: #1b88fc;
+  color: #e8e8e8;
+}
 
 /*--------------------------------------------------
                   Début CSS Listes utilisateurs

@@ -12,12 +12,15 @@
         <div class="divGaucheInfos">
             <h2>{{ Entreprise.ENT_RaisonSociale}}</h2>
             <div class="cbxSpecialite">
-                <input type="checkbox" value="SLAM" name="SLAM" id="SLAM">
-                <label for="SLAM">SLAM</label>
-                <input type="checkbox" value="SISR" name="SISR" id="SISR">
-                <label for="SISR">SISR</label>
-                <input type="checkbox" value="Licence" name="Licence" id="Licence">
-                <label for="Licence">Licence</label>
+                <form method="POST" action="">
+                    <input type="checkbox" value="SLAM" name="SLAM" id="SLAM">
+                    <label for="SLAM">SLAM</label>
+                    <input type="checkbox" value="SISR" name="SISR" id="SISR">
+                    <label for="SISR">SISR</label>
+                    <input type="checkbox" value="Licence" name="Licence" id="Licence">
+                    <label for="Licence">Licence</label>
+                    <input type="submit" value="Sauvegarder">
+                </form>
             </div>
             <h3>{{ Entreprise.ENT_RUE}}</h3>
             <h3>{{ Entreprise.ENT_ComplementAdresse}}</h3>
