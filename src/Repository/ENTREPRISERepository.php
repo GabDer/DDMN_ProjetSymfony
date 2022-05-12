@@ -199,8 +199,30 @@ class ENTREPRISERepository extends ServiceEntityRepository
             WHERE entreprise_id = :ent_id';
         $stmt = $conn->prepare($sql);
         $resultat = $stmt->executeQuery(['ent_id' => $id]);
-        // returns an array of arrays (i.e. a raw data set)
         return $resultat->fetchAssociative();
+    }
+
+    public function DeleteSpecialiteEntreprise(int $ent_id)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+        DELETE FROM specialite_entreprise WHERE entreprise_id = :ent_id
+        ';
+        $stmt = $conn->prepare($sql);
+        $stmt->executeQuery(['ent_id' => $ent_id]);
+    }
+
+    public function InsertSpecialiteEntreprise(int $spe_id, int $ent_id)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+        INSERT INTO specialite_entreprise (specialite_id, entreprise_id)
+        VALUES(:spe_id, :ent_id)
+        ';
+        $stmt = $conn->prepare($sql);
+        $stmt->executeQuery(['spe_id' => $spe_id, 'ent_id' => $ent_id]);
     }
     // /**//  * @return ENTREPRISE[] Returns an array of ENTREPRISE objects
     //  */

@@ -12,7 +12,7 @@
         <div class="divGaucheInfos">
             <h2>{{ Entreprise.ENT_RaisonSociale}}</h2>
             <div class="cbxSpecialite">
-                <form method="POST" action="">
+                <form action="{{ path('ModifierEntrepriseSpecialite', { 'id': Entreprise.id}) }}" method="POST">
                     <input type="checkbox" value="SLAM" name="SLAM" id="SLAM">
                     <label for="SLAM">SLAM</label>
                     <input type="checkbox" value="SISR" name="SISR" id="SISR">

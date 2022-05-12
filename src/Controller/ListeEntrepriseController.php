@@ -316,4 +316,35 @@ class ListeEntrepriseController extends AbstractController
         }
         return $this->render('ModifierEntreprise.html.twig', ['Entreprise'=>$entreprise, 'entFormModif'=>$entFormModif->createView()]);
     }
+
+    /**
+    *  @Route("/modifier_entreprise/specialite/{id}", name="ModifierEntrepriseSpecialite")
+    */
+    public function ModifierEntrepriseSpecialite(ManagerRegistry $em,Request $request, $id)
+    {
+        $session = $request->getSession();
+        if ($session->get('Role') == null){
+            return $this->redirectToRoute("app_login");
+        }
+        if ($session->get('Role')["UTI_ROLE"] == "0"){
+            return $this->redirectToRoute("listeEntreprise");
+        }
+
+            $em = $em->getManager();
+            $entreprise = $em->getRepository(ENTREPRISE::class)->find($id);
+            $em->getRepository(ENTREPRISE::class)->DeleteSpecialiteEntreprise($id);
+            if(isset($_POST["SLAM"]) && $_POST["SLAM"]!=null)
+            {
+                $em->getRepository(ENTREPRISE::class)->InsertSpecialiteEntreprise(1,$id);
+            }
+            if(isset($_POST["SISR"]) && $_POST["SISR"]!=null)
+            {
+                $em->getRepository(ENTREPRISE::class)->InsertSpecialiteEntreprise(2,$id);
+            }
+            if(isset($_POST["Licence"]) && $_POST["Licence"]!=null)
+            {
+                $em->getRepository(ENTREPRISE::class)->InsertSpecialiteEntreprise(3,$id);
+            }   
+        return $this->redirectToRoute("listeEntreprise");
+    }
 }
