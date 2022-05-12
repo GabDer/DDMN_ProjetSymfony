@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\PERSONNE;
 use App\Entity\ENTREPRISE;
+use App\Entity\FONCTION;
 use App\Repository\ENTREPRISERepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -23,6 +24,13 @@ class PersonneType extends AbstractType
             ->add('PER_PRENOM', TextType::class, array('label'=>false, 'attr'=>['placeholder'=>'Prénom']))
             ->add('PER_TEL', TelType::class, array('label'=>false, 'attr'=>['placeholder'=>'Tel']))
             ->add('PER_MAIL', EmailType::class, array('label'=>false, 'attr'=>['placeholder'=>'Mail']))
+            ->add('Fonction', EntityType::class, 
+                array(
+                    'class'=>FONCTION::class,
+                    'choice_label'=>Fonction->getFONLIBELLE(),
+                    'label'=>false,
+                )
+            )
             ->add('ENTREPRISE', EntityType::class,
                 array(
                     'class'=>ENTREPRISE::class,
@@ -30,6 +38,7 @@ class PersonneType extends AbstractType
                     'label'=>false,
                 )
             )
+
             ->add('Ajouter', SubmitType :: class, ['label' => 'Ajouter'])
             // ->add('ENTREPRISE', EntityType::class, 
             //     array(

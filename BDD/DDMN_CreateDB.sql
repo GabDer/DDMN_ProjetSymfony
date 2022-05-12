@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 10 mai 2022 à 12:14
+-- Généré le : mar. 10 mai 2022 à 19:27
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -169,7 +169,19 @@ CREATE TABLE IF NOT EXISTS `personneprofil` (
   PRIMARY KEY (`id`),
   KEY `IDX_780F4F62B1E86BCE` (`per_id_id`),
   KEY `IDX_780F4F62C19FAEF2` (`pro_id_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `personneprofil`
+--
+
+INSERT INTO `personneprofil` (`id`, `per_id_id`, `pro_id_id`, `date`) VALUES
+(7, 1, 3, '2021-08-30'),
+(8, 2, 4, '2021-05-07'),
+(9, 3, 2, '2021-09-27'),
+(10, 3, 4, '2021-06-02'),
+(11, 4, 1, '2022-01-13'),
+(12, 4, 3, '2021-04-18');
 
 -- --------------------------------------------------------
 
@@ -282,14 +294,14 @@ ALTER TABLE `fonction_personne`
 -- Contraintes pour la table `personne`
 --
 ALTER TABLE `personne`
-  ADD CONSTRAINT `FK_FCEC9EFA4AEAFEA` FOREIGN KEY (`entreprise_id`) REFERENCES `entreprise` (`id`);
+  ADD CONSTRAINT `FK_FCEC9EFA4AEAFEA` FOREIGN KEY (`entreprise_id`) REFERENCES `entreprise` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `personneprofil`
 --
 ALTER TABLE `personneprofil`
-  ADD CONSTRAINT `FK_780F4F62B1E86BCE` FOREIGN KEY (`per_id_id`) REFERENCES `personne` (`id`),
-  ADD CONSTRAINT `FK_780F4F62C19FAEF2` FOREIGN KEY (`pro_id_id`) REFERENCES `profil` (`id`);
+  ADD CONSTRAINT `FK_780F4F62B1E86BCE` FOREIGN KEY (`per_id_id`) REFERENCES `personne` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_780F4F62C19FAEF2` FOREIGN KEY (`pro_id_id`) REFERENCES `profil` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `specialite_entreprise`
