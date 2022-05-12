@@ -26,7 +26,7 @@ class EntrepriseType extends AbstractType
             ->add('ENT_NUM1', TextType::class, array('required' => false, 'label'=>false, 'attr'=>['placeholder'=>'Numero 1']))
             ->add('ENT_NUM2', TextType::class, array('required' => false, 'label'=>false, 'attr'=>['placeholder'=>'Numero 2']))
             ->add('ENT_SiteWeb', UrlType::class, array('required' => false, 'label'=>false, 'attr'=>['placeholder'=>'URL site web']))
-            // ->add('ENT_AVOIR', CheckboxType::class, array('label'=>false, 'attr'=>['placeholder'=>'Specialite']))
+            // ->add('ENT_AVOIR', CheckboxType::class, ['label'=> '])
             //->add('ENT_AVOIR', TextType::class)
             ->add('Valider', SubmitType :: class, ['label' => 'Sauvegarder'])
         ;

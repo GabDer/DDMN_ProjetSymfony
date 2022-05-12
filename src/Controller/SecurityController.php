@@ -44,6 +44,9 @@ class SecurityController extends AbstractController
         if ($session->get('Role') == null){
             return $this->redirectToRoute("app_login");
         }
+        if ($session->get('Role')["UTI_ROLE"] == "0"){
+            return $this->redirectToRoute("listeEntreprise");
+        }
         $entityManager = $doctrine->getManager();
         $listeUtilisateurs = $entityManager->getRepository(UTILISATEUR::class)->AffichageUtilisateurs(); //On récupère toute les utilisateurs existants
         sort($listeUtilisateurs);
@@ -61,6 +64,9 @@ class SecurityController extends AbstractController
         $session = $request->getSession();
         if ($session->get('Role') == null){
             return $this->redirectToRoute("app_login");
+        }
+        if ($session->get('Role')["UTI_ROLE"] == "0"){
+            return $this->redirectToRoute("listeEntreprise");
         }
 
         $utilisateur = new Utilisateur();
@@ -88,6 +94,14 @@ class SecurityController extends AbstractController
     */
     public function ModifierUtilisatuer(ManagerRegistry $em,Request $request, $id):Response
     {
+        $session = $request->getSession();
+        if ($session->get('Role') == null){
+            return $this->redirectToRoute("app_login");
+        }
+        if ($session->get('Role')["UTI_ROLE"] == "0"){
+            return $this->redirectToRoute("listeEntreprise");
+        }
+
         $em = $em->getManager();
         $utilisateur = $em->getRepository(Utilisateur::class)->find($id);
 
@@ -128,6 +142,10 @@ class SecurityController extends AbstractController
         if ($session->get('Role') == null){
             return $this->redirectToRoute("app_login");
         }
+        if ($session->get('Role')["UTI_ROLE"] == "0"){
+            return $this->redirectToRoute("listeEntreprise");
+        }
+
         $em = $em->getManager();
         $utilisateur = $em->getRepository(Utilisateur::class)->find($id);
         try

@@ -22,6 +22,9 @@ class PersonneController extends AbstractController
         if ($session->get('Role') == null){
             return $this->redirectToRoute("app_login");
         }
+        if ($session->get('Role')["UTI_ROLE"] == "0"){
+            return $this->redirectToRoute("listeEntreprise");
+        }
 
         $Personne = new PERSONNE();
         $PersonneForm = $this->createForm(PersonneType::class, $Personne);
