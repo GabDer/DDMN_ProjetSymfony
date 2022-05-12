@@ -5,8 +5,6 @@
 
 {% block content %}
 
-	{% set Role = app.session.get('Role') %}
-	{% if ( Role.UTI_ROLE == 1 ) %}
 		<div>
 			<h1 class="text-light">Ajouter utilisateurs <a href="{{ path('AjoutUtilisateurs') }}"><i class="fa fa-plus" aria-hidden="true"></i></a></h1>
 		</div>
@@ -41,8 +39,4 @@
 				</tbody>
 			{% endfor %}
 		</table>
-{% else %}
-	<h1>
-		Vous n'avez pas les droits pour accéder à cette page.
-	</h1>
-{% endif %}{% endblock %}
+{% endblock %}

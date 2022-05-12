@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\PERSONNE;
 use App\Entity\ENTREPRISE;
+use App\Entity\FONCTION;
+use App\Form\FonctionType;
 use App\Form\PersonneType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,17 +24,21 @@ class PersonneController extends AbstractController
         if ($session->get('Role') == null){
             return $this->redirectToRoute("app_login");
         }
+        if ($session->get('Role')["UTI_ROLE"] == "0"){
+            return $this->redirectToRoute("listeEntreprise");
+        }
 
         $Personne = new PERSONNE();
+        $Fonction = new FONCTION();
         $PersonneForm = $this->createForm(PersonneType::class, $Personne);
+        $perFonctionForm = $this->createForm(FonctionType::class, $Fonction);
         if ($request->isMethod('POST'))
         {
             $PersonneForm->handleRequest($request);
 
             if ($PersonneForm->isSubmitted() && $PersonneForm->isValid())
             {
-                // $Personne = $Personne->getEntreprise();
-                // dd($Personne);
+
                 $em = $em->getManager();
                 $em->persist($Personne);
                 $em->flush(); 

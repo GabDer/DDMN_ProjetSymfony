@@ -207,7 +207,7 @@ class ListeEntrepriseController extends AbstractController
         if ($session->get('Role') == null){
             return $this->redirectToRoute("app_login");
         }
-        if ($session->get('Role') == "0"){
+        if ($session->get('Role')["UTI_ROLE"] == "0"){
             return $this->redirectToRoute("listeEntreprise");
         }
 
@@ -220,7 +220,6 @@ class ListeEntrepriseController extends AbstractController
             $em = $em->getManager();
             $em->persist($entreprise);
             $em->flush();
-            $this->addFlash('success', 'L\entreprise à bien était ajouter. ');
             return $this->redirectToRoute('InfosEntreprise', ['id'=>$entreprise->getId()]);
         }
         return $this->render('AjoutEntreprise.html.twig', ['AjoutEntrepriseForm' => $AjoutEntrepriseForm->createView()]);
@@ -257,7 +256,7 @@ class ListeEntrepriseController extends AbstractController
         if ($session->get('Role') == null){
             return $this->redirectToRoute("app_login");
         }
-        if ($session->get('Role') == "0"){
+        if ($session->get('Role')["UTI_ROLE"] == "0"){
             return $this->redirectToRoute("listeEntreprise");
         }
         $em = $em->getManager();
@@ -289,7 +288,7 @@ class ListeEntrepriseController extends AbstractController
         if ($session->get('Role') == null){
             return $this->redirectToRoute("app_login");
         }
-        if ($session->get('Role') == "0"){
+        if ($session->get('Role')["UTI_ROLE"] == "0"){
             return $this->redirectToRoute("listeEntreprise");
         }
 
