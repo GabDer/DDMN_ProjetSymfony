@@ -275,7 +275,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 
 INSERT INTO `utilisateur` (`id`, `uti_login`, `uti_mdp`, `uti_role`) VALUES
 (1, 'ADMIN', 'ecf482a600e363689703fe9f1bb1e80c', 1),
-(2, 'Enseignant', 'ffa30b58137ef56ec4415a64f7d5d919', 0);
+(2, 'Enseignant', 'e496044409cd040eab0c9f677ed7ed89', 0);
 
 --
 -- Contraintes pour les tables déchargées

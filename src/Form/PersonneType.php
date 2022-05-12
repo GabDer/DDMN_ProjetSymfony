@@ -29,7 +29,7 @@ class PersonneType extends AbstractType
                     'choice_label'=> 'FON_LIBELLE',
                     'label'=>false,
                     'multiple'=>true,
-                    'required' => false
+                    'required' => false,
                 ])
             ->add('ENTREPRISE', EntityType::class,
                 array(

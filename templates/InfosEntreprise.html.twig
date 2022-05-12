@@ -8,9 +8,11 @@
 {% endblock %}
 {% block content %}
     {% set fonctions =[] %}
+    {% set Role = app.session.get('Role') %}
     <div class="infoEntrCardBody">
         <div class="divGaucheInfos">
             <h2>{{ Entreprise.ENT_RaisonSociale}}</h2>
+            {% if Role.UTI_ROLE == 1 %}
             <div class="cbxSpecialite">
                 <form action="{{ path('ModifierEntrepriseSpecialite', { 'id': Entreprise.id}) }}" method="POST">
                     <input type="checkbox" value="SLAM" name="SLAM" id="SLAM">
@@ -22,6 +24,7 @@
                     <input type="submit" value="Sauvegarder">
                 </form>
             </div>
+            {% endif %}
             <h3>{{ Entreprise.ENT_RUE}}</h3>
             <h3>{{ Entreprise.ENT_ComplementAdresse}}</h3>
             <h3>{{ Entreprise.ENT_CP}} {{ Entreprise.ENT_Ville}}</h3>
@@ -45,7 +48,6 @@
                 </div>
             {% endfor %}
             </div>
-            {% set Role = app.session.get('Role') %}
             {% if Role.UTI_ROLE == 1 %}
                 <div><a href="{{ path('AjouterPersonne') }}" class="BtnAjouterPers">Ajouter des contacts</a></div>
             {% endif %}

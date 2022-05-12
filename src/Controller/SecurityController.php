@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Form\LoginFormType;
 use App\Entity\Utilisateur;
 use App\Repository\UtilisateurRepository;
+use App\Form\UtilisateurFormType;
 use Doctrine\Persistence\ManagerRegistry;
 
 class SecurityController extends AbstractController
@@ -70,7 +71,7 @@ class SecurityController extends AbstractController
         }
 
         $utilisateur = new Utilisateur();
-        $ajoutUserForm = $this->createForm(LoginFormType::class, $utilisateur);
+        $ajoutUserForm = $this->createForm(UtilisateurFormType::class, $utilisateur);
         if ($request->isMethod('POST'))
         {
             $ajoutUserForm->handleRequest($request);
@@ -83,7 +84,6 @@ class SecurityController extends AbstractController
             $utilisateur->setUTIMDP($mdp);
             $em->persist($utilisateur);
             $em->flush();
-            $this->addFlash('success', 'L\'utilisateur a bien été ajouté');
             return $this->redirectToRoute('listeUtilisateurs');
         }
         return $this->render('AjoutUtilisateur.html.twig', ['ajoutUserForm'=>$ajoutUserForm->createView()]);
@@ -105,7 +105,7 @@ class SecurityController extends AbstractController
         $em = $em->getManager();
         $utilisateur = $em->getRepository(Utilisateur::class)->find($id);
 
-        $utilisateurFormModif = $this->createForm(LoginFormType::class, $utilisateur);
+        $utilisateurFormModif = $this->createForm(UtilisateurFormType::class, $utilisateur);
         if( $request->isMethod('POST'))
         {
             $utilisateurFormModif->handleRequest($request);
@@ -122,6 +122,7 @@ class SecurityController extends AbstractController
                     $utilisateur->setUTIMDP($mdp);
                     $em->persist($utilisateur);
                     $em->flush();
+                    return $this->redirectToRoute('listeUtilisateurs');
                 }
                 catch(Exeption $e)
                 {
